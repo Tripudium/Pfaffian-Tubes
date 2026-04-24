@@ -1,6 +1,6 @@
 # Tubular Neighbourhoods of Pfaffian Sets and Robustness of Deep Learning
 
-This repository is private. To access it, your email must be added to the repository's access list.
+This repository is private. To access it, your email must be added to the repository's access list. (README is obsolete, since this resides in a separate github repo)
 
 ### 1. Setting up SSH Keys
 
