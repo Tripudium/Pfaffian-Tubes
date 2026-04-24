@@ -1,0 +1,220 @@
+\section{Robustness}\label{sec:robustness}
+We now apply the tube bounds from the previous section to the classification setting introduced in Section~\ref{sec:pfaffian}. Recall that a classifier $F\colon \R^n \to \R^m$ induces decision regions $C_j$ separated by the decision boundary $\Sigma = \bigcup_{i<j} V_{ij}$, where $V_{ij} = \mathcal{Z}(g_{ij})$ and $g_{ij} = F_j - F_i$. For $x\in \R^n\setminus \Sigma$, the distance to misclassification is
+\begin{equation*}
+  \Delta(x) := \dist(x, \Sigma) = \inf\{\|x - y\| \colon y \in \Sigma\}.
+\end{equation*}
+
+It is natural to measure the distance to misclassification relative to the size of the input. In analogy to the theory of conditioning in numerical analysis and optimisation~\cite{burgisser2013condition}, we define the condition of a classifier.
+
+\begin{definition}\label{def:condition}
+The \emph{condition number} of the classifier $F$ at $x\in \R^n\setminus \Sigma$ is
+\begin{equation*}
+  \mC(x) := \frac{\|x\|}{\Delta(x)}.
+\end{equation*}
+More generally, the \emph{local condition number} centred at $p\in \R^n$ is
+\begin{equation*}
+  \mC_p(x) := \frac{\|x - p\|}{\Delta(x)}.
+\end{equation*}
+\end{definition}
+
+The condition number $\mC(x)$ is the reciprocal of the relative distance to the decision boundary, so that $\mC(x) > t$ means the classification of $x$ can be changed by a perturbation of relative size less than $1/t$. This is entirely analogous to the role of the condition number in numerical analysis, where the ``ill-posed problems'' correspond to the decision boundary~$\Sigma$.
+
+\begin{remark}[Weak condition number]\label{rem:weak-condition}
+For absolutely continuous distributions, the probability that a random perturbation of size exactly $\Delta(x)$ leads to misclassification is zero. For a random direction $v$ uniformly distributed on $\mathbb{S}^{n-1}$, define the directional distance $\Delta(x;v) = \inf\{\eta > 0 \colon \hat{j}(x+\eta v) \neq \hat{j}(x)\}$. If $C_{\hat{j}(x)}$ is star-shaped with respect to~$x$, the $(1-\delta)$-quantile of $\|x\|/\Delta(x;v)$ defines a \emph{weak condition number}
+\begin{equation*}
+  \mC_\delta(x) := \inf\left\{\eta > 0 \colon \Prob_{v\in \mathbb{S}^{n-1}}\!\left(\frac{\|x\|}{\Delta(x;v)} > \eta\right) \leq \delta\right\},
+\end{equation*}
+in analogy with the weak condition numbers introduced in~\cite{lotz2020weak} and further studied in~\cite{burgisser2013condition}. The weak condition number captures the typical-case rather than worst-case sensitivity of a classification to perturbations.
+\end{remark}
+
+
+\subsection{Tail bounds on the condition number}
+We are interested in the probability that the condition number $\mC(X)$ exceeds a threshold~$t$, for $X$ drawn from a probability distribution on the data space. This is an instance of the probabilistic analysis of condition numbers, studied in detail in~\cite{burgisser2013condition}. In what follows, we distinguish two settings:
+\begin{enumerate}
+\item \emph{Random data:} $X$ is drawn from a distribution on the data space (average-case analysis);
+\item \emph{Random perturbation:} $X = \overline{x} + \xi$ for a fixed data point $\overline{x}$ and a random perturbation $\xi$ (smoothed analysis).
+\end{enumerate}
+The tube bounds of Section~\ref{sec:tubular} apply to both settings.
+
+\begin{theorem}[Uniform tail bound]\label{thm:condition-uniform}
+Let $F\colon \R^n \to \R^m$ be a classifier whose pairwise decision boundaries $V_{ij} = \mathcal{Z}(g_{ij})$ are bounded Pfaffian hypersurfaces with format $(\alpha, \beta, s)$, $s\geq n$, and non-vanishing gradient. Let $X$ be uniformly distributed in $B(p, \sigma)$. Then for $t > 0$,
+\begin{equation*}
+  \Prob(\mC_p(X) > t) \leq \binom{m}{2}\, C_{\alpha,\beta,s,n}\left(1 + \frac{\alpha + \overline{\beta} + 1}{t}\right)^n,
+\end{equation*}
+where $C_{\alpha,\beta,s,n}$ and $\overline{\beta}$ are as in Theorem~\ref{thm:prob_bound}.
+\end{theorem}
+
+\begin{proof}
+  For $X\in B(p,\sigma)$ we have $\|X - p\|\leq \sigma$, so the event $\mC_p(X) > t$ implies $\Delta(X) < \|X-p\|/t \leq \sigma/t$. Since $\Sigma = \bigcup_{i<j}V_{ij}$, we get $\{\Delta(X) < \sigma/t\} \subseteq \bigcup_{i<j}\{\dist(X, V_{ij}) < \sigma/t\}$. By a union bound and Theorem~\ref{thm:prob_bound} applied to each $V_{ij}$ with $\varepsilon = \sigma/t$,
+\begin{equation*}
+  \Prob(\mC_p(X) > t) \leq \binom{m}{2}\, C_{\alpha,\beta,s,n}\left(1 + (\alpha + \overline{\beta} + 1)\frac{1}{t}\right)^n. \qedhere
+\end{equation*}
+\end{proof}
+
+\begin{remark}\label{rem:global-condition}
+For the global condition number $\mC(X) = \|X\|/\Delta(X)$, the bound $\|X\|\leq \|p\| + \sigma$ gives the variant
+\begin{equation*}
+  \Prob(\mC(X) > t) \leq \binom{m}{2}\, C_{\alpha,\beta,s,n}\left(1 + (\alpha + \overline{\beta} + 1)\frac{\|p\| + \sigma}{t\sigma}\right)^n.
+\end{equation*}
+The local form of Theorem~\ref{thm:condition-uniform} is preferred because it is independent of~$\sigma$ and has $O(1/t)$ tail decay for large~$t$.
+\end{remark}
+
+We now turn to the smoothed analysis setting, where the data point is a Gaussian perturbation of a fixed input $\overline{x}$. The following result is sharper than the uniform bound, as the Gaussian concentration around $\overline{x}$ yields a tighter estimate via a Fubini decomposition.
+
+\begin{theorem}[Gaussian tail bound]\label{thm:condition-gaussian}
+Under the hypotheses of Theorem~\ref{thm:condition-uniform}, let $X$ be normally distributed around $\overline{x}\in \R^n$ with covariance $\sigma^2 \mathrm{Id}$. Then for $t > 0$,
+\begin{equation*}
+\Prob(\mC_{\overline{x}}(X) > t) \leq \binom{m}{2}\, C_{\alpha,\beta,s,n}\left[\left(1+\frac{\alpha+\overline{\beta}+1}{t}\right)^n - \left(1+\frac{1}{t}\right)^n\right].
+\end{equation*}
+\end{theorem}
+
+\begin{remark}
+For large $t$, the Gaussian bound decays as $\binom{m}{2}\, C_{\alpha,\beta,s,n}\cdot n(\alpha+\overline{\beta})/t$.
+\end{remark}
+
+The proof of Theorem~\ref{thm:condition-gaussian} relies on a standard reduction from Gaussian to uniform distributions (cf.~\cite[Section~3.1]{burgisser2013condition}).
+
+\begin{lemma}\label{lem:gauss-to-uniform}
+Let $V = \mathcal{Z}(f)$ be a bounded Pfaffian hypersurface with format $(\alpha, \beta, s)$, $s\geq n$, and non-vanishing gradient. Let $X$ be normally distributed around $\overline{x}\in \R^{n}$ with covariance $\sigma^2 \mathrm{Id}$. Then
+\begin{equation*}
+\Prob(\|X-\overline{x}\|\cdot \dist(X,V)^{-1}\geq t) \leq C_{\alpha,\beta,s,n}\left[\left(1+\frac{\alpha+\overline{\beta}+1}{t}\right)^n - \left(1+\frac{1}{t}\right)^n\right].
+\end{equation*}
+\end{lemma}
+
+\begin{proof}
+Set $A:=\{x\in \R^{n} \mid \|x-\overline{x}\|\cdot \dist(x,V)^{-1}\geq t\}$.
+Let $U_{s}$ be uniformly distributed on a closed ball $B(\overline{x},s)$ around $\overline{x}$ of radius $s$, with density
+\begin{equation*}
+  \frac{1}{\omega_n s^{n}}\cdot \onemtx\{\|x-\overline{x}\|\leq s\},
+\end{equation*}
+where $\omega_n = \vol B(0,1)$.
+For a Gaussian vector $X$ centred at $\overline{x}$ with covariance $\sigma^2\mathrm{Id}$, a standard Fubini argument (see, e.g.,~\cite{burgisser2013condition}) gives
+\begin{equation}\label{eq:gauss-to-uniform}
+ \Prob(X\in A) = \frac{\omega_n}{(2\pi)^{\frac{n}{2}}}\int_{0}^{\infty} \Prob(U_{\sigma s}\in A)\, s^{n+1} \econst^{-\frac{s^2}{2}} \ \diff{s}.
+\end{equation}
+Since $U_{\sigma s}\in A$ implies $\dist(U_{\sigma s},V)\leq \sigma s/t$, we can apply Corollary~\ref{cor:tight_prob_bound} with ball radius $\sigma s$ and $\varepsilon = \sigma s/t$. The ratio $\varepsilon/(\sigma s) = 1/t$ is independent of $s$, so
+\begin{equation*}
+  \Prob(U_{\sigma s}\in A) \leq C_{\alpha,\beta,s,n}\left[\left(1+\frac{\alpha+\overline{\beta}+1}{t}\right)^n - \left(1+\frac{1}{t}\right)^n\right].
+\end{equation*}
+This is independent of $s$ and factors out of the integral~\eqref{eq:gauss-to-uniform}. The remaining integral evaluates to
+\begin{equation*}
+  \frac{\omega_n}{(2\pi)^{\frac{n}{2}}}\int_{0}^{\infty} s^{n+1} \econst^{-\frac{s^2}{2}} \ \diff{s} = 1,
+\end{equation*}
+which follows from $\omega_n = \pi^{n/2}/\Gamma(n/2+1)$ and the substitution $u=s^2/2$ in the Gamma function.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:condition-gaussian}]
+The event $\mC_{\overline{x}}(X) > t$ implies $\|X - \overline{x}\|/\dist(X,\Sigma) > t$, which in turn implies $\|X-\overline{x}\|/\dist(X,V_{ij}) > t$ for some pair $i < j$. By a union bound and Lemma~\ref{lem:gauss-to-uniform} applied to each~$V_{ij}$,
+\begin{equation*}
+  \Prob(\mC_{\overline{x}}(X) > t) \leq \binom{m}{2}\, C_{\alpha,\beta,s,n}\left[\left(1+\frac{\alpha+\overline{\beta}+1}{t}\right)^n - \left(1+\frac{1}{t}\right)^n\right]. \qedhere
+\end{equation*}
+\end{proof}
+
+
+\subsection{Neural network classifiers}
+We now specialise the tail bounds to neural network classifiers with Pfaffian activation functions.
+
+\begin{corollary}[Sigmoid/tanh network]\label{cor:nn-condition}
+Let $F\colon \R^n\to \R^m$ be a fully connected neural network classifier with $\ell$ hidden layers, $h$ total hidden units, and an activation function with Pfaffian format $(\alpha, \beta, s)$ that is autonomous with $s\geq 1$. Assume the pairwise decision boundaries $V_{ij}$ are bounded with non-vanishing gradient.
+
+If $X$ is uniformly distributed in $B(p,\sigma)$, then
+\begin{equation*}
+  \Prob(\mC_p(X) > t) \leq \binom{m}{2}\, C_{\alpha_F,\beta_F,s_F,n}\left(1 + \frac{\alpha_F + \overline{\beta}_F + 1}{t}\right)^n,
+\end{equation*}
+where $\alpha_F = \ell(\alpha+\beta-1)-\beta+1$, $\beta_F = \beta$, $s_F = sh$, and $\overline{\beta}_F = \max\{\beta_F, 2\}$.
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{prop:nn-format}, the network output has Pfaffian format $(\alpha_F, \beta_F, s_F)$. Since $g_{ij} = F_j - F_i$ shares the same Pfaffian chain (Remark~\ref{re:1}), each $V_{ij}$ is a Pfaffian hypersurface with the same format. The result follows from Theorem~\ref{thm:condition-uniform}.
+\end{proof}
+
+For single-hidden-layer sigmoid networks, the BKK-based tube bound of Theorem~\ref{thm:prob_bound_single_layer} yields a sharper tail bound in which the Khovanski\u\i{} prefactor $2^{h(h-1)/2}$ of Corollary~\ref{cor:nn-condition} is replaced by a polynomial in the width.
+
+\begin{corollary}[Single-hidden-layer sigmoid]\label{cor:nn-condition-single-layer}
+  Let $F\colon \R^n\to \R^m$ be a classifier implemented by a neural network with a single hidden layer of width $w$ and logistic sigmoid activation, a linear output layer, and first-layer weights $a_k\in\Q^n$ in general position with common denominator~$q$. Set $L=q\max_{k,i}|a_{ki}|$. Assume that for each pair $i<j$ the decision boundary $V_{ij}=\mathcal{Z}(g_{ij})$ is smooth with non-vanishing gradient and is contained in the closed ball $B(p,\sigma)$. If $X$ is uniformly distributed on $B(p,\sigma)$, then for every $t>0$,
+  \begin{equation}\label{eq:single-layer-condition-bound}
+    \Prob(\mC_p(X)>t) \;\leq\; \binom{m}{2}\,C_n(L)\cdot w^n\left[\left(1+\frac{1}{t}\right)^n-1\right],
+  \end{equation}
+  where $C_n(L)\leq 4\,n!\,(2L+2)^n$ depends only on $n$ and $L$.
+\end{corollary}
+
+\begin{proof}
+  As in the proof of Theorem~\ref{thm:condition-uniform}, the event $\mC_p(X)>t$ implies $\Delta(X) < \sigma/t$, so by a union bound
+  \begin{equation*}
+    \Prob(\mC_p(X)>t) \;\leq\; \sum_{i<j}\Prob(d(X,V_{ij})<\sigma/t).
+  \end{equation*}
+  Each $g_{ij}=F_j-F_i$ has the form $\tilde c_0+\sum_k d_k\,\sigma(a_k^{\trans}x+b_k)$ with $d_k$ the differences of the second-layer output weights of $F$ and the $(a_k,b_k)$ the first-layer weights and biases (which are shared across all pairs $i<j$). Hence each $V_{ij}$ satisfies the hypotheses of Theorem~\ref{thm:prob_bound_single_layer} with the common lattice constant $L$. Applying that theorem with $\varepsilon=\sigma/t$ to each $V_{ij}$ and summing gives~\eqref{eq:single-layer-condition-bound}.
+\end{proof}
+
+\begin{remark}\label{rem:single-layer-condition-tight}
+  The tight form of Corollary~\ref{cor:single-layer-tight-prob-bound} applied to each $V_{ij}$ sharpens the bracket in~\eqref{eq:single-layer-condition-bound} to $n(1/t)(1+1/t)^{n-1}$. In particular, for $t\geq 1$,
+  \begin{equation*}
+    \Prob(\mC_p(X)>t) \;\leq\; \binom{m}{2}\cdot 2^{n-1}\,n\,C_n(L)\,w^n\cdot\frac{1}{t},
+  \end{equation*}
+  an explicit $O(1/t)$ tail bound with polynomial dependence on the width.
+\end{remark}
+
+The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires more care. The Fubini reduction of Lemma~\ref{lem:gauss-to-uniform} expresses a Gaussian probability as an integral of uniform-ball probabilities at all radii $s\sigma$, $s \in (0,\infty)$, but Theorem~\ref{thm:prob_bound_single_layer} applies only when the ball contains $V_{ij}$. Splitting the integral at the threshold $s^* = R_V/\sigma$ determined by an enclosing radius $R_V$ of $V_{ij}$, and using the general Pfaffian bound on the small-$s$ part, gives a hybrid bound whose Khovanski\u\i{} contribution is tempered by a Gaussian concentration factor.
+
+\begin{proposition}[Gaussian tail, single-hidden-layer sigmoid]\label{prop:single-layer-gaussian}
+  Under the hypotheses of Corollary~\ref{cor:nn-condition-single-layer}, assume further that each pairwise decision boundary $V_{ij}$ is contained in a common ball $B(\overline x, R_V)$ around a fixed centre $\overline x \in \R^n$. Let $X$ be normally distributed around $\overline x$ with covariance $\sigma^2\mathrm{Id}$. Then for every $t > 0$,
+  \begin{equation}\label{eq:single-layer-gaussian-bound}
+    \Prob(\mC_{\overline x}(X) > t) \;\leq\; \binom{m}{2}\Bigl[\,B_{\mathrm{BKK}}(t) \;+\; \gamma_n(R_V/\sigma)\cdot B_{\mathrm{Pf}}(t)\,\Bigr],
+  \end{equation}
+  where
+  \begin{align*}
+    B_{\mathrm{BKK}}(t) &\;:=\; n\,C_n(L)\,w^n\cdot\frac{1}{t}\!\left(1+\frac{1}{t}\right)^{\!n-1},\\
+    B_{\mathrm{Pf}}(t) &\;:=\; C_{2,1,w,n}\!\left[\left(1+\frac{5}{t}\right)^{\!n} - \left(1+\frac{1}{t}\right)^{\!n}\right],
+  \end{align*}
+  $C_n(L) \leq 4\,n!\,(2L+2)^n$ is the constant from Theorem~\ref{thm:prob_bound_single_layer}, $C_{2,1,w,n}$ is the Pfaffian constant of Theorem~\ref{thm:prob_bound} applied to the format $(\alpha,\beta,s) = (2,1,w)$ of a single-hidden-layer sigmoid network, and
+  \begin{equation*}
+    \gamma_n(u) \;:=\; \frac{\omega_n}{(2\pi)^{n/2}}\int_0^u s^{n+1}\econst^{-s^2/2}\,\diff s.
+  \end{equation*}
+\end{proposition}
+
+\begin{proof}
+  Fix a pair $i < j$ and set $A_{ij} := \{x \in \R^n : \|x - \overline x\|\cdot\dist(x, V_{ij})^{-1} \geq t\}$. By the Fubini identity~\eqref{eq:gauss-to-uniform} of Lemma~\ref{lem:gauss-to-uniform},
+  \begin{equation*}
+    \Prob(X \in A_{ij}) \;=\; \frac{\omega_n}{(2\pi)^{n/2}} \int_0^\infty \Prob(U_{\sigma s} \in A_{ij})\,s^{n+1}\econst^{-s^2/2}\,\diff s,
+  \end{equation*}
+  with $U_{\sigma s}$ uniform on $B(\overline x, \sigma s)$. Split the integral at $s^* := R_V/\sigma$.
+
+  \emph{Region $s \geq s^*$.} The hypothesis gives $V_{ij} \subset B(\overline x, R_V) \subset B(\overline x, \sigma s)$. The event $U_{\sigma s} \in A_{ij}$ implies $\dist(U_{\sigma s}, V_{ij}) \leq \sigma s/t$, and Corollary~\ref{cor:single-layer-tight-prob-bound} applied to $V_{ij}$ with ball radius $\sigma s$ and $\varepsilon = \sigma s/t$ gives $\Prob(U_{\sigma s} \in A_{ij}) \leq B_{\mathrm{BKK}}(t)$, a bound independent of $s$ since $\varepsilon/(\sigma s) = 1/t$. Using $\frac{\omega_n}{(2\pi)^{n/2}}\int_0^\infty s^{n+1}\econst^{-s^2/2}\,\diff s = 1$,
+  \begin{equation*}
+    \frac{\omega_n}{(2\pi)^{n/2}}\int_{s^*}^\infty \Prob(U_{\sigma s} \in A_{ij})\,s^{n+1}\econst^{-s^2/2}\,\diff s \;\leq\; B_{\mathrm{BKK}}(t).
+  \end{equation*}
+
+  \emph{Region $s < s^*$.} Without the containment hypothesis we use the unconditional Pfaffian bound: each $g_{ij}$ is Pfaffian of format $(2,1,w)$ (Example~\ref{ex:activations}), so Corollary~\ref{cor:tight_prob_bound} applied to $V_{ij}$ with ball radius $\sigma s$ and $\varepsilon = \sigma s/t$ gives $\Prob(U_{\sigma s} \in A_{ij}) \leq B_{\mathrm{Pf}}(t)$, again independent of $s$. Integrating over $[0, s^*]$ contributes $\gamma_n(R_V/\sigma)\,B_{\mathrm{Pf}}(t)$.
+
+  Summing the two regions and applying a union bound over the $\binom{m}{2}$ pairs $i < j$ yields~\eqref{eq:single-layer-gaussian-bound}.
+\end{proof}
+
+\begin{remark}[Concentration regime]\label{rem:gaussian-concentration-regime}
+  The factor $\gamma_n(u)$ is a chi-type probability, concentrated near $u = \sqrt{n+2}$ (the mode of the density $s^{n+1}\econst^{-s^2/2}$). Dropping the exponential factor in the integrand yields the elementary upper bound
+  \begin{equation*}
+    \gamma_n(u) \;\leq\; \frac{u^{n+2}}{(n+2)\,2^{n/2}\,\Gamma(n/2+1)},
+  \end{equation*}
+  which is superexponentially small in $n$ whenever $u \ll \sqrt n$. Consequently the Khovanski\u\i{} contribution $\gamma_n(R_V/\sigma)\cdot B_{\mathrm{Pf}}(t)$ in~\eqref{eq:single-layer-gaussian-bound} is dominated by the BKK term as soon as the Gaussian scale $\sigma$ is comparable to or larger than the enclosing radius $R_V$ of the decision boundary: in that regime the Gaussian condition-number tail decays polynomially in the width $w$, matching the uniform case of Corollary~\ref{cor:nn-condition-single-layer} up to constants. In the complementary concentration regime $\sigma \ll R_V/\sqrt n$---tight Gaussian perturbation of $\overline x$---the Khovanski\u\i{} term dominates, and Theorem~\ref{thm:condition-gaussian} remains the sharpest unconditional bound available.
+\end{remark}
+
+\begin{example}[Sigmoid activation, multi-layer]\label{ex:sigmoid-condition}
+For the logistic sigmoid $\sigma(x) = (1+\econst^{-x})^{-1}$ with format $(2,1,1)$, we get $\alpha_F = 2\ell$, $\beta_F = 1$, $s_F = h$, and $\overline{\beta}_F = 2$, so
+\begin{equation*}
+  \Prob(\mC_p(X) > t) \leq \binom{m}{2}\cdot 6\cdot 2^{\frac{h(h-1)}{2}}\big(n(4\ell+1)+2\big)^h\left(1+\frac{2\ell+3}{t}\right)^n,
+\end{equation*}
+provided $h\geq n$. The Gaussian variant (Theorem~\ref{thm:condition-gaussian}) gives, for $X\sim \mathcal{N}(\overline{x}, \sigma^2\mathrm{Id})$,
+\begin{equation*}
+  \Prob(\mC_{\overline{x}}(X) > t) \leq \binom{m}{2}\cdot 6\cdot 2^{\frac{h(h-1)}{2}}\big(n(4\ell+1)+2\big)^h\left[\left(1+\frac{2\ell+3}{t}\right)^n - \left(1+\frac{1}{t}\right)^n\right].
+\end{equation*}
+For large $t$, the Gaussian bound decays as $\binom{m}{2}\cdot 6\cdot 2^{h(h-1)/2}(n(4\ell+1)+2)^h \cdot n(2\ell+2)/t$.
+\end{example}
+
+\begin{example}[Sigmoid activation, single hidden layer]\label{ex:sigmoid-condition-single}
+For $\ell=1$ and $h=w$, with first-layer weights rational in general position and lattice constant $L$, Corollary~\ref{cor:nn-condition-single-layer} gives
+\begin{equation*}
+  \Prob(\mC_p(X)>t) \;\leq\; \binom{m}{2}\cdot 4\,n!\,(2L+2)^n\,w^n\left[\left(1+\frac{1}{t}\right)^n-1\right]
+\end{equation*}
+whenever $V_{ij}\subset B(p,\sigma)$ for all pairs $i<j$. For large $t$ this decays as $\binom{m}{2}\cdot 4\,n!\,(2L+2)^n\cdot n\,w^n/t$ by Remark~\ref{rem:single-layer-condition-tight}. The Khovanski\u\i{} prefactor $2^{w(w-1)/2}\cdot(n\cdot 5 + 2)^w$ of Example~\ref{ex:sigmoid-condition} is replaced by the polynomial $C_n(L)\cdot w^n$, making the bound quantitatively meaningful at practical widths.
+\end{example}
+
+\end{remark}
