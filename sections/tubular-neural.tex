@@ -201,9 +201,11 @@ The strategy is to replace the Khovanskii--Rolle bound with a global argument ba
 \end{proposition}
 
 \begin{proof}
-By Remark~\ref{re:affine}, we may assume the regular value of the Gauss map is $v=e_n$, so that $\md(V)$ is bounded (up to the factor $2$ for the two normal orientations) by the number of solutions of
+Let $\gamma\colon S(NV)\to S^{n-1}$ be the generalised Gauss map. Since $S(NV)$ is compact, the set of critical values of $\gamma$ is compact and has empty interior by Sard's theorem. The regular values are therefore open and dense, and the fibre cardinality is locally constant on them. Choose a connected component of the set of regular values on which the maximal degree $\md(V)$ is attained, and choose a rational point $v=(v_1,\ldots,v_n)\in S^{n-1}\cap\Q^n$ in that component; such a point exists because the rational points of the sphere are dense. After permuting the coordinates, which preserves rationality and the lattice constant $L$, we may assume $v_n\neq 0$.
+
+For a hypersurface, $\gamma^{-1}(v)$ is the set of points $x\in V$ for which $\nabla f(x)$ is parallel to $v$. Thus $\md(V)$ is bounded by the number of solutions of
 \begin{equation}\label{eq:single-layer-system}
-  f(x) = 0, \qquad \frac{\partial f}{\partial x_j}(x) = 0, \quad j = 1,\ldots, n-1,
+  f(x) = 0, \qquad v_n\frac{\partial f}{\partial x_j}(x)-v_j\frac{\partial f}{\partial x_n}(x) = 0, \quad j = 1,\ldots, n-1,
 \end{equation}
 where
 \begin{equation}\label{eq:single-layer-f}
@@ -211,7 +213,6 @@ where
   \qquad
   \frac{\partial f}{\partial x_j}(x) = \sum_{k=1}^w d_k\,a_{kj}\,\sigma'(a_k^{\trans}x + b_k).
 \end{equation}
-\pl{I think if we change coordinates to get $v = e_n$ then we can no longer assume that the $a_k$ have rational coefficients? Though the proof should still work!}
 Set $\vec p_k := q\,a_k\in\Z^n$, so that $\|\vec p_k\|_\infty\leq L$, and set $y_j=\econst^{-x_j/q}$. We get
 \begin{equation*}
   \econst^{-(a_k^{\trans}x + b_k)}
@@ -220,12 +221,12 @@ Set $\vec p_k := q\,a_k\in\Z^n$, so that $\|\vec p_k\|_\infty\leq L$, and set $y
   \;=:\; u_k(y),
 \end{equation*}
 where we use the notation $y^{\vec p_k}=y_1^{qa_{k1}}\cdots y_n^{qa_{kn}}$. 
-Each sigmoid becomes $\sigma_k = (1+u_k)^{-1}$ and its derivative $\sigma'_k = u_k(1+u_k)^{-2}$. Set $\Phi(y):=\prod_{k=1}^w(1+u_k(y))^2$, a strictly positive analytic function on $\R_{>0}^n$. Multiplying~\eqref{eq:single-layer-system} by the non-vanishing factor $\Phi(y)$, the system transforms into the following polynomial system on $(\R_{>0})^n$:
+Each sigmoid becomes $\sigma_k = (1+u_k)^{-1}$ and its derivative $\sigma'_k = u_k(1+u_k)^{-2}$. Set $\Phi(y):=\prod_{k=1}^w(1+u_k(y))^2$, a strictly positive analytic function on $\R_{>0}^n$. Multiplying~\eqref{eq:single-layer-system} by the non-vanishing factor $\Phi(y)$, the system transforms into the following Laurent polynomial system on $(\R_{>0})^n$:
 \begin{equation}\label{eq:laurent-system}
-  F_0(y) \;:=\; F_0(y) \;:=\; c_0\prod_{k=1}^w(1+u_k)^2 + \sum_{k=1}^w d_k (1 + u_k) \, \prod_{l\neq k}(1+u_l)^2 \;=\; 0,
+  F_0(y) \;:=\; c_0\prod_{k=1}^w(1+u_k)^2 + \sum_{k=1}^w d_k (1 + u_k) \, \prod_{l\neq k}(1+u_l)^2 \;=\; 0,
 \end{equation}
 \begin{equation}\label{eq:laurent-system-j}
-  F_j(y) \;:=\; \sum_{k=1}^w d_k\,a_{kj}\,u_k\!\!\prod_{l\neq k}(1+u_l)^2 \;=\; 0, \qquad j=1,\ldots,n-1.
+  F_j(y) \;:=\; \sum_{k=1}^w d_k\,(v_n a_{kj}-v_j a_{kn})\,u_k\!\!\prod_{l\neq k}(1+u_l)^2 \;=\; 0, \qquad j=1,\ldots,n-1.
 \end{equation}
 Each factor $(1+u_k)^2 = 1 + 2u_k + u_k^2$ contributes monomials with exponents in $\{0,\vec p_k,2\vec p_k\}$, so all monomials appearing in~\eqref{eq:laurent-system}--\eqref{eq:laurent-system-j} have exponent vectors in the Minkowski sum
 \begin{equation}\label{eq:zonotope-support}
@@ -251,7 +252,7 @@ and there are $\binom{w}{n}\leq w^n/n!$ subsets, so
 \begin{equation*}
   \operatorname{Vol}(\conv(A)) \;\leq\; \operatorname{Vol}(Z) \;\leq\; 2^n\cdot n!\,L^n\cdot\frac{w^n}{n!} \;=\; (2L)^n\,w^n.
 \end{equation*}
-The Bernstein bound implies that there are at most $n!\,(2L)^n\,w^n$ solutions of~\eqref{eq:single-layer-system}, and the orientation factor $2$ is absorbed into the constant $C(n,L)\leq 2\cdot n!\,(2L)^n$ in~\eqref{eq:single-layer-bound}.
+The Bernstein bound implies that there are at most $n!\,(2L)^n\,w^n$ solutions of~\eqref{eq:single-layer-system}. This is stronger than the stated estimate, and is absorbed into the constant $C(n,L)\leq 2\cdot n!\,(2L)^n$ in~\eqref{eq:single-layer-bound}.
 
 Bernstein's bound is achieved generically and can be exceeded only at degenerate systems. The coefficients of~\eqref{eq:laurent-system}--\eqref{eq:laurent-system-j} are polynomials in the data $(d_k,b_k,c_0,a_{kj})$, so the degenerate locus is a proper algebraic subset of parameter space. Under the general-position hypothesis on $A$ and a Sard-type genericity assumption on $(b_k,d_k,c_0)$, which holds outside a measure-zero set and which may be imposed by an arbitrarily small perturbation that does not increase the zero count, the system avoids the degenerate locus and Bernstein's bound applies.
 \end{proof}
