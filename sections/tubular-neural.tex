@@ -104,6 +104,8 @@ In particular, at the last hidden layer ($i=\ell$), the format of $F^\ell\circ \
   \left(\ell(\alpha+\beta-1)-\beta+1,\; \beta,\; sh\right),
 \end{equation*}
 where $h=\sum_{j=1}^\ell n_j$ is the total number of hidden units. 
+\pl{Here would it be worth generalising this result to also mention the case where $g$ is not linear and may have a different Pfaffian format to the activation functions (e.g. softmax)?
+I think this could be useful for Corollary 5.8 to be applicable to neural networks with a softmax-ed output.}
 \end{proposition}
 
 Thus, for a fixed set of activation functions (and hence fixed $\alpha$, $\beta$, $s$), the chain-degree grows linearly in the depth $\ell$, the function degree is constant, and the order grows linearly in $h$.
@@ -190,6 +192,7 @@ The strategy is to replace the Khovanski\u i--Rolle bound with a global argument
   \begin{equation*}
   f(x) = c_0+\sum_{k=1}^n d_k \sigma(a_k^{\trans}x+b_k), 
   \end{equation*}
+  \pl{Should the $n$ here be a $w$?}
   where $\sigma$ is the logistic sigmoid, $c_0,b_k\in \R$ and the $a_k\in \mathbb{Q}^{n}$ are in general position with common denominator $q\in\N_{>0}$. Set $V=\{x\colon f(x)=0\}$ and $L := q\cdot\max_{k,i}|a_{ki}|$. 
   Then $V$ is a smooth hypersurface with maximum degree
   \begin{equation}\label{eq:single-layer-bound}
@@ -209,6 +212,7 @@ where
   \qquad
   \frac{\partial f}{\partial x_j}(x) = \sum_{k=1}^w d_k\,a_{kj}\,\sigma'(a_k^{\trans}x + b_k).
 \end{equation}
+\pl{I think if we change coordinates to get $v = e_n$ then we can no longer assume that the $a_k$ have rational coefficients? Though the proof should still work!}
 Set $\vec p_k := q\,a_k\in\Z^n$, so that $\|\vec p_k\|_\infty\leq L$, and set $y_j=\econst^{-x_j/q}$. We get
 \begin{equation*}
   \econst^{-(a_k^{\trans}x + b_k)}
@@ -221,10 +225,11 @@ Each sigmoid becomes $\sigma_k = (1+u_k)^{-1}$ and its derivative $\sigma'_k = u
 \begin{equation}\label{eq:laurent-system}
   F_0(y) \;:=\; c_0\prod_{k=1}^w(1+u_k)^2 + \sum_{k=1}^w d_k\, \prod_{l\neq k}(1+u_l)^2 \;=\; 0,
 \end{equation}
+\pl{Should this be $F_0(y) \;:=\; c_0\prod_{k=1}^w(1+u_k)^2 + \sum_{k=1}^w d_k (1 + u_k) \, \prod_{l\neq k}(1+u_l)^2 \;=\; 0$? (i.e. an additional factor of $1 + u_k$ next to $d_k$}
 \begin{equation}\label{eq:laurent-system-j}
   F_j(y) \;:=\; \sum_{k=1}^w d_k\,a_{kj}\,u_k\!\!\prod_{l\neq k}(1+u_l)^2 \;=\; 0, \qquad j=1,\ldots,n-1.
 \end{equation}
-Each factor $(1+u_k)^2 = 1 + 2u_k + u_k^2$ contributes monomials withexponents in $\{0,\vec p_k,2\vec p_k\}$, so all monomials appearing in~\eqref{eq:laurent-system}--\eqref{eq:laurent-system-j} have exponent vectors in the Minkowski sum
+Each factor $(1+u_k)^2 = 1 + 2u_k + u_k^2$ contributes monomials with exponents in $\{0,\vec p_k,2\vec p_k\}$, so all monomials appearing in~\eqref{eq:laurent-system}--\eqref{eq:laurent-system-j} have exponent vectors in the Minkowski sum
 \begin{equation}\label{eq:zonotope-support}
   A \;:=\; \sum_{k=1}^w \{0,\vec p_k,2\vec p_k\} \;\subset\; \Z^n.
 \end{equation}
@@ -302,7 +307,7 @@ We first extend Proposition~\ref{prop:single-layer-degree} from $\md(V)$ to the 
   \end{equation*}
   where $\tilde a_k\in\R^{1+i}$ is the projection of $a_k$ onto the first $i+1$ coordinates in the rotated frame. The entries of $\tilde a_k$ need not be rational.
 
-  For each $k$, let $\tilde a_k'\in(1/q)\Z^{1+i}$ be the coordinatewise round of $\tilde a_k$ to the nearest multiple of $1/q$. Then $\tilde a_k'$ has common denominator $q$ and $\|\tilde a_k'-\tilde a_k\|_\infty\le 1/(2q)$; since $\|\tilde a_k\|_\infty\le\|a_k\|_\infty\le L/q$ by orthogonal projection, the rational lattice constant for the approximants is $L^*:=q\max_k\|\tilde a_k'\|_\infty\le L+1$. Let
+  For each $k$, let $\tilde a_k'\in(1/q)\Z^{1+i}$ be the coordinate-wise round of $\tilde a_k$ to the nearest multiple of $1/q$. Then $\tilde a_k'$ has common denominator $q$ and $\|\tilde a_k'-\tilde a_k\|_\infty\le 1/(2q)$; since $\|\tilde a_k\|_\infty\le\|a_k\|_\infty\le L/q$ \pl{Shouldn't we have an extra $\sqrt n$ factor in this inequality? (I don't think this causes any trouble downstream)?}by orthogonal projection, the rational lattice constant for the approximants is $L^*:=q\max_k\|\tilde a_k'\|_\infty\le L+1$. Let
   \begin{equation*}
     \tilde f'(u) \;=\; c_0+\sum_{k=1}^w d_k\,\sigma(\tilde a_k'^{\trans}u+b_k).
   \end{equation*}
