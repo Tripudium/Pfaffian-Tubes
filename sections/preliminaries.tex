@@ -1,8 +1,8 @@
 \section{Pfaffian functions and Pfaffian sets}\label{sec:pfaffian}
-References for the material in this section are~\cite{khovanskiui1991fewnomials, zell2003quantitative, gabrielov2004complexity}. We assume throughout that $n\in \N_{>0}$.
+References for the material in this section are~\cite{khovanskii1991fewnomials, zell2003quantitative, gabrielov2004complexity}. We assume throughout that $n\in \N_{>0}$.
 
 \subsection{Pfaffian functions}
-Pfaffian functions, introduced by Khovanskii~\cite{khovanskiui1991fewnomials}, are functions that satisfy triangular systems of first-order partial differential equations with polynomial coefficients. Pfaffian functions have a well-defined notion of complexity that can be used to prove various quantitative results about the geometric objects they define.
+Pfaffian functions, introduced by Khovanskii~\cite{khovanskii1991fewnomials}, are functions that satisfy triangular systems of first-order partial differential equations with polynomial coefficients. Pfaffian functions have a well-defined notion of complexity that can be used to prove various quantitative results about the geometric objects they define.
 
 \begin{definition}[Pfaffian function]
 Let $\cU \subset \R^n$ be an open set. A \emph{Pfaffian chain} of order $s \in \N$ and chain-degree $\alpha \in \N_{>0}$ over $\cU$ is a sequence of functions $\boldq= (q_1, \dotsc, q_s)$ with $q_i\in C^1(\cU)$ for $i\in [s]$, such that there exist polynomials $P_{ij}\in \R[X_1,\dots,X_n,Y_1,\dots,Y_i]_{\leq \alpha}$, for $i\in [s]$ and $j\in [n]$, that verify
@@ -133,7 +133,7 @@ Let $F=(f_1,\dots,f_n) \colon \R^n\to \R^n$ be a Pfaffian function with chain $\
 \end{equation*}
 \end{theorem}
 
-In~\cite[\S 3.12, Corollary 5]{khovanskiui1991fewnomials}, a version of Theorem~\ref{thm:khovanskii} is derived from more general results. The standard formulations (e.g.,~\cite[Theorem 3.1]{gabrielov2004complexity}) use $\min\{n,s\}$ in place of $\min\{k,s\}$; the refined bound follows from the proof in~\cite{khovanskiui1991fewnomials}, where the Rolle-type induction only involves the $k$ variables on which the chain depends. The following result is a slightly sharper version of~\cite[Corollary 3.3]{gabrielov2004complexity} and~\cite[Theorem 2.3]{jones2012density}, using the refined bound of Theorem~\ref{thm:khovanskii}.
+In~\cite[\S 3.12, Corollary 5]{khovanskii1991fewnomials}, a version of Theorem~\ref{thm:khovanskii} is derived from more general results. The standard formulations (e.g.,~\cite[Theorem 3.1]{gabrielov2004complexity}) use $\min\{n,s\}$ in place of $\min\{k,s\}$; the refined bound follows from the proof in~\cite{khovanskii1991fewnomials}, where the Rolle-type induction only involves the $k$ variables on which the chain depends. The following result is a slightly sharper version of~\cite[Corollary 3.3]{gabrielov2004complexity} and~\cite[Theorem 2.3]{jones2012density}, using the refined bound of Theorem~\ref{thm:khovanskii}.
 
 \begin{corollary}
 Let $F=(f_1,\dots,f_m) \colon \R^n \to \R^m$ be a Pfaffian function with chain $\boldq=(q_1,\dots,q_s)$ and formats $(\alpha, \beta, s)$, for which the functions in the Pfaffian chain depend only on $k\leq n$ of the variables. Then the number of connected components of the zero set $\mathcal{Z}(f_1,\dots,f_m)$ is bounded by 

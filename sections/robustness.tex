@@ -129,7 +129,7 @@ where $\alpha_F = \ell(\alpha+\beta-1)-\beta+1$, $\beta_F = \beta$, $s_F = sh$, 
 By Proposition~\ref{prop:nn-format}, the network output has Pfaffian format $(\alpha_F, \beta_F, s_F)$. Since $g_{ij} = F_j - F_i$ shares the same Pfaffian chain (Remark~\ref{re:1}), each $V_{ij}$ is a Pfaffian hypersurface with the same format. The result follows from Theorem~\ref{thm:condition-uniform}.
 \end{proof}
 
-For single-hidden-layer sigmoid networks, the BKK-based tube bound of Theorem~\ref{thm:prob_bound_single_layer} yields a sharper tail bound in which the Khovanski\u\i{} prefactor $2^{h(h-1)/2}$ of Corollary~\ref{cor:nn-condition} is replaced by a polynomial in the width.
+For single-hidden-layer sigmoid networks, the BKK-based tube bound of Theorem~\ref{thm:prob_bound_single_layer} yields a sharper tail bound in which the Khovanskii prefactor $2^{h(h-1)/2}$ of Corollary~\ref{cor:nn-condition} is replaced by a polynomial in the width.
 
 \begin{corollary}[Single-hidden-layer sigmoid]\label{cor:nn-condition-single-layer}
   Let $F\colon \R^n\to \R^m$ be a classifier implemented by a neural network with a single hidden layer of width $w$ and logistic sigmoid activation, a linear output layer, and first-layer weights $a_k\in\Q^n$ in general position with common denominator~$q$. Set $L=q\max_{k,i}|a_{ki}|$. Assume that for each pair $i<j$ the decision boundary $V_{ij}=\mathcal{Z}(g_{ij})$ is smooth with non-vanishing gradient and is contained in the closed ball $B(p,\sigma)$. If $X$ is uniformly distributed on $B(p,\sigma)$, then for every $t>0$,
@@ -155,7 +155,7 @@ For single-hidden-layer sigmoid networks, the BKK-based tube bound of Theorem~\r
   an explicit $O(1/t)$ tail bound with polynomial dependence on the width.
 \end{remark}
 
-The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires more care. The Fubini reduction of Lemma~\ref{lem:gauss-to-uniform} expresses a Gaussian probability as an integral of uniform-ball probabilities at all radii $s\sigma$, $s \in (0,\infty)$, but Theorem~\ref{thm:prob_bound_single_layer} applies only when the ball contains $V_{ij}$. Splitting the integral at the threshold $s^* = R_V/\sigma$ determined by an enclosing radius $R_V$ of $V_{ij}$, and using the general Pfaffian bound on the small-$s$ part, gives a hybrid bound whose Khovanski\u\i{} contribution is tempered by a Gaussian concentration factor.
+The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires more care. The Fubini reduction of Lemma~\ref{lem:gauss-to-uniform} expresses a Gaussian probability as an integral of uniform-ball probabilities at all radii $s\sigma$, $s \in (0,\infty)$, but Theorem~\ref{thm:prob_bound_single_layer} applies only when the ball contains $V_{ij}$. Splitting the integral at the threshold $s^* = R_V/\sigma$ determined by an enclosing radius $R_V$ of $V_{ij}$, and using the general Pfaffian bound on the small-$s$ part, gives a hybrid bound whose Khovanskii contribution is tempered by a Gaussian concentration factor.
 
 \begin{proposition}[Gaussian tail, single-hidden-layer sigmoid]\label{prop:single-layer-gaussian}
   Under the hypotheses of Corollary~\ref{cor:nn-condition-single-layer}, assume further that each pairwise decision boundary $V_{ij}$ is contained in a common ball $B(\overline x, R_V)$ around a fixed centre $\overline x \in \R^n$. Let $X$ be normally distributed around $\overline x$ with covariance $\sigma^2\mathrm{Id}$. Then for every $t > 0$,
@@ -195,7 +195,7 @@ The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires 
   \begin{equation*}
     \gamma_n(u) \;\leq\; \frac{u^{n+2}}{(n+2)\,2^{n/2}\,\Gamma(n/2+1)},
   \end{equation*}
-  which is superexponentially small in $n$ whenever $u \ll \sqrt n$. Consequently the Khovanski\u\i{} contribution $\gamma_n(R_V/\sigma)\cdot B_{\mathrm{Pf}}(t)$ in~\eqref{eq:single-layer-gaussian-bound} is dominated by the BKK term as soon as the Gaussian scale $\sigma$ is comparable to or larger than the enclosing radius $R_V$ of the decision boundary: in that regime the Gaussian condition-number tail decays polynomially in the width $w$, matching the uniform case of Corollary~\ref{cor:nn-condition-single-layer} up to constants. In the complementary concentration regime $\sigma \ll R_V/\sqrt n$---tight Gaussian perturbation of $\overline x$---the Khovanski\u\i{} term dominates, and Theorem~\ref{thm:condition-gaussian} remains the sharpest unconditional bound available.
+  which is superexponentially small in $n$ whenever $u \ll \sqrt n$. Consequently the Khovanskii contribution $\gamma_n(R_V/\sigma)\cdot B_{\mathrm{Pf}}(t)$ in~\eqref{eq:single-layer-gaussian-bound} is dominated by the BKK term as soon as the Gaussian scale $\sigma$ is comparable to or larger than the enclosing radius $R_V$ of the decision boundary: in that regime the Gaussian condition-number tail decays polynomially in the width $w$, matching the uniform case of Corollary~\ref{cor:nn-condition-single-layer} up to constants. In the complementary concentration regime $\sigma \ll R_V/\sqrt n$---tight Gaussian perturbation of $\overline x$---the Khovanskii term dominates, and Theorem~\ref{thm:condition-gaussian} remains the sharpest unconditional bound available.
 \end{remark}
 
 \begin{example}[Sigmoid activation, multi-layer]\label{ex:sigmoid-condition}
@@ -215,5 +215,5 @@ For $\ell=1$ and $h=w$, with first-layer weights rational in general position an
 \begin{equation*}
   \prob\{\mC_p(X)>t\} \;\leq\; \binom{m}{2}\cdot 4\,n!\,(2L+2)^n\,w^n\left[\left(1+\frac{1}{t}\right)^n-1\right]
 \end{equation*}
-whenever $V_{ij}\subset B(p,\sigma)$ for all pairs $i<j$. For large $t$ this decays as $\binom{m}{2}\cdot 4\,n!\,(2L+2)^n\cdot n\,w^n/t$ by Remark~\ref{rem:single-layer-condition-tight}. The Khovanski\u\i{} prefactor $2^{w(w-1)/2}\cdot(n\cdot 5 + 2)^w$ of Example~\ref{ex:sigmoid-condition} is replaced by the polynomial $C_n(L)\cdot w^n$, making the bound quantitatively meaningful at practical widths.
+whenever $V_{ij}\subset B(p,\sigma)$ for all pairs $i<j$. For large $t$ this decays as $\binom{m}{2}\cdot 4\,n!\,(2L+2)^n\cdot n\,w^n/t$ by Remark~\ref{rem:single-layer-condition-tight}. The Khovanskii prefactor $2^{w(w-1)/2}\cdot(n\cdot 5 + 2)^w$ of Example~\ref{ex:sigmoid-condition} is replaced by the polynomial $C_n(L)\cdot w^n$, making the bound quantitatively meaningful at practical widths.
 \end{example}

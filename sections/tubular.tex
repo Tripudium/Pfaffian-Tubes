@@ -2,13 +2,13 @@
 Let $M$ be an $m$-dimensional compact Riemannian submanifold of $\R^n$ with the metric induced from the Euclidean metric, and denote by $c = n - m$ the codimension of $M$ in $\R^n$.
 The $\varepsilon$-tubular neighbourhood of $M$ in $\R^n$, $T(M, \varepsilon)$, is the set of points in $\R^n$ that can be joined perpendicularly to $M$ by a segment of length $\le \varepsilon$. Since $M$ is compact, $T(M, \varepsilon)$ is equal to the closed $\varepsilon$-neighbourhood of $M$ (this need not hold if $M$ is not compact).
 In this section we derive a bound on the probability that a random point lies in $T(M, \varepsilon)$ in the case where $M$ is defined by Pfaffian functions. The bound is derived by combining
-a variant of Weyl's tube formula with degree bounds on the generalized Gau\ss\ map, following the approach of~\cite{lotz2015volume}.
+a variant of Weyl's tube formula with degree bounds on the generalised Gauss map, following the approach of~\cite{lotz2015volume}.
 
-\subsection{Generalized Gauss map}
+\subsection{Generalised Gauss map}
  For $p\in M$, let $N_{p} M = \{ v \in \R^n \colon v \perp T_{p} M \}$ denote the normal space to $M$ at $p$ and  $S(NM)=\{(p,v)\in M\times S^{n-1}\colon v \perp T_{p} M\}$ the normal sphere bundle of $M$. If $M$ is a compact Riemannian manifold, then so is $S(NM)$, and the dimension of $S(NM)$ is $n-1$. 
 
 \begin{definition}
-The map $\gamma\colon S(NM) \to S^{n-1}$, $(p, v) \mapsto v$ is called the generalized Gauss map.
+The map $\gamma\colon S(NM) \to S^{n-1}$, $(p, v) \mapsto v$ is called the generalised Gauss map.
 \end{definition}
 
 Given a map between compact manifolds $f\colon M \to N$ of the same dimension, it is known that for a regular value $v$, the set $f^{-1}(v)$ is always finite~\cite[\S 1]{milnor1997topology}, and we define the maximum degree of $f$ by
@@ -17,7 +17,7 @@ Given a map between compact manifolds $f\colon M \to N$ of the same dimension, i
 \end{equation*}
 where $\reg f$ is the set of regular values of $f$. 
 
-Let $\cE^n_{j}$ be the set of dimension $j$ affine subspaces of $\R^n$. For almost all $L\in \cE^n_{c+i}$, the intersection $M\cap L$ is either empty or transverse, meaning that $\codim(T_{p}M\cap T_{p}L)=\codim T_{p}M+\codim T_{p}L$.  If $L \in \cE^n_{c+i}$ intersects $M$ transversally, then $M\cap L$ is an $i$-dimensional submanifold of $L \cong\R^{c+i}$. In this case, we can define the degree of $M$ with respect to $L$ as the maximum degree of the generalized Gauss map of $M\cap L$ as a submanifold of $L\cong \R^{c+i}$:
+Let $\cE^n_{j}$ be the set of dimension $j$ affine subspaces of $\R^n$. For almost all $L\in \cE^n_{c+i}$, the intersection $M\cap L$ is either empty or transverse, meaning that $\codim(T_{p}M\cap T_{p}L)=\codim T_{p}M+\codim T_{p}L$.  If $L \in \cE^n_{c+i}$ intersects $M$ transversally, then $M\cap L$ is an $i$-dimensional submanifold of $L \cong\R^{c+i}$. In this case, we can define the degree of $M$ with respect to $L$ as the maximum degree of the generalised Gauss map of $M\cap L$ as a submanifold of $L\cong \R^{c+i}$:
 \begin{equation*}
 \md(M, L) := \md \gamma_{M \cap L},
 \end{equation*}
@@ -56,8 +56,8 @@ where $\omega_n = \vol B(0,1)$.
 
 To turn this into an effective bound, we need to bound the $i$-th degrees of $M$.
 
-\subsection{Bounding the degree of the Gauss Map}
-The key to deriving an effective bound on the volume of $T(M, \varepsilon)$ is to bound the degree of the generalized Gauss map.
+\subsection{Bounding the degree of the Gauss map}
+The key to deriving an effective bound on the volume of $T(M, \varepsilon)$ is to bound the degree of the generalised Gauss map.
 We are interested in the case where $M$ is a complete intersection of $c$ smooth Pfaffian functions. By this, we mean that $M$ 
 can be expressed in the form
 \begin{equation*}
@@ -74,7 +74,7 @@ where the $f_i$ are Pfaffian functions of format $(\alpha, \beta, s)$, and such 
   \end{proposition}
   
   \begin{proof}
-  Let $v\in S^{n-1}$ be a regular value of the generalized Gauss map $\gamma\colon S(NM)\to S^{n-1}$. At each point $x\in M$,
+  Let $v\in S^{n-1}$ be a regular value of the generalised Gauss map $\gamma\colon S(NM)\to S^{n-1}$. At each point $x\in M$,
   the normal sphere bundle is spanned by the normalized gradients of the $f_i$, and the number of points in the pre-image $\gamma^{-1}(v)$ is the same as the number of points in the set
   \begin{equation*}
     S:= \left\{x\in M \colon \exists \lambda_1,\dots,\lambda_c \text{ s.t. } \sum_{i=1}^c \lambda_i \nabla f_i(x) = v\right\}.
@@ -116,7 +116,7 @@ where the $f_i$ are Pfaffian functions of format $(\alpha, \beta, s)$, and such 
 % \begin{equation*}
 %  \tilde{\gamma}\colon V\to S^{n-1}, \ \tilde{\gamma}(x)=\frac{\nabla f(x)}{\|\nabla f(x)\|}.
 % \end{equation*}
-% Any $v\in S^{n-1}$ in the image of the generalized Gau\ss map is of the form $\pm \tilde{\gamma}(x)$, so that after a suitable choice of sign for $f$, we have
+% Any $v\in S^{n-1}$ in the image of the generalised Gauss map is of the form $\pm \tilde{\gamma}(x)$, so that after a suitable choice of sign for $f$, we have
 % \begin{equation*}
 %  |\gamma^{-1}(v)| \leq 2|\tilde{\gamma}^{-1}(v)|.
 % \end{equation*} 
@@ -178,16 +178,16 @@ For $i\in [m]$, we can bound the $i$-th maximal degree as follows. Let $h\colon 
 \begin{equation*}
  L = \{x\in \R^n \colon h_{c+i+1}(x)=\cdots =h_{n}(x)=0\} 
 \end{equation*}
-and such that $\mathrm{mdeg}_i(M) = \mathrm{mdeg}(M;L)$. Clearly, the $i$-th maximal degree is coordinate-independent and
+and such that $\md_i(M) = \md(M,L)$. Clearly, the $i$-th maximal degree is coordinate-independent and
 \begin{equation*}
-  \mathrm{mdeg}_i(M) = \mathrm{mdeg}(M;L) = \mathrm{mdeg}(\tilde{M};\tilde{L}),
+  \md_i(M) = \md(M,L) = \md(\tilde{M},\tilde{L}),
 \end{equation*}
 where $\tilde{M}=\{x\colon \tilde{f}_i(x)=f(h^{-1}(x))=0\}$ and $\tilde{L} = \{x\colon x_{c+i+1}=\cdots =x_{n}=0\}$. 
 Thus $\tilde{M}$ can by seen as a submanifold of $\R^{c+i}$ and we can apply the bound from Proposition~\ref{prop:pfaffian-degree-bound} to get
 \begin{align} 
   \begin{split}
   \label{eq:ideg}
-  \mathrm{mdeg}_i(M) \leq &2^{\frac{s(s-1)}{2}}(\alpha+\beta)^{c+i}\beta_1\cdots \beta_c\\
+  \md_i(M) \leq &2^{\frac{s(s-1)}{2}}(\alpha+\beta)^{c+i}\beta_1\cdots \beta_c\\
   &\cdot\left((c+i+\min\{c+i,s\})\alpha+(c+i)(\beta-1)+\sum_{j=1}^c(\beta_j-1)+1\right)^s.
   \end{split}
 \end{align}
@@ -217,12 +217,12 @@ Let $\sigma, \varepsilon > 0$ such that $M = V \cap B(p, \sigma + \varepsilon)$ 
 \begin{equation*}
 T(V, \varepsilon) \cap B(p, \sigma) \subset T(M \setminus \partial M, \varepsilon) \cup T(\partial M, \varepsilon),
 \end{equation*}
-where $\partial M=M\cap S^{n-1}(p, \varepsilon+\sigma)$ is the sphere of radius $\varepsilon+\sigma$ centered at $p$.
+where $\partial M=M\cap S^{n-1}(p, \varepsilon+\sigma)$ is the sphere of radius $\varepsilon+\sigma$ centred at $p$.
 It is therefore enough to bound the two tubular neighbourhoods on the right-hand side.
 
 Since $M \setminus \partial M \subset V$ and $\dim M \setminus \partial M = \dim V$, we get $\md_i(M\setminus \partial M) \leq \md_i(V)$. Although $M\setminus \partial M$ is not compact, the tube volume bound of Theorem~\ref{thm:tube_bound} extends to this setting by a compact exhaustion argument. We thus get
 \begin{equation*}
-  \vol T(M \setminus \partial M, \varepsilon)  \leq 2 \omega_n (\sigma+\varepsilon)^n\sum_{i=0}^{n-1} \binom{n}{i+1} \cdot \mathrm{mdeg}_i(V)\cdot \left(\frac{\varepsilon}{\sigma+\varepsilon}\right)^{i+1}.
+  \vol T(M \setminus \partial M, \varepsilon)  \leq 2 \omega_n (\sigma+\varepsilon)^n\sum_{i=0}^{n-1} \binom{n}{i+1} \cdot \md_i(V)\cdot \left(\frac{\varepsilon}{\sigma+\varepsilon}\right)^{i+1}.
 \end{equation*}
 Since $\partial M$ has codimension $2$, we get, in addition,
 \begin{equation*}

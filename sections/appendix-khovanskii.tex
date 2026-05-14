@@ -1,6 +1,6 @@
-\section{Khovanski{\u\i}'s theorem}
-We give a self-contained proof of Khovanski{\u\i}'s Theorem (Theorem \ref{thm:khovanskii}).
-The two main ingredients of the proof are B\'ezout's Inequality for real algebraic sets, Theorem~\ref{thm:real-bezout}, and a generalization of Rolle's Theorem~\cite[\S 3.2]{khovanskiui1991fewnomials}.
+\section{Khovanskii's theorem}
+We give a self-contained proof of Khovanskii's Theorem (Theorem \ref{thm:khovanskii}).
+The two main ingredients of the proof are B\'ezout's Inequality for real algebraic sets, Theorem~\ref{thm:real-bezout}, and a generalisation of Rolle's Theorem~\cite[\S 3.2]{khovanskii1991fewnomials}.
 
 \begin{theorem}[Real B\'ezout Inequality] \label{thm:real-bezout}
   Let $P_1, \dots, P_n \in \R[X_1, \dots, X_n]$ be polynomials of degrees $d_1, \dots, d_n$. Then the number of non-degenerate solutions of the system
@@ -12,10 +12,10 @@ The two main ingredients of the proof are B\'ezout's Inequality for real algebra
 
 In the following, we refer to two roots $y$, $z$ of a function $g\colon C\to \R$ on a smooth $1$-manifold $C\subset \R^{n+1}$ as {\em consecutive roots} if there is an arc connecting $y$ and $z$ that does not contain any other root of $g$. A point $x$ is said to be between two consecutive roots $y$ and $z$ if $x$ is on the arc between $y$ and $z$ that does not contain any other roots. A function $f\colon C\to \R$ is said to \emph{change sign} at $x$, if $f(x)=0$ and there exists an open neighbourhood $U\subset C$, $x\in U$, such that $U\backslash \{x\}$ is the union of two connected components, and $f$ has different signs on each of them. 
 %A form $\omega\in \Lambda^n \R^{n+1}$ is said to change sign at $y\in C$ if $\omega = f(x) \ \diff{x}^1\wedge\cdots \wedge \diff{x}^n$ in local coordinates and $f|_{C}$ changes sign at $x$. 
-For an illustration of the following generalization of Rolle's Lemma, see~\cite{bates2011khovanskii}.
+For an illustration of the following generalisation of Rolle's Lemma, see~\cite{bates2011khovanskii}.
 %If $C\subset M$, with $M$ an $n$-dimensional differentiable manifold, then an $n$-form $\omega$ on $M$ is said to change %sign on $x\in C$ if $\omega=f\cdot \diff{x}_1\wedge\cdots \wedge\diff{x}_n$ in local coordinates around $x$ and $f|%_{C}$ changes sign at $x$. 
 
-\begin{lemma}[Khovanski{\u\i}-Rolle] \label{lem:kho-rolle}
+\begin{lemma}[Khovanskii-Rolle] \label{lem:kho-rolle}
 Let $G = (g_1, \ldots, g_n)\colon \R^{n+1} \rightarrow \R^n$ be a smooth map and let $y \in \R^n$ be a regular value of $G$, so that $C = G^{-1}(y)$ is a smooth $1$-submanifold of $\R^{n+1}$. Let $g\colon \R^{n+1} \rightarrow \R$ be a smooth map such that all the roots of $g|_C$ are non-degenerate, i.e., the differential $\diff(g|_C)$ does not vanish at any root. Then between any two consecutive roots of $g|_C$, the determinant
 \begin{equation}\label{eq:kho-rolle-det}
  \det([\nabla g_1, \ldots, \nabla g_n, \nabla g])
@@ -59,7 +59,7 @@ Set $\eps = \min_j \eps_j > 0$ (minimising over all components and all arcs). Th
 By Sard's theorem, we can choose $\delta \in (0, \eps)$ to be a regular value of $h|_C$.
 \end{proof}
 
-The following technical lemma, which bounds the degree of the determinant arising in the Khovanski{\u\i}--Rolle step, is the key ingredient in the induction.
+The following technical lemma, which bounds the degree of the determinant arising in the Khovanskii--Rolle step, is the key ingredient in the induction.
 
 \begin{lemma}[Rolle determinant degree]\label{lem:rolle-det-degree}
 Let $f_1,\dots,f_n$ be Pfaffian functions on $\R^n$ with common chain $\boldq = (q_1,\dots,q_s)$ of chain-degree $\alpha$, where the chain depends on $k\leq n$ of the variables, and with respective degrees $\beta_1,\dots,\beta_n$, so that $f_i(x) = Q_i(x, q_1(x),\dots,q_s(x))$ for polynomials $Q_i$ of degree $\beta_i$. Let $P_{ij}$ denote the chain polynomials of $\boldq$. Define $G = (g_1,\dots,g_n)\colon \R^{n+1}\to \R^n$ and $g\colon \R^{n+1}\to \R$ by
@@ -157,7 +157,7 @@ Since $\frac{\partial g}{\partial x_{n+1}} = -1$, the value $0$ is a regular val
 where $\pi_n$ denotes projection onto the first $n$ coordinates. Moreover, $(x, q_s(x))$ is a regular solution of $(G, g) = (y, 0)$ if and only if $x$ is a regular solution of $F = y$ (see Claim~\ref{claim:regular-solutions} below). Thus, it suffices to bound the number of regular solutions of $(G, g) = (y, 0)$.
 
 \medskip
-\noindent\textbf{Step 2: Applying the Khovanski{\u\i}--Rolle Corollary.}
+\noindent\textbf{Step 2: Applying the Khovanskii--Rolle Corollary.}
 We first assume that $G$ is a proper map; this assumption will be removed in Claim~\ref{claim:G-proper}. By a standard argument based on the implicit function theorem~\cite[Chapter~1]{milnor1997topology}, the number of regular preimage points of a proper map is locally constant. By Sard's theorem, we may choose $y \in \R^n$ that is a regular value of both $G$ and of $G|_N$. For such $y$, the set $C = G^{-1}(y) \subset \R^{n+1}$ is a smooth, compact $1$-manifold, and
 \begin{equation*}
   \left\{(x, x_{n+1}) \in N \suchthat G(x, x_{n+1}) = y\right\} = \left\{(x, x_{n+1}) \in C \suchthat g(x, x_{n+1}) = 0\right\}.
