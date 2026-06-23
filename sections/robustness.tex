@@ -53,7 +53,7 @@ where $C_{\alpha,\beta,s,n}$ and $\overline{\beta}$ are as in Theorem~\ref{thm:p
 \end{theorem}
 
 \begin{proof}
-  For $X\in B(p,\sigma)$ we have $\|X - p\|\leq \sigma$, so the event $\mC_p(X) > t$ implies $\Delta(X) < \|X-p\|/t \leq \sigma/t$. By the inclusion~\eqref{eq:sigma-inclusion}, any point within $\sigma/t$ of $\Sigma$ is within $\sigma/t$ of some $V_{ij}$, so $\{\Delta(X) < \sigma/t\} \subseteq \bigcup_{i<j}\{\dist(X, V_{ij}) < \sigma/t\}$. By a union bound and Theorem~\ref{thm:prob_bound} applied to each $V_{ij}$ with $\varepsilon = \sigma/t$,
+  For $X\in B(p,\sigma)$ we have $\|X - p\|\leq \sigma$, so the event $\mC_p(X) > t$ implies $\Delta(X) < \|X-p\|/t \leq \sigma/t$. By the inclusion~\eqref{eq:sigma-inclusion}, any point within $\sigma/t$ of $\Sigma$ is within $\sigma/t$ of some $V_{ij}$, so $\{\Delta(X) < \sigma/t\} \subseteq \bigcup_{i<j}\{\dist(X, V_{ij}) < \sigma/t\}$. By a union bound and the simplified bound of Remark~\ref{rem:prob_bound_simple} applied to each $V_{ij}$ with $\varepsilon = \sigma/t$,
 \begin{equation*}
   \prob\{\mC_p(X) > t\} \leq \binom{m}{2}\, C_{\alpha,\beta,s,n}\left(1 + (\alpha + \overline{\beta} + 1)\frac{1}{t}\right)^n. \qedhere
 \end{equation*}
@@ -64,7 +64,7 @@ For the global condition number $\mC(X) = \|X\|/\Delta(X)$, the bound $\|X\|\leq
 \begin{equation*}
   \prob\{\mC(X) > t\} \leq \binom{m}{2}\, C_{\alpha,\beta,s,n}\left(1 + (\alpha + \overline{\beta} + 1)\frac{\|p\| + \sigma}{t\sigma}\right)^n.
 \end{equation*}
-The local form of Theorem~\ref{thm:condition-uniform} is preferred because it is independent of~$\sigma$. As stated, its bound tends to the constant $\binom{m}{2}\,C_{\alpha,\beta,s,n}$ as $t\to\infty$; genuine $O(1/t)$ tail decay is obtained from the tight form of Corollary~\ref{cor:tight_prob_bound}, whose bracket $(1+(\alpha+\overline{\beta}+1)/t)^n-(1+1/t)^n$ is $O(1/t)$ as $t\to\infty$.
+The local form of Theorem~\ref{thm:condition-uniform} is preferred because it is independent of~$\sigma$. As stated, its bound tends to the constant $\binom{m}{2}\,C_{\alpha,\beta,s,n}$ as $t\to\infty$; genuine $O(1/t)$ tail decay is obtained from the full form of Theorem~\ref{thm:prob_bound}, whose bracket $(1+(\alpha+\overline{\beta}+1)/t)^n-(1+1/t)^n$ is $O(1/t)$ as $t\to\infty$.
 \end{remark}
 
 We now turn to the smoothed analysis setting, where the data point is a Gaussian perturbation of a fixed input $\overline{x}$. The following result is sharper than the uniform bound, as the Gaussian concentration around $\overline{x}$ yields a tighter estimate via a Fubini decomposition.
@@ -100,7 +100,7 @@ For a Gaussian vector $X$ centred at $\overline{x}$ with covariance $\sigma^2\ma
 \begin{equation}\label{eq:gauss-to-uniform}
  \prob\{X\in A\} = \frac{\omega_n}{(2\pi)^{\frac{n}{2}}}\int_{0}^{\infty} \prob\{U_{\sigma s}\in A\}\, s^{n+1} \econst^{-\frac{s^2}{2}} \ \diff{s}.
 \end{equation}
-Since $U_{\sigma s}\in A$ implies $\dist(U_{\sigma s},V)\leq \sigma s/t$, we can apply Corollary~\ref{cor:tight_prob_bound} with ball radius $\sigma s$ and $\varepsilon = \sigma s/t$. The ratio $\varepsilon/(\sigma s) = 1/t$ is independent of $s$, so
+Since $U_{\sigma s}\in A$ implies $\dist(U_{\sigma s},V)\leq \sigma s/t$, we can apply Theorem~\ref{thm:prob_bound} with ball radius $\sigma s$ and $\varepsilon = \sigma s/t$. The ratio $\varepsilon/(\sigma s) = 1/t$ is independent of $s$, so
 \begin{equation*}
   \prob\{U_{\sigma s}\in A\} \leq C_{\alpha,\beta,s,n}\left[\left(1+\frac{\alpha+\overline{\beta}+1}{t}\right)^n - \left(1+\frac{1}{t}\right)^n\right].
 \end{equation*}
@@ -191,7 +191,7 @@ The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires 
     \frac{\omega_n}{(2\pi)^{n/2}}\int_{s^*}^\infty \prob\{U_{\sigma s} \in A_{ij}\}\,s^{n+1}\econst^{-s^2/2}\,\diff s \;\leq\; B_{\mathrm{BKK}}(t).
   \end{equation*}
 
-  \emph{Region $s < s^*$.} Without the containment hypothesis we use the unconditional Pfaffian bound: each $g_{ij}$ is Pfaffian of format $(2,1,w)$ (Example~\ref{ex:activations}), so Corollary~\ref{cor:tight_prob_bound} applied to $V_{ij}$ with ball radius $\sigma s$ and $\varepsilon = \sigma s/t$ gives $\prob\{U_{\sigma s} \in A_{ij}\} \leq B_{\mathrm{Pf}}(t)$, again independent of $s$. Integrating over $[0, s^*]$ contributes $\gamma_n(R_V/\sigma)\,B_{\mathrm{Pf}}(t)$.
+  \emph{Region $s < s^*$.} Without the containment hypothesis we use the unconditional Pfaffian bound: each $g_{ij}$ is Pfaffian of format $(2,1,w)$ (Example~\ref{ex:activations}), so Theorem~\ref{thm:prob_bound} applied to $V_{ij}$ with ball radius $\sigma s$ and $\varepsilon = \sigma s/t$ gives $\prob\{U_{\sigma s} \in A_{ij}\} \leq B_{\mathrm{Pf}}(t)$, again independent of $s$. Integrating over $[0, s^*]$ contributes $\gamma_n(R_V/\sigma)\,B_{\mathrm{Pf}}(t)$.
 
   Summing the two regions and applying a union bound over the $\binom{m}{2}$ pairs $i < j$ yields~\eqref{eq:single-layer-gaussian-bound}.
 \end{proof}

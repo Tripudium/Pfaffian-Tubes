@@ -1,5 +1,5 @@
 \section{Pfaffian functions and Pfaffian sets}\label{sec:pfaffian}
-References for the material in this section are~\cite{khovanskii1991fewnomials, zell2003quantitative, gabrielov2004complexity}. We assume throughout that $n\in \N_{>0}$.
+References for the material in this section are~\cite{khovanskii1991fewnomials, zell2003quantitative, gabrielov2004complexity}. We assume throughout that $n\in \N_{>0}$. Pfaffian functions are defined relative to an open domain $\cU\subseteq\R^n$; unless a domain is specified we take $\cU=\R^n$, which covers the activation functions of interest, as these are Pfaffian on all of $\R^n$. A proper subdomain is needed only once, in the proof of Proposition~\ref{prop:single-layer-ideg}.
 
 \subsection{Pfaffian functions}
 Pfaffian functions, introduced by Khovanskii~\cite{khovanskii1991fewnomials}, are functions that satisfy triangular systems of first-order partial differential equations with polynomial coefficients. The sets defined by Pfaffian functions are tame in the sense of o-minimal geometry~\cite{wilkie1996model, wilkie1999theorem, speissegger1999pfaffian}, and many of their geometric and topological properties, such as the number of connected components and the sum of Betti numbers, can be bounded effectively in terms of the format~\cite{gabrielov2004complexity}.
@@ -127,16 +127,16 @@ We conclude this subsection with the following central result on Pfaffian system
 We call a solution $a\in \R^n$ of a system of equations $F(x)=0$ regular (or non-degenerate), if the differential $\diff{F}(a)$ has maximal rank. 
 
 \begin{theorem}[Khovanskii] \label{thm:khovanskii}
-Let $F=(f_1,\dots,f_n) \colon \R^n\to \R^n$ be a Pfaffian function with chain $\boldq=(q_1,\dots,q_s)$ and component-wise formats $(\alpha, \beta_i, s)$, for which the functions in the Pfaffian chain depend only on $\{x_1,\dots,x_k\}$ for some $k\leq n$. Then the number of regular real solutions of the system $F(x) = 0$ is bounded by 
+Let $\cU\subseteq\R^n$ be an open domain and let $F=(f_1,\dots,f_n) \colon \cU\to \R^n$ be a Pfaffian function over $\cU$ with chain $\boldq=(q_1,\dots,q_s)$ and component-wise formats $(\alpha, \beta_i, s)$, for which the functions in the Pfaffian chain depend only on $\{x_1,\dots,x_k\}$ for some $k\leq n$. Then the number of regular real solutions of the system $F(x) = 0$ in $\cU$ is bounded by
 \begin{equation*}
 2^{\frac{s(s - 1)}{2}} \beta_1 \dotsm \beta_n \left(\beta_1 + \dotsb + \beta_n - n + \min\{k, s\}\alpha + 1 \right)^s.
 \end{equation*}
 \end{theorem}
 
-In~\cite[\S 3.12, Corollary 5]{khovanskii1991fewnomials}, a version of Theorem~\ref{thm:khovanskii} is derived from more general results. The standard formulations (e.g.,~\cite[Theorem 3.1]{gabrielov2004complexity}) use $\min\{n,s\}$ in place of $\min\{k,s\}$; the refined bound follows from the proof in~\cite{khovanskii1991fewnomials}, where the Rolle-type induction only involves the $k$ variables on which the chain depends. The following result is a slightly sharper version of~\cite[Corollary 3.3]{gabrielov2004complexity} and~\cite[Theorem 2.3]{jones2012density}, using the refined bound of Theorem~\ref{thm:khovanskii}.
+In~\cite[\S 3.12, Corollary 5]{khovanskii1991fewnomials}, a version of Theorem~\ref{thm:khovanskii} is derived from more general results. The standard formulations (e.g.,~\cite[Theorem 3.1]{gabrielov2004complexity}) use $\min\{n,s\}$ in place of $\min\{k,s\}$; the refined bound follows from the proof in~\cite{khovanskii1991fewnomials}, where the Rolle-type induction only involves the $k$ variables on which the chain depends. The bound depends only on the format and on $n$, not on the domain $\cU$; the case $\cU=\R_{>0}^n$, with a logarithmic chain, is the classical fewnomial setting for counting positive solutions and is the one invoked in the proof of Proposition~\ref{prop:single-layer-ideg}. The following result is a slightly sharper version of~\cite[Corollary 3.3]{gabrielov2004complexity} and~\cite[Theorem 2.3]{jones2012density}, using the refined bound of Theorem~\ref{thm:khovanskii}.
 
 \begin{corollary}
-Let $F=(f_1,\dots,f_m) \colon \R^n \to \R^m$ be a Pfaffian function with chain $\boldq=(q_1,\dots,q_s)$ and formats $(\alpha, \beta, s)$, for which the functions in the Pfaffian chain depend only on $k\leq n$ of the variables. Then the number of connected components of the zero set $\mathcal{Z}(f_1,\dots,f_m)$ is bounded by 
+  Let $\cU\subseteq\R^n$ be an open domain and let $F\in \Pfaff_{\alpha,\beta,s}(\cU;\R^m)$ be a Pfaffian function with chain $\boldq=(q_1,\dots,q_s)$, for which the functions in the Pfaffian chain depend only on $k\leq n$ of the variables. Then the number of connected components of the zero set $\mathcal{Z}(F)$ is bounded by 
 \begin{equation}\label{eq:jones}
 2^{\frac{s(s - 1)}{2}+1} (\alpha+2\beta-1)^{n-1}\beta \left( n (\alpha+2\beta-2)+\alpha(\min\{k, s\}-1) + 2 \right)^s.
 \end{equation}
