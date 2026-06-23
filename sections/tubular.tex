@@ -17,13 +17,13 @@ Given a map between compact manifolds $f\colon M \to N$ of the same dimension, i
 \end{equation*}
 where $\reg f$ is the set of regular values of $f$. 
 
-Let $\cE^n_{j}$ be the set of dimension $j$ affine subspaces of $\R^n$. For almost all $L\in \cE^n_{c+i}$, the intersection $M\cap L$ is either empty or transverse, meaning that $\codim(T_{p}M\cap T_{p}L)=\codim T_{p}M+\codim T_{p}L$.  If $L \in \cE^n_{c+i}$ intersects $M$ transversally, then $M\cap L$ is an $i$-dimensional submanifold of $L \cong\R^{c+i}$. In this case, we can define the degree of $M$ with respect to $L$ as the maximum degree of the generalised Gauss map of $M\cap L$ as a submanifold of $L\cong \R^{c+i}$:
+Let $\cE^n_{j}$ be the set of dimension $j$ affine subspaces of $\R^n$. For almost all $H\in \cE^n_{c+i}$, the intersection $M\cap H$ is either empty or transverse, meaning that $\codim(T_{p}M\cap T_{p}H)=\codim T_{p}M+\codim T_{p}H$.  If $H \in \cE^n_{c+i}$ intersects $M$ transversally, then $M\cap H$ is an $i$-dimensional submanifold of $H \cong\R^{c+i}$. In this case, we can define the degree of $M$ with respect to $H$ as the maximum degree of the generalised Gauss map of $M\cap H$ as a submanifold of $H\cong \R^{c+i}$:
 \begin{equation*}
-\md(M, L) := \md \gamma_{M \cap L},
+\md(M, H) := \md \gamma_{M \cap H},
 \end{equation*}
 and the $i$-th degree of $M$ as 
 \begin{equation*}
-\md_i(M) := \sup_{L \in \cE^n_{c+i}} \ \md(M, L).
+\md_i(M) := \sup_{H \in \cE^n_{c+i}} \ \md(M, H).
 \end{equation*}
 
 %\begin{figure}
@@ -176,13 +176,13 @@ where the $f_i$ are Pfaffian functions of format $(\alpha, \beta, s)$, and such 
 
 For $i\in [m]$, we can bound the $i$-th maximal degree as follows. Let $h\colon \R^n\to \R^n$ be an orthogonal change of variables, such that
 \begin{equation*}
- L = \{x\in \R^n \colon h_{c+i+1}(x)=\cdots =h_{n}(x)=0\} 
+ H = \{x\in \R^n \colon h_{c+i+1}(x)=\cdots =h_{n}(x)=0\} 
 \end{equation*}
-and such that $\md_i(M) = \md(M,L)$. Clearly, the $i$-th maximal degree is coordinate-independent and
+and such that $\md_i(M) = \md(M,H)$. Clearly, the $i$-th maximal degree is coordinate-independent and
 \begin{equation*}
-  \md_i(M) = \md(M,L) = \md(\tilde{M},\tilde{L}),
+  \md_i(M) = \md(M,H) = \md(\tilde{M},\tilde{H}),
 \end{equation*}
-where $\tilde{M}=\{x\colon \tilde{f}_i(x)=f(h^{-1}(x))=0\}$ and $\tilde{L} = \{x\colon x_{c+i+1}=\cdots =x_{n}=0\}$. 
+where $\tilde{M}=\{x\colon \tilde{f}_i(x)=f(h^{-1}(x))=0\}$ and $\tilde{H} = \{x\colon x_{c+i+1}=\cdots =x_{n}=0\}$. 
 Thus $\tilde{M}$ can by seen as a submanifold of $\R^{c+i}$ and we can apply the bound from Proposition~\ref{prop:pfaffian-degree-bound} to get
 \begin{align} 
   \begin{split}
