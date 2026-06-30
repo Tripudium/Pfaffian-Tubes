@@ -5,17 +5,17 @@ In this section we derive a bound on the probability that a random point lies in
 a variant of Weyl's tube formula with degree bounds on the generalised Gauss map, following the approach of~\cite{lotz2015volume}.
 
 \subsection{Generalised Gauss map}
- For $p\in M$, let $N_{p} M = \{ v \in \R^n \colon v \perp T_{p} M \}$ denote the normal space to $M$ at $p$ and  $S(NM)=\{(p,v)\in M\times S^{n-1}\colon v \perp T_{p} M\}$ the normal sphere bundle of $M$. If $M$ is a compact Riemannian manifold, then so is $S(NM)$, and the dimension of $S(NM)$ is $n-1$. 
+ For $p\in M$, let $N_{p} M = \{ v \in \R^n \colon v \perp T_{p} M \}$ denote the normal space to $M$ at $p$ and  $S(NM)=\{(p,v)\in M\times S^{n-1}\colon v \perp T_{p} M\}$ the normal sphere bundle of $M$. The normal sphere bundle $S(NM)$ is a smooth manifold of dimension $n-1$ for any submanifold $M$, and is compact when $M$ is; in particular the generalised Gauss map is defined whether or not $M$ is compact.
 
 \begin{definition}
 The map $\gamma\colon S(NM) \to S^{n-1}$, $(p, v) \mapsto v$ is called the generalised Gauss map.
 \end{definition}
 
-Given a map between compact manifolds $f\colon M \to N$ of the same dimension, it is known that for a regular value $v$, the set $f^{-1}(v)$ is always finite~\cite[\S 1]{milnor1997topology}, and we define the maximum degree of $f$ by
+For a smooth map $f$ between manifolds of the same dimension, the fibre $f^{-1}(v)$ over a regular value $v$ is discrete, and finite if the domain is compact~\cite[\S 1]{milnor1997topology}. We define the maximum degree of $f$ by
 \begin{equation*}
-\md f = \max_{v \in \reg f} |f^{-1} (v)|,
+\md f = \sup_{v \in \reg f} |f^{-1} (v)| \;\in\; \N\cup\{\infty\},
 \end{equation*}
-where $\reg f$ is the set of regular values of $f$. 
+where $\reg f$ is the set of regular values of $f$. For a general smooth map this supremum may be infinite; for the generalised Gauss maps of (sections of) Pfaffian sets to which we apply it, it is finite and attained---bounded by the degree estimates of this section---and the domain need not be compact.
 
 Let $\cE^n_{j}$ be the set of dimension $j$ affine subspaces of $\R^n$. For almost all $H\in \cE^n_{c+i}$, the intersection $M\cap H$ is either empty or transverse, meaning that $\codim(T_{p}M\cap T_{p}H)=\codim T_{p}M+\codim T_{p}H$.  If $H \in \cE^n_{c+i}$ intersects $M$ transversally, then $M\cap H$ is an $i$-dimensional submanifold of $H \cong\R^{c+i}$. In this case, we can define the degree of $M$ with respect to $H$ as the maximum degree of the generalised Gauss map of $M\cap H$ as a submanifold of $H\cong \R^{c+i}$:
 \begin{equation*}
@@ -47,12 +47,16 @@ based on a version of Weyl's tube formula and integral geometry. The key takeawa
 In what follows, $B(p,\sigma)$ denotes a closed ball of radius $\sigma$ around $p\in \R^n$.
 
 \begin{theorem} \label{thm:tube_bound}
-Let $M \subset B(p, \sigma)$ be a compact Riemannian submanifold of $\R^n$ of dimension $m$, and set $c=n-m$. Then for any $\varepsilon > 0$ we have 
+Let $M \subset B(p, \sigma)$ be a compact Riemannian submanifold of $\R^n$ of dimension $m$, possibly with boundary, and set $c=n-m$. Then for any $\varepsilon > 0$ we have 
 \begin{equation*}
 \vol T(M, \varepsilon) \le 2\omega_n \sigma^n \sum_{i=0}^m \binom{n}{c+i} \md_i(M) \left(\frac{\varepsilon}{\sigma}\right)^{c+i},
 \end{equation*}
-where $\omega_n = \vol B(0,1)$.
+where $\omega_n = \vol B(0,1)$ and, when $M$ has boundary, the degrees $\md_i(M)$ are taken on the interior $M\setminus\partial M$.
 \end{theorem}
+
+\begin{remark}\label{rem:tube_bound_boundary}
+The estimate of Theorem~\ref{thm:tube_bound} is a one-sided, integral-geometric bound: it controls $\vol T(M,\varepsilon)$ by the integrals of absolute curvature over the interior $M\setminus\partial M$, which are themselves bounded by the section degrees $\md_i$ via Crofton's formula. The upper bound follows from the surjectivity of the normal exponential map $S(NM)\times[0,\varepsilon]\to T(M,\varepsilon)$ together with the area formula, and therefore holds verbatim for a bounded compact manifold with boundary, the curvature integrals and degrees being taken over the interior; boundarylessness is needed only for the \emph{equality} (Weyl) form valid for small $\varepsilon$. The result is stated and proved in this generality in~\cite[Theorems 3.1 and 4.3]{lotz2015volume}.
+\end{remark}
 
 To turn this into an effective bound, we need to bound the $i$-th degrees of $M$.
 
@@ -176,16 +180,15 @@ where the $f_i$ are Pfaffian functions of format $(\alpha, \beta, s)$, and such 
 % Since $f$ is Pfaffian with format $(\alpha, \beta, s)$, it follows from Lemma~\ref{le:pfaffalgebra} that $\frac{\partial f}{\partial x_i}$ is Pfaffian with format $(\alpha, \alpha + \beta - 1, s)$, and the bound on the number of solutions of the system~\eqref{eq:paffian-hyper} follows from Khovanskii's inequality, Theorem~\ref{thm:khovanskii}. 
 % \end{proof}
 
-For $i\in [m]$, we can bound the $i$-th maximal degree as follows. Let $h\colon \R^n\to \R^n$ be an orthogonal change of variables, such that
+For $i\in [m]$, we bound the $i$-th maximal degree as follows. Fix a section $H\in\cE^n_{c+i}$ meeting $M$ transversally. Since $H$ is an affine subspace, there is an affine isometry $h\colon \R^n\to \R^n$ (a rigid motion) carrying $H$ onto the coordinate subspace
 \begin{equation*}
- H = \{x\in \R^n \colon h_{c+i+1}(x)=\cdots =h_{n}(x)=0\} 
+  \tilde{H} = \{x\in \R^n \colon x_{c+i+1}=\cdots =x_{n}=0\}\cong\R^{c+i};
 \end{equation*}
-It suffices to provide a uniform bound on $\md(M,H)$ for all such $H$. Clearly, the maximal degree is coordinate-independent and
+such an $h$ exists for any affine $(c+i)$-subspace, obtained by translating $H$ to pass through the origin and then rotating its direction space onto $\R^{c+i}\times\{0\}$. The generalised Gauss-map degree is invariant under isometries, so
 \begin{equation*}
-  \md(M,H) = \md(\tilde{M},\tilde{H}),
+  \md(M,H) = \md(\tilde{M},\tilde{H}),\qquad \tilde{M} := h(M) = \mathcal{Z}(\tilde{f}_1,\dots,\tilde{f}_c),\quad \tilde{f}_j := f_j\circ h^{-1}.
 \end{equation*}
-where $\tilde{M}=\{x\colon \tilde{f}_i(x)=f(h^{-1}(x))=0\}$ and $\tilde{H} = \{x\colon x_{c+i+1}=\cdots =x_{n}=0\}$. 
-Thus $\tilde{M}$ can by seen as a submanifold of $\R^{c+i}$ and we can apply the bound from Proposition~\ref{prop:pfaffian-degree-bound} to get
+By Remark~\ref{re:affine}, each $\tilde{f}_j$ is Pfaffian of the same format $(\alpha,\beta,s)$ as $f_j$, so $\tilde{M}$ is a Pfaffian complete intersection of that format; in particular the resulting bound is independent of $H$, and it suffices to bound $\md(\tilde{M},\tilde{H})$. Restricting to $\tilde{H}$, that is, setting $x_{c+i+1}=\cdots=x_n=0$, realises $\tilde{M}\cap\tilde{H}$ as a Pfaffian complete intersection of $c$ functions of format $(\alpha,\beta,s)$ in the $c+i$ variables $x_1,\dots,x_{c+i}$, so applying Proposition~\ref{prop:pfaffian-degree-bound} in dimension $c+i$ gives
 \begin{equation} 
   \label{eq:ideg}
   \md_i(M) \leq 2^{\frac{s(s-1)}{2}}(\alpha+\beta)^{c+i}\beta^c
@@ -213,14 +216,14 @@ The probability that $d(X,V)\leq \varepsilon$ for $X$ uniformly distributed in $
 \begin{equation*}
   \prob\{d(X, V)\leq \varepsilon\} = \frac{\vol (T(V,\varepsilon)\cap B(p,\sigma))}{\vol B(p,\sigma)}.
 \end{equation*}
-Let $\sigma, \varepsilon > 0$ such that $M = V \cap B(p, \sigma + \varepsilon)$ is a manifold (this is true for almost all $\sigma$), and notice that
+Fix $\varepsilon>0$ and assume first that $\sigma+\varepsilon$ is a regular value of the map $x\mapsto\|x-p\|$ on $V$, which holds for almost all $\sigma>0$ by Sard's theorem; the remaining values of $\sigma$ are handled by a limiting argument at the end of the proof. Then $M = V \cap B(p, \sigma + \varepsilon)$ is a compact manifold with boundary, and we notice that
 \begin{equation*}
 T(V, \varepsilon) \cap B(p, \sigma) \subset T(M \setminus \partial M, \varepsilon) \cup T(\partial M, \varepsilon),
 \end{equation*}
 where $\partial M=M\cap S^{n-1}(p, \varepsilon+\sigma)$ is the sphere of radius $\varepsilon+\sigma$ centred at $p$.
 It is therefore enough to bound the two tubular neighbourhoods on the right-hand side.
 
-Since $M \setminus \partial M \subset V$ and $\dim M \setminus \partial M = \dim V$, we get $\md_i(M\setminus \partial M) \leq \md_i(V)$. The set $M\setminus\partial M = V\cap B^\circ(p,\sigma+\varepsilon)$ is a bounded smooth hypersurface without boundary, but it is not compact, so Theorem~\ref{thm:tube_bound} does not apply to it directly; we extend the bound by a compact exhaustion. By Sard's theorem applied to the map $x\mapsto \|x-p\|$ on $V$, almost every $r\in(0,\sigma+\varepsilon)$ is a regular value, so each $K_r:=V\cap \overline{B(p,r)}$ is a compact hypersurface. Fix regular values $r_k\nearrow\sigma+\varepsilon$, so that $K_{r_k}\nearrow M\setminus\partial M$. For each $k$, Theorem~\ref{thm:tube_bound} applied to the compact set $K_{r_k}\subset B(p,\sigma+\varepsilon)$, together with the monotonicity $\md_i(K_{r_k})\le\md_i(V)$, bounds $\vol T(K_{r_k},\varepsilon)$ by the right-hand side below, uniformly in $k$. Note that the $K_{r_k}$ are manifolds with boundary $V\cap S^{n-1}(p,r_k)$ but this does not affect the argument, as the bound of Theorem~\ref{thm:tube_bound} depends only on the section degrees $\md_i$, the codimension-$2$ boundary contributing only terms of the kind bounded for $\partial M$ below. Since the closed neighbourhoods $T(K_{r_k},\varepsilon)$ increase to $T(M\setminus\partial M,\varepsilon)$ up to a Lebesgue-null set, monotone convergence of measure gives
+Since $M \setminus \partial M \subset V$ and $\dim(M \setminus \partial M) = \dim V$, we have $\md_i(M\setminus \partial M) \leq \md_i(V)$. Applying Theorem~\ref{thm:tube_bound} to the compact manifold-with-boundary $M\subset B(p,\sigma+\varepsilon)$---which is legitimate by Remark~\ref{rem:tube_bound_boundary}, the bound being a one-sided integral-geometric estimate in the section degrees, with the $\md_i$ taken on the interior $M\setminus\partial M$---and using $\md_i(M\setminus\partial M)\le\md_i(V)$, we obtain
 \begin{equation*}
   \vol T(M \setminus \partial M, \varepsilon)  \leq 2 \omega_n (\sigma+\varepsilon)^n\sum_{i=0}^{n-1} \binom{n}{i+1} \cdot \md_i(V)\cdot \left(\frac{\varepsilon}{\sigma+\varepsilon}\right)^{i+1}.
 \end{equation*}
@@ -250,7 +253,7 @@ The substitution $j=i+1$ and the binomial theorem give
 \begin{equation*}
   \sum_{j=1}^{n}\binom{n}{j}(at)^j(1+t)^{n-j} = (1+(a+1)t)^n - (1+t)^n.
 \end{equation*}
-Recalling $C_{\alpha,\beta,s,n}=6K$, $a=\alpha+\overline{\beta}$, and $t=\varepsilon/\sigma$ completes the proof.
+Recalling $C_{\alpha,\beta,s,n}=6K$, $a=\alpha+\overline{\beta}$, and $t=\varepsilon/\sigma$ gives the claimed bound for every $\sigma$ such that $\sigma+\varepsilon$ is a regular value of $x\mapsto\|x-p\|$ on $V$, which by Sard's theorem is a dense set of $\sigma>0$. It remains to remove this genericity assumption. Both sides of the inequality are continuous in $\sigma$: the right-hand side is a polynomial in $\varepsilon/\sigma$, while the left-hand side equals $\vol\bigl(T(V,\varepsilon)\cap B(p,\sigma)\bigr)/(\omega_n\sigma^n)$, which is continuous because $\sigma\mapsto\vol\bigl(T(V,\varepsilon)\cap B(p,\sigma)\bigr)$ is (the spheres $S^{n-1}(p,\sigma)$ being Lebesgue-null). Since the bound holds on a dense set of $\sigma$ and both sides are continuous, it holds for all $\sigma,\varepsilon>0$, completing the proof.
 \end{proof}
 
 \begin{remark}\label{rem:prob_bound_simple}
