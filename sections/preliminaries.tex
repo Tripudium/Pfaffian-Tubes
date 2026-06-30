@@ -15,7 +15,7 @@ A function $g(x)=P(x,q_1(x),\dots,q_s(x))$, with $P\in \R[X_1,\dots,X_n,Y_1,\dot
 The triple $(\alpha, \beta, s)$ is called a \emph{format} of $g$. We denote by $\Pfaff_{\boldq,\beta}(\cU)$ the set of all Pfaffian functions over $\cU$ with chain $\boldq$ and degree $\beta$, and by $\Pfaff_{\alpha,\beta,s}(\cU)$ the set of all Pfaffian functions over $\cU$ with format $(\alpha,\beta,s)$.  When we say that a Pfaffian function $\cU\to \R^m$ has a particular format, we mean that every component has that same format, and we write $\Pfaff_{\alpha,\beta,s}(\cU; \R^m)$.
 
 \begin{remark}
- Note that the Pfaffian chain associated with a Pfaffian function, and hence also a format, is not unique. In particular, if $g\in \Pfaff_{\alpha,\beta,s}(\cU)$, then $g\in \Pfaff_{\alpha',\beta',s'}(\cU)$ for $\alpha'\geq \alpha$, $\beta'\geq \beta$, and $s'\geq s$. In the following, we will often leave the chain implicit, and our results will be stated in terms of the format.
+ Note that the Pfaffian chain associated with a Pfaffian function, and hence also a format, is not unique. In particular, if $\Pfaff_{\alpha,\beta,s}(\cU)\subseteq \Pfaff_{\alpha',\beta',s'}(\cU)$ for $\alpha'\geq \alpha$, $\beta'\geq \beta$, and $s'\geq s$. In the following, we will often leave the chain implicit, and our results will be stated in terms of the format.
 \end{remark}
 
 We call a Pfaffian function $g\colon \cU\to \R$ \emph{autonomous} with respect to a Pfaffian chain $\boldq$ if 
@@ -23,9 +23,7 @@ We call a Pfaffian function $g\colon \cU\to \R$ \emph{autonomous} with respect t
   \frac{\partial q_i}{\partial x_j}(x) = P_{ij}(q_1(x),\dots,q_i(x))
 \end{equation}
 for some $P_{ij}\in \R[Y_1,\dots,Y_i]$, and $g(x)=P(q_1(x), \dots, q_s(x))$ for some $P\in \R[Y_1,\dots,Y_s]$. 
-
-\begin{remark} Note that being autonomous is a property of a given Pfaffian representation of a function, not a property of the function itself. Every Pfaffian function can be made autonomous by adjoining the coordinate functions $x_1,\dots,x_n$ to the Pfaffian chain. In what follows, we often work with a fixed chain that may be implicit, and refer to a Pfaffian function as autonomous if it is autonomous with respect to that chain.
-\end{remark}
+Note that being autonomous is a property of a given Pfaffian representation of a function, not a property of the function itself. Every Pfaffian function can be made autonomous by adjoining the coordinate functions $x_1,\dots,x_n$ to the Pfaffian chain. In what follows, we often work with a fixed chain that may be implicit, and refer to a Pfaffian function as autonomous if it is autonomous with respect to that chain.
 
 \begin{example}\label{ex:1} The following are simple examples of Pfaffian functions.
         \begin{enumerate}
@@ -63,7 +61,7 @@ The first two statements are straightforward consequences of the fact that the c
 \begin{equation*}
   \frac{\partial g}{\partial x_i} = \frac{\partial P}{\partial x_i}+\sum_{\ell=1}^s \frac{\partial P}{\partial y_\ell}\frac{\partial q_\ell}{\partial x_i}= \frac{\partial P}{\partial x_i}+\sum_{\ell=1}^s \frac{\partial P}{\partial y_\ell}P_{\ell i}(x,q_1(x),\dots,q_\ell(x)).
 \end{equation*}
-The resulting expression is a polynomial in $x$ and the $q_j$, and the degree is clearly bounded by $\alpha+\beta-1$.
+The resulting expression is a polynomial in $x$ and the $q_j$, with degree bounded by $\alpha+\beta-1$.
 \end{proof}
 
 \begin{remark}\label{re:1}
