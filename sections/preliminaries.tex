@@ -18,11 +18,14 @@ The triple $(\alpha, \beta, s)$ is called a \emph{format} of $g$. We denote by $
  Note that the Pfaffian chain associated with a Pfaffian function, and hence also a format, is not unique. In particular, if $g\in \Pfaff_{\alpha,\beta,s}(\cU)$, then $g\in \Pfaff_{\alpha',\beta',s'}(\cU)$ for $\alpha'\geq \alpha$, $\beta'\geq \beta$, and $s'\geq s$. In the following, we will often leave the chain implicit, and our results will be stated in terms of the format.
 \end{remark}
 
-We call a Pfaffian function $g\colon \cU\to \R$ \emph{autonomous}, if 
+We call a Pfaffian function $g\colon \cU\to \R$ \emph{autonomous} with respect to a Pfaffian chain $\boldq$ if 
 \begin{equation}\label{eq:simplepfaff}
   \frac{\partial q_i}{\partial x_j}(x) = P_{ij}(q_1(x),\dots,q_i(x))
 \end{equation}
-for some $P_{ij}\in \R[Y_1,\dots,Y_i]$, and $g(x)=P(q_1(x), \dots, q_s(x))$ for some $P\in \R[Y_1,\dots,Y_s]$.
+for some $P_{ij}\in \R[Y_1,\dots,Y_i]$, and $g(x)=P(q_1(x), \dots, q_s(x))$ for some $P\in \R[Y_1,\dots,Y_s]$. 
+
+\begin{remark} Note that being autonomous is a property of a given Pfaffian representation of a function, not a property of the function itself. Every Pfaffian function can be made autonomous by adjoining the coordinate functions $x_1,\dots,x_n$ to the Pfaffian chain. In what follows, we often work with a fixed chain that may be implicit, and refer to a Pfaffian function as autonomous if it is autonomous with respect to that chain.
+\end{remark}
 
 \begin{example}\label{ex:1} The following are simple examples of Pfaffian functions.
         \begin{enumerate}
@@ -32,7 +35,7 @@ for some $P_{ij}\in \R[Y_1,\dots,Y_i]$, and $g(x)=P(q_1(x), \dots, q_s(x))$ for 
             \item The logistic sigmoid $\sigma = (1 + \econst^{-x})^{-1}$ is Pfaffian with format $(2, 1, 1)$. A Pfaffian chain is $\boldq=(\sigma)$ and $P_{11}(X,Y_1)=Y_1(1-Y_1)$;
             \item $\arctan$ is Pfaffian with format $(3, 1, 2)$. A Pfaffian chain is $\boldq=((1+x^2)^{-1},\arctan(x))$. The polynomials are $P_{11}(X,Y_1) = -2XY_1^2$ and $P_{21}(X,Y_1,Y_2)=Y_1$. 
         \end{enumerate}
-Examples (2-4) are autonomous, while (1) and (5) are not.
+Examples (2-4) are autonomous with respect to the given chains, while (1) and (5) are not.
 \end{example}
 
 %\begin{definition}[Algebraically independent Pfaffian chain]
