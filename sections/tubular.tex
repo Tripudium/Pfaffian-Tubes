@@ -25,7 +25,7 @@ and the $i$-th degree of $M$ as
 \begin{equation*}
 \md_i(M) := \sup_{H \in \cE^n_{c+i}} \ \md(M, H).
 \end{equation*}
-
+where we use the convention $\md(M, H) = 0$ for non-tranverse intersections.
 %\begin{figure}
 %    \centering
 %        \begin{tikzpicture}
@@ -66,9 +66,9 @@ M = \mathcal{Z}(f_1, \dots, f_c),
 where the $f_i$ are Pfaffian functions of format $(\alpha, \beta, s)$, and such that the gradients $\nabla f_i$ are linearly independent at each point.
 
 \begin{proposition}\label{prop:pfaffian-degree-bound}
-  Let $M=\mathcal{Z}(f_1,\dots,f_c)$ be a Pfaffian complete intersection, where the $f_i$ are Pfaffian with format $(\alpha, \beta_i, s)$ with respect to the same Pfaffian chain and $\beta_i\le \beta$ for all $i$. Then
+  Let $M=\mathcal{Z}(f_1,\dots,f_c)$ be a compact Pfaffian complete intersection, where the $f_i$ are Pfaffian with format $(\alpha, \beta_i, s)$ with respect to the same Pfaffian chain and $\beta_i\le \beta$ for all $i$. Then
   \begin{equation*}
-    \md(M) \le{} 2^{\frac{s(s-1)}{2}}(\alpha+\beta)^n\beta^c \cdot \left((n+\min\{n,s\})\alpha+(n+c)(\beta-1)+1\right)^s.
+    \md_{n-c}(M) \le{} 2^{\frac{s(s-1)}{2}}(\alpha+\beta)^n\beta^c \cdot \left((n+\min\{n,s\})\alpha+(n+c)(\beta-1)+1\right)^s.
   \end{equation*}
   %\begin{align*}
   %  \md(M) \le{} & 2^{\frac{s(s-1)}{2}}(\alpha+\beta)^n\beta_1\cdots \beta_c \\
@@ -180,9 +180,9 @@ For $i\in [m]$, we can bound the $i$-th maximal degree as follows. Let $h\colon 
 \begin{equation*}
  H = \{x\in \R^n \colon h_{c+i+1}(x)=\cdots =h_{n}(x)=0\} 
 \end{equation*}
-and such that $\md_i(M) = \md(M,H)$. Clearly, the $i$-th maximal degree is coordinate-independent and
+It suffices to provide a uniform bound on $\md(M,H)$ for all such $H$. Clearly, the maximal degree is coordinate-independent and
 \begin{equation*}
-  \md_i(M) = \md(M,H) = \md(\tilde{M},\tilde{H}),
+  \md(M,H) = \md(\tilde{M},\tilde{H}),
 \end{equation*}
 where $\tilde{M}=\{x\colon \tilde{f}_i(x)=f(h^{-1}(x))=0\}$ and $\tilde{H} = \{x\colon x_{c+i+1}=\cdots =x_{n}=0\}$. 
 Thus $\tilde{M}$ can by seen as a submanifold of $\R^{c+i}$ and we can apply the bound from Proposition~\ref{prop:pfaffian-degree-bound} to get
@@ -198,13 +198,13 @@ We can now state and prove our bound on the volume of a tubular neighbourhood of
 but the reader should note that one could readily modify the proof to get a similar bound for $\vol T(V, \varepsilon)$. 
 
 \begin{theorem} \label{thm:prob_bound}
-Let $V = \mathcal{Z}(f)$ for Pfaffian function $f\in \Pfaff_{\alpha,\beta,s}(\R^n)$ and $s\geq n$. Suppose that $\nabla f$ is non-vanishing on $V$ and that $V$ is bounded. Moreover, let $p \in \R^n$, $\varepsilon, \sigma > 0$ and $X$ uniformly distributed over $B(p, \sigma)$. Then
+Let $V = \mathcal{Z}(f)$ for Pfaffian function $f\in \Pfaff_{\alpha,\beta,s}(\R^n)$. Suppose that $\nabla f$ is non-vanishing on $V$ and that $V$ is bounded. Moreover, let $p \in \R^n$, $\varepsilon, \sigma > 0$ and $X$ uniformly distributed over $B(p, \sigma)$. Then
 \begin{equation*}
 \prob\{ d(X, V) \le \varepsilon \} \leq C_{\alpha,\beta,s,n}\left[\left(1+(\alpha+\overline{\beta}+1)\frac{\varepsilon}{\sigma}\right)^n - \left(1+\frac{\varepsilon}{\sigma}\right)^n\right],
 \end{equation*}
 where $\overline{\beta}= \max\{\beta,2\}$ and
 \begin{equation*}
-C_{\alpha,\beta,s,n} =  6\cdot 2^{\frac{s(s-1)}{2}}\beta\left(n(2\alpha+\overline{\beta}-1)+\beta+1\right)^s.
+C_{\alpha,\beta,s,n} =  6\cdot 2^{\frac{s(s-1)}{2}}\beta\left(n (2\alpha+\overline{\beta}-1)+\beta+1\right)^s.
 \end{equation*}
 \end{theorem}
 
@@ -226,7 +226,7 @@ Since $M \setminus \partial M \subset V$ and $\dim M \setminus \partial M = \dim
 \end{equation*}
 Since $\partial M$ has codimension $2$, we get, in addition,
 \begin{equation*}
-  T(\partial M, \varepsilon) \leq 2 \omega_n (\sigma+\varepsilon)^{n}\sum_{i=1}^{n-1} \binom{n}{i+1} \cdot \md_{i-1}(\partial M)\cdot \left(\frac{\varepsilon}{\sigma+\varepsilon}\right)^{i+1}.
+  \vol T(\partial M, \varepsilon) \leq 2 \omega_n (\sigma+\varepsilon)^{n}\sum_{i=1}^{n-1} \binom{n}{i+1} \cdot \md_{i-1}(\partial M)\cdot \left(\frac{\varepsilon}{\sigma+\varepsilon}\right)^{i+1}.
 \end{equation*}
 Set
 \begin{equation*}
@@ -253,12 +253,12 @@ The substitution $j=i+1$ and the binomial theorem give
 Recalling $C_{\alpha,\beta,s,n}=6K$, $a=\alpha+\overline{\beta}$, and $t=\varepsilon/\sigma$ completes the proof.
 \end{proof}
 
-%\begin{remark}\label{rem:prob_bound_simple}
-%Discarding the non-positive term $-(1+\varepsilon/\sigma)^n$ gives the simpler bound
-%\begin{equation*}
-%  \prob\{ d(X, V) \le \varepsilon \} \leq C_{\alpha,\beta,s,n}\left(1+(\alpha+\overline{\beta}+1)\frac{\varepsilon}{\sigma}\right)^n.
-%\end{equation*}
-%The full bound of Theorem~\ref{thm:prob_bound} is sharper in two ways: it vanishes as $\varepsilon\to 0$ (as it must), and for large $\sigma/\varepsilon$ it decays as $C_{\alpha,\beta,s,n}\cdot n(\alpha+\overline{\beta})\varepsilon/\sigma$. This $O(\varepsilon/\sigma)$ behaviour is essential for %deriving the $O(1/t)$ tail bounds on condition numbers in Section~\ref{sec:robustness}.
-%\end{remark}
+\begin{remark}\label{rem:prob_bound_simple}
+Discarding the non-positive term $-(1+\varepsilon/\sigma)^n$ gives the simpler bound
+\begin{equation*}
+ \prob\{ d(X, V) \le \varepsilon \} \leq C_{\alpha,\beta,s,n}\left(1+(\alpha+\overline{\beta}+1)\frac{\varepsilon}{\sigma}\right)^n.
+\end{equation*}
+The full bound of Theorem~\ref{thm:prob_bound} is sharper in two ways: it vanishes as $\varepsilon\to 0$ (as it must), and for large $\sigma/\varepsilon$ it decays as $C_{\alpha,\beta,s,n}\cdot n(\alpha+\overline{\beta})\varepsilon/\sigma$. This $O(\varepsilon/\sigma)$ behaviour is essential for deriving the $O(1/t)$ tail bounds on condition numbers in Section~\ref{sec:robustness}.
+\end{remark}
 
 

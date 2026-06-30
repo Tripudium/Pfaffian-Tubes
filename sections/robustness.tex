@@ -45,7 +45,7 @@ We are interested in the probability that the condition number $\mC(X)$ exceeds 
 The tube bounds of Section~\ref{sec:tubular} apply to both settings.
 
 \begin{theorem}[Uniform tail bound]\label{thm:condition-uniform}
-Let $F\colon \R^n \to \R^m$ be a classifier whose pairwise decision boundaries $V_{ij} = \mathcal{Z}(g_{ij})$ are bounded Pfaffian hypersurfaces with format $(\alpha, \beta, s)$, $s\geq n$, and non-vanishing gradient. Let $X$ be uniformly distributed in $B(p, \sigma)$. Then for $t > 0$,
+Let $F\colon \R^n \to \R^m$ be a classifier whose pairwise decision boundaries $V_{ij} = \mathcal{Z}(g_{ij})$ are bounded Pfaffian hypersurfaces with format $(\alpha, \beta, s)$, and non-vanishing gradient. Let $X$ be uniformly distributed in $B(p, \sigma)$. Then for $t > 0$,
 \begin{equation*}
   \prob\{\mC_p(X) > t\} \leq \binom{m}{2}\, C_{\alpha,\beta,s,n}\left(1 + \frac{\alpha + \overline{\beta} + 1}{t}\right)^n,
 \end{equation*}
@@ -83,7 +83,7 @@ For large $t$, the Gaussian bound decays as $\binom{m}{2}\, C_{\alpha,\beta,s,n}
 The proof of Theorem~\ref{thm:condition-gaussian} relies on a standard reduction from Gaussian to uniform distributions (cf.~\cite[Section~3.1]{burgisser2013condition}).
 
 \begin{lemma}\label{lem:gauss-to-uniform}
-Let $V = \mathcal{Z}(f)$ be a bounded Pfaffian hypersurface with format $(\alpha, \beta, s)$, $s\geq n$, and non-vanishing gradient. Let $X$ be normally distributed around $\overline{x}\in \R^{n}$ with covariance $\sigma^2 \mathrm{Id}$. Then
+Let $V = \mathcal{Z}(f)$ be a bounded Pfaffian hypersurface with format $(\alpha, \beta, s)$ and non-vanishing gradient. Let $X$ be normally distributed around $\overline{x}\in \R^{n}$ with covariance $\sigma^2 \mathrm{Id}$. Then
 \begin{equation*}
 \prob\{\|X-\overline{x}\|\cdot \dist(X,V)^{-1}\geq t\} \leq C_{\alpha,\beta,s,n}\left[\left(1+\frac{\alpha+\overline{\beta}+1}{t}\right)^n - \left(1+\frac{1}{t}\right)^n\right].
 \end{equation*}
@@ -123,13 +123,13 @@ The event $\mC_{\overline{x}}(X) > t$ implies $\|X - \overline{x}\|/\dist(X,\Sig
 We now specialise the tail bounds to neural network classifiers with Pfaffian activation functions.
 
 \begin{corollary}[Sigmoid/tanh network]\label{cor:nn-condition}
-Let $F\colon \R^n\to \R^m$ be a fully connected neural network classifier with $\ell$ hidden layers, $h$ total hidden units, and an activation function with Pfaffian format $(\alpha, \beta, s)$ that is autonomous with $s\geq 1$, and assume $s_F = sh\geq n$ (e.g.\ $h\geq n$). Assume the pairwise decision boundaries $V_{ij}$ are bounded with non-vanishing gradient.
+Let $F\colon \R^n\to \R^m$ be a fully connected neural network classifier with $\ell$ hidden layers, $h$ total hidden units, and an activation function with Pfaffian format $(\alpha, \beta, s)$ that is autonomous with $s\geq 1$, and autonomous Pfaffian output function with format $(\alpha', \beta', s')$. Assume the pairwise decision boundaries $V_{ij}$ are bounded with non-vanishing gradient.
 
 If $X$ is uniformly distributed in $B(p,\sigma)$, then
 \begin{equation*}
   \prob\{\mC_p(X) > t\} \leq \binom{m}{2}\, C_{\alpha_F,\beta_F,s_F,n}\left(1 + \frac{\alpha_F + \overline{\beta}_F + 1}{t}\right)^n,
 \end{equation*}
-where $\alpha_F = \ell(\alpha+\beta-1)-\beta+1$, $\beta_F = \beta$, $s_F = sh$, and $\overline{\beta}_F = \max\{\beta_F, 2\}$.
+where $\alpha_F = \ell(\alpha+\beta-1) + \alpha'$, $\beta_F = \beta'$, $s_F = sh + s'm$, and $\overline{\beta}_F = \max\{\beta_F, 2\}$.
 \end{corollary}
 
 \begin{proof}
@@ -197,7 +197,7 @@ The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires 
 \end{proof}
 
 \begin{remark}[Concentration regime]\label{rem:gaussian-concentration-regime}
-  The factor $\gamma_n(u)$ is a chi-type probability, concentrated near $u = \sqrt{n+2}$ (the mode of the density $s^{n+1}\econst^{-s^2/2}$). Dropping the exponential factor in the integrand yields the elementary upper bound
+  The factor $\gamma_n(u)$ is a chi-type probability, concentrated near $u = \sqrt{n+1}$ (the mode of the density $s^{n+1}\econst^{-s^2/2}$). Dropping the exponential factor in the integrand yields the elementary upper bound
   \begin{equation*}
     \gamma_n(u) \;\leq\; \frac{u^{n+2}}{(n+2)\,2^{n/2}\,\Gamma(n/2+1)},
   \end{equation*}
@@ -205,7 +205,7 @@ The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires 
 \end{remark}
 
 \begin{example}[Sigmoid activation, multi-layer]\label{ex:sigmoid-condition}
-For the logistic sigmoid $\sigma(x) = (1+\econst^{-x})^{-1}$ with format $(2,1,1)$, we get $\alpha_F = 2\ell$, $\beta_F = 1$, $s_F = h$, and $\overline{\beta}_F = 2$, so
+For the logistic sigmoid $\sigma(x) = (1+\econst^{-x})^{-1}$ with format $(2,1,1)$ and linear output layer, we get $\alpha_F = 2\ell$, $\beta_F = 1$, $s_F = h$, and $\overline{\beta}_F = 2$, so
 \begin{equation*}
   \prob\{\mC_p(X) > t\} \leq \binom{m}{2}\cdot 6\cdot 2^{\frac{h(h-1)}{2}}\big(n(4\ell+1)+2\big)^h\left(1+\frac{2\ell+3}{t}\right)^n,
 \end{equation*}

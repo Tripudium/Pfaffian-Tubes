@@ -87,7 +87,7 @@ where $Q^{ij}\in \R[Y_1,\dots,Y_{s}]$ with $\deg Q^{ij}\leq \beta$ and $\boldq^{
 \end{equation*}
 for polynomials $P_r^{ij}$ satisfying $\deg P_r^{ij} \le \alpha$.
 
-If the output function $g$ is also Pfaffian, then Lemma~\ref{le:composition} implies that each component of $F^i$ is a Pfaffian function, with a Pfaffian chain consisting of $s$ functions for every unit in the $i$-th layer of the network. If we denote the output of the $j$-th node in the $i$-th layer by $z^i_j$, i.e., the $j$-th component of the vector $z^i := F^i\circ \cdots \circ F^1(x)$, then this node
+If the output function $g$ is also Pfaffian, then Lemma~\ref{le:composition} implies that each component of $F^i$ is a Pfaffian function, with a Pfaffian chain consisting of $s$ functions for every unit in the $i$-th layer of the network. If we denote the ``preactivation'' of the $j$-th node in the $i$-th layer by $z^i_j$, i.e., the $j$-th component of the vector $z^i := A_i(F^{i-1}\circ \cdots \circ F^1(x)) + b_i$, then this node
 contributes the functions
 \begin{equation*}
   (q_1^{ij}(z^i_j),\dots,q_s^{ij}(z^i_j))
@@ -104,8 +104,10 @@ In particular, at the last hidden layer ($i=\ell$), the format of $F^\ell\circ \
   \left(\ell(\alpha+\beta-1)-\beta+1,\; \beta,\; sh\right),
 \end{equation*}
 where $h=\sum_{j=1}^\ell n_j$ is the total number of hidden units. 
-%\pl{Here would it be worth generalising this result to also mention the case where $g$ is not linear and may have a different Pfaffian format to the activation functions (e.g. softmax)?
-%I think this could be useful for Corollary 5.8 to be applicable to neural networks with a softmax-ed output.}
+Similarly, if the output function is an autonomous Pfaffian function with format $(\alpha', \beta', s')$, then the function $F = F^{\ell+1} \circ F^\ell\circ \cdots \circ F^1$ is Pfaffian with format
+\begin{equation*}
+  \left(\ell(\alpha+\beta-1) + \alpha',\; \beta',\; sh + s'm\right),
+\end{equation*}
 \end{proposition}
 
 Thus, for a fixed set of activation functions (and hence fixed $\alpha$, $\beta$, $s$), the chain-degree grows linearly in the depth $\ell$, the function degree is constant, and the order grows linearly in $h$.
@@ -139,19 +141,38 @@ Table~\ref{tab:activations} lists common activation functions and their Pfaffian
 \end{table}
 \end{example}
 
+% \begin{example}[Softmax]\label{ex:softmax}
+% A common output function for classification problems is the softmax function. Each component of the softmax function
+% \begin{equation}\label{eq:softmax}
+%   g(x) = \left(\frac{\mathrm{e}^{x_1}}{\sum_{j}\mathrm{e}^{x_j}}, \dots, \frac{\mathrm{e}^{x_m}}{\sum_{j}\mathrm{e}^{x_j}}\right).
+% \end{equation}
+% is Pfaffian with format $(2,1,m)$, but the Pfaffian chains of the different components differ by a permutation. For example, 
+% \begin{equation*}
+%   \frac{\partial g_i}{\partial x_j}(x) = \begin{cases}
+%     -g_i(x)g_j(x) & \text{ if } i\neq j\\
+%     g_i(x)(1-g_i(x)) & \text{ if } i=j.
+%   \end{cases}
+% \end{equation*}
+% In this case, a Pfaffian chain is arrived at by listing the components so that $g_i$ comes last.
+% \end{example}
+
 \begin{example}[Softmax]\label{ex:softmax}
 A common output function for classification problems is the softmax function. Each component of the softmax function
 \begin{equation}\label{eq:softmax}
   g(x) = \left(\frac{\mathrm{e}^{x_1}}{\sum_{j}\mathrm{e}^{x_j}}, \dots, \frac{\mathrm{e}^{x_m}}{\sum_{j}\mathrm{e}^{x_j}}\right).
 \end{equation}
-is Pfaffian with format $(2,1,m)$, but the Pfaffian chains of the different components differ by a permutation. For example, 
+is Pfaffian with format $(3,1,m)$, but the Pfaffian chains are not identical. For example, if we set
+$$
+q_{ij}(x) = e^{x_j - x_i} 
+$$
+then we have
 \begin{equation*}
   \frac{\partial g_i}{\partial x_j}(x) = \begin{cases}
-    -g_i(x)g_j(x) & \text{ if } i\neq j\\
+    -q_{ij} (x) g_i(x)^2 & \text{ if } i\neq j\\
     g_i(x)(1-g_i(x)) & \text{ if } i=j.
   \end{cases}
 \end{equation*}
-In this case, a Pfaffian chain is arrived at by listing the components so that $g_i$ comes last.
+In this case, a Pfaffian chain for $g_i$ is given by $(q_{i1}, \dotsc , \widehat{q_{ii}}, \dotsc, q_{in}, g_i)$. Note that this also gives a Pfaffian chain for any other $g_j$, but yielding a format $(3, 2, m)$ as one has to write $g_j = g_i q_{ij}$.
 \end{example}
 
 When using a neural network as a classifier, we can interpret $F_i(x)$ as representing the likelihood that $x$ belongs to class $i$ (for example, if the output map $g$ is the softmax function). Thus a data point $x\in \R^n$ is assigned to class $j$ if $F_j(x)>F_i(x)$ for all $i\neq j$, with an arbitrary tie break if $F_i(x)=F_j(x)$.
@@ -174,11 +195,14 @@ Assume the neural network classifier implemented by $F\colon \R^n\to \R^m$ is a 
 \end{proposition}
 
 \begin{example}
-Consider an $\ell$-layer neural network for classification in which all the activation functions at hidden nodes are of format $(2,1,1)$ (for example, $\tanh$ and the logistic sigmoid $\sigma$). Then the $g_{ij}(x)$ are Pfaffian with format
+Consider an $\ell$-layer neural network for classification in which all the activation functions at hidden nodes are of format $(2,1,1)$ (for example, $\tanh$ and the logistic sigmoid $\sigma$) and the output function is the softmax function. Then the $g_{ij}(x)$ are Pfaffian with format
 \begin{equation*}
-  (2\ell+1, 1, h+2),
+  (2\ell + 3, 1, h + 2m),
 \end{equation*}
-where $h$ is the total number of hidden nodes.
+where $h$ is the total number of hidden nodes. If we consider the same network without the softmax layer, then the corresponding Pfaffian format is
+$$
+    (2\ell, 1, h)
+$$
 \end{example}
 
 \subsection{The Gauss map of a neural network}
@@ -188,12 +212,12 @@ The strategy is to replace the Khovanskii--Rolle bound with a global argument ba
 
 
 \begin{proposition}\label{prop:single-layer-degree}
-  Let $f\colon \R^n \to \R$ be given by
+  Let $f\colon \R^n \to \R$ be a non-constant function given by
   \begin{equation*}
   f(x) = c_0+\sum_{k=1}^w d_k \sigma(a_k^{\trans}x+b_k), 
   \end{equation*}
-  where $\sigma$ is the logistic sigmoid, $c_0,b_k\in \R$ and the $a_k\in \mathbb{Q}^{n}$ are in general position with common denominator $q\in\N_{>0}$. Set $V=\{x\colon f(x)=0\}$ and $L := q\cdot\max_{k,i}|a_{ki}|$. 
-  Then $V$ is a smooth hypersurface with maximum degree
+  where $\sigma$ is the logistic sigmoid, $c_0,b_k, d_k\in \R$ and the $a_k\in \mathbb{Q}^{n}$ are in general position with common denominator $q\in\N_{>0}$. Set $V=\{x\colon f(x)=0\}$ and $L := q\cdot\max_{k,i}|a_{ki}|$. 
+  If $V$ is a smooth hypersurface (which is the case for any choice of parameters outside of a measure zero set), and compact then the maximum degree satisfies
   \begin{equation}\label{eq:single-layer-bound}
     \md(V) \;\leq\; C(n,L)\cdot w^{n},
   \end{equation}
@@ -284,7 +308,7 @@ For networks with more than one hidden layer, we expect the single-layer bound o
 The conjecture is supported by two observations. The single-layer case $\ell = 1$ is Proposition~\ref{prop:single-layer-degree}, where the exponent $n$ is sharp by Remark~\ref{rem:single-layer-lowerbound}. For piecewise-linear (ReLU) networks, which lie outside the Pfaffian framework but share the layered composition structure, the number of linear regions---and hence the number of affine pieces making up the decision boundary---is bounded by $O(\prod_j n_j^{\,n})$~\cite{montufar2014,hanin2019}, matching the form of~\eqref{eq:multi-layer-bound}. Recovering this scaling for sigmoid networks by Pfaffian methods appears to require an improvement of the Khovanskii--Rolle factor $2^{s(s-1)/2}$ for chains of length $s = n_1+\cdots+n_\ell$ to one that reflects the layered structure of the chain. A direct BKK argument on the compounded system fails because of the transcendentality of sigmoid composition: after a single layer of the exponential substitution used in Proposition~\ref{prop:single-layer-degree}, the deeper pre-activations involve exponentials of rational functions, which are not Laurent monomials in any natural substitution.
 
 \begin{remark}
-Bianchini and Scarselli~\cite{bianchini2014complexity} obtain comparable polynomial bounds for networks with arctan activation by a different route: the arctan chain has length $2$ regardless of the number of hidden units, so the Pfaffian exponential factor is trivial. For sigmoid networks the chain length grows linearly with the number of hidden units, and a polynomial bound analogous to the arctan case is the content of Conjecture~\ref{conj:multi-layer-degree}.
+Bianchini and Scarselli~\cite{bianchini2014complexity} obtain comparable polynomial bounds for networks \pl{of depth 3?} with arctan activation by a different route: the arctan chain has length $2$ regardless of the number of hidden units, so the Pfaffian exponential factor is trivial. For sigmoid networks the chain length grows linearly with the number of hidden units, and a polynomial bound analogous to the arctan case is the content of Conjecture~\ref{conj:multi-layer-degree}.
 \end{remark}
 
 \subsection{Tubular neighbourhood bound for neural networks}\label{subsec:tube-nn}
@@ -360,7 +384,7 @@ Writing $\vec p_k=qa_k\in\Z^n$ with $\|\vec p_k\|_\infty\le L$, we have $\nu_e=\
   \]
   Indeed $\partial_{y_l}(y_j^{-1})=-\delta_{jl}(y_j^{-1})^2$ and $\partial_{y_l}\bigl(\sum_j\omega_{sj}\log y_j\bigr)=\omega_{sl}\,y_l^{-1}$ are polynomials of degree $\alpha=2$ in the chain, the chain is triangular, and it depends on all $k=n$ variables. Note that, after the substitution, the $w$ sigmoids have become rational and contribute nothing to the chain: the only transcendental functions are the $\le n$ logarithms encoding the affine section $H$, so the chain length is $s=2n-i-1\le 2n$, independently of the width~$w$.
 
-  We can now apply Khovanskii's bound, Theorem~\ref{thm:khovanskii}, to the resulting system of equations. 
+  We can now apply Khovanskii's bound, Theorem~\ref{thm:khovanskii}, to the resulting system of equations. Note that since $v$ is a regular value, all solutions are non-degenerate. 
   The polynomials $F_0,\dots,F_i$ have degree $\beta_F\le 4nLw$, while $G_1,\dots,G_{n-i-1}$ have degree $1$. Their sum of degrees is $\sum_r\beta_r=(i+1)\beta_F+(n-i-1)$, and since $\min\{k,s\}=\min\{n,2n-i-1\}=n$ the base term of the Khovanskii bound is $\sum_r\beta_r-n+\min\{k,s\}\alpha+1=(i+1)\beta_F+2n-i$. Khovanskii's theorem~\ref{thm:khovanskii}, applied with domain $\cU=\R_{>0}^n$ (on which the chain $\boldq$ is defined), these component-wise formats, $\alpha=2$, and chain length $s=2n-i-1$, therefore gives
   \[
     N\ \le\ 2^{\binom{s}{2}}\,\beta_F^{\,i+1}\bigl((i+1)\beta_F+2n-i\bigr)^{s}
