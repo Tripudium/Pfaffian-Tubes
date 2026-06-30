@@ -221,7 +221,7 @@ The strategy is to replace the Khovanskii--Rolle bound with a global argument ba
   \begin{equation}\label{eq:single-layer-bound}
     \md(V) \;\leq\; C(n,L)\cdot w^{n},
   \end{equation}
-  where $C(n,L)\leq 2\cdot n!\,(2L)^n$ depends only on $n$ and $L$. The general-position hypothesis constrains the weight vectors $a_k$ only; the estimate holds for arbitrary $b_k,d_k,c_0$, the Sard-type genericity of $(b_k,d_k,c_0)$ used in the proof being arranged by an arbitrarily small perturbation that does not increase $\md(V)$.
+  where $C(n,L)\leq 2\cdot n!\,(2L)^n$ depends only on $n$ and $L$. The general-position hypothesis constrains the weight vectors $a_k$ only; no genericity of $b_k,d_k,c_0$ is required.
 \end{proposition}
 
 \begin{proof}
@@ -262,7 +262,7 @@ By Bernstein's theorem, a system of $n$ Laurent polynomials in $n$ variables wit
 \begin{equation*}
   n!\,\operatorname{MV}(P_0,\ldots,P_{n-1})
 \end{equation*}
-isolated solutions in $(\C^*)^n$, counted with multiplicity, where $\operatorname{MV}$ denotes the mixed volume, provided no solution escapes to a lower-dimensional face (a non-degeneracy condition discussed later). Since $P_j\subseteq\conv(A)$ for all $j$ and the mixed volume is monotone in each argument, this is at most $n!\,\operatorname{Vol}(\conv(A))$. The diffeomorphism $\Psi\colon x_j\mapsto y_j=\econst^{-x_j/q}$ embeds $\R^n$ bijectively onto $(\R_{>0})^n\subset(\C^*)^n$, and multiplication by $\Phi(y)$ is non-vanishing there, so every isolated real solution of~\eqref{eq:single-layer-system} corresponds to an isolated complex solution of~\eqref{eq:laurent-system}--\eqref{eq:laurent-system-j} in $(\C^*)^n$. Hence the real count is bounded by $n!\,\operatorname{Vol}(\conv(A))$.
+isolated solutions in $(\C^*)^n$, counted with multiplicity, where $\operatorname{MV}$ denotes the mixed volume. This is an upper bound on the number of isolated torus solutions that holds for every choice of coefficients; degeneracy of the system can only affect whether the bound is attained, not its validity. Since $P_j\subseteq\conv(A)$ for all $j$ and the mixed volume is monotone in each argument, the bound is at most $n!\,\operatorname{Vol}(\conv(A))$. The diffeomorphism $\Psi\colon x_j\mapsto y_j=\econst^{-x_j/q}$ embeds $\R^n$ bijectively onto $(\R_{>0})^n\subset(\C^*)^n$, and multiplication by $\Phi(y)$ is non-vanishing there. Since $v$ is a regular value of the Gauss map, every solution of~\eqref{eq:single-layer-system} is non-degenerate, and hence corresponds under $\Psi$ to a non-degenerate---in particular isolated, multiplicity-one---solution of~\eqref{eq:laurent-system}--\eqref{eq:laurent-system-j} in $(\C^*)^n$. These real solutions are therefore among the isolated torus solutions counted above, so the real count is bounded by $n!\,\operatorname{Vol}(\conv(A))$.
 
 The set $A$ lies in the zonotope $Z := \sum_{k=1}^w[0,2\vec p_k]$, so $\conv(A)\subseteq Z$. The zonotope volume formula (see~\cite[Ch.~7]{ziegler1995}) gives
 \begin{equation}\label{eq:zonotope-volume}
@@ -277,8 +277,6 @@ and there are $\binom{w}{n}\leq w^n/n!$ subsets, so
   \operatorname{Vol}(\conv(A)) \;\leq\; \operatorname{Vol}(Z) \;\leq\; 2^n\cdot n!\,L^n\cdot\frac{w^n}{n!} \;=\; (2L)^n\,w^n.
 \end{equation*}
 The Bernstein bound implies that there are at most $n!\,(2L)^n\,w^n$ solutions of~\eqref{eq:single-layer-system}. This is stronger than the stated estimate, and is absorbed into the constant $C(n,L)\leq 2\cdot n!\,(2L)^n$ in~\eqref{eq:single-layer-bound}.
-
-Bernstein's bound is achieved generically and can be exceeded only at degenerate systems. The coefficients of~\eqref{eq:laurent-system}--\eqref{eq:laurent-system-j} are polynomials in the data $(d_k,b_k,c_0,a_{kj})$, so the degenerate locus is a proper algebraic subset of parameter space. Under the general-position hypothesis on $A$ and a Sard-type genericity assumption on $(b_k,d_k,c_0)$, which holds outside a measure-zero set and which may be imposed by an arbitrarily small perturbation that does not increase the zero count, the system avoids the degenerate locus and Bernstein's bound applies.
 \end{proof}
 
 \begin{remark}\label{rem:single-layer-lowerbound}
