@@ -161,7 +161,7 @@ For single-hidden-layer sigmoid networks, the tube bound of Theorem~\ref{thm:pro
   an explicit $O(w^n/t)$ tail bound, polynomial in the width, valid in the tail regime $t\gtrsim K(n,L)w^n$.
 \end{remark}
 
-The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires more care. The Fubini reduction of Lemma~\ref{lem:gauss-to-uniform} expresses a Gaussian probability as an integral of uniform-ball probabilities at all radii $s\sigma$, $s \in (0,\infty)$, but Theorem~\ref{thm:prob_bound_single_layer} applies only when the ball contains $V_{ij}$. Splitting the integral at the threshold $s^* = R_V/\sigma$ determined by an enclosing radius $R_V$ of $V_{ij}$, and using the general Pfaffian bound on the small-$s$ part, gives a hybrid bound whose Khovanskii contribution is tempered by a Gaussian concentration factor.
+The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires more care. The Fubini reduction of Lemma~\ref{lem:gauss-to-uniform} expresses a Gaussian probability as an integral of uniform-ball probabilities at all radii $s\sigma$, $s \in (0,\infty)$, but Theorem~\ref{thm:prob_bound_single_layer} applies only when the ball contains $V_{ij}$. Splitting the integral at the threshold $s^* = R_V/\sigma$ determined by an enclosing radius $R_V$ of $V_{ij}$, and using the general Pfaffian bound on the small-$s$ part, gives a hybrid bound in which the Khovanskii contribution is multiplied by a Gaussian concentration factor $\gamma_n(R_V/\sigma)$ that decays in $n$ but is independent of the width; see Remark~\ref{rem:gaussian-concentration-regime} for its effect on the width scaling.
 
 \begin{proposition}[Gaussian tail, single-hidden-layer sigmoid]\label{prop:single-layer-gaussian}
   Under the hypotheses of Corollary~\ref{cor:nn-condition-single-layer}, assume further that each pairwise decision boundary $V_{ij}$ is contained in a common ball $B(\overline x, R_V)$ around a fixed centre $\overline x \in \R^n$. Let $X$ be normally distributed around $\overline x$ with covariance $\sigma^2\mathrm{Id}$. Then for every $t > 0$,
@@ -196,20 +196,38 @@ The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires 
   Summing the two regions and applying a union bound over the $\binom{m}{2}$ pairs $i < j$ yields~\eqref{eq:single-layer-gaussian-bound}.
 \end{proof}
 
-\begin{remark}[Concentration regime]\label{rem:gaussian-concentration-regime}
+\begin{remark}[Concentration regime and the width dependence]\label{rem:gaussian-concentration-regime}
   The factor $\gamma_n(u)$ is a chi-type probability, concentrated near $u = \sqrt{n+1}$ (the mode of the density $s^{n+1}\econst^{-s^2/2}$). Dropping the exponential factor in the integrand yields the elementary upper bound
-  \begin{equation*}
+  \begin{equation}\label{eq:gamma-elementary}
     \gamma_n(u) \;\leq\; \frac{u^{n+2}}{(n+2)\,2^{n/2}\,\Gamma(n/2+1)},
+  \end{equation}
+  which is superexponentially small in $n$ whenever $u \ll \sqrt n$; thus for a tight perturbation ($u = R_V/\sigma \ll \sqrt n$) the prefactor $\gamma_n(R_V/\sigma)$ multiplying the Khovanskii term is small.
+
+  This $n$-decay must not be confused with the dependence on the width. The two terms in~\eqref{eq:single-layer-gaussian-bound} scale very differently in $w$: since $K(n,L)$ is independent of $w$, the BKK term satisfies $B_{\mathrm{BKK}}(t) = \Theta(w^{2n})$, whereas the Pfaffian term carries the constant of Theorem~\ref{thm:prob_bound},
+  \begin{equation*}
+    C_{2,1,w,n} \;=\; 6\cdot 2^{w(w-1)/2}\,(5n+2)^{w},
   \end{equation*}
-  which is superexponentially small in $n$ whenever $u \ll \sqrt n$. Consequently the Khovanskii contribution $\gamma_n(R_V/\sigma)\cdot B_{\mathrm{Pf}}(t)$ in~\eqref{eq:single-layer-gaussian-bound} is dominated by the BKK term as soon as the Gaussian scale $\sigma$ is comparable to or larger than the enclosing radius $R_V$ of the decision boundary: in that regime the Gaussian condition-number tail decays polynomially in the width $w$, matching the uniform case of Corollary~\ref{cor:nn-condition-single-layer} up to constants. In the complementary concentration regime $\sigma \ll R_V/\sqrt n$---tight Gaussian perturbation of $\overline x$---the Khovanskii term dominates, and Theorem~\ref{thm:condition-gaussian} remains the sharpest unconditional bound available.
+  which is super-exponential in $w$, and the concentration factor $\gamma_n(R_V/\sigma)$ is \emph{independent} of $w$. Consequently, for a fixed architecture in which $n$ and the ratio $R_V/\sigma$ are held fixed while $w \to \infty$, the Khovanskii contribution $\gamma_n(R_V/\sigma)\cdot B_{\mathrm{Pf}}(t)$ eventually dominates the polynomial BKK term: the Gaussian bound~\eqref{eq:single-layer-gaussian-bound} does \emph{not} inherit the polynomial-in-$w$ rate of the uniform case (Corollary~\ref{cor:nn-condition-single-layer}) at fixed Gaussian scale. This is the price of the Fubini reduction, which samples uniform balls of every radius $\sigma s$ and must fall back on the unconditional Pfaffian bound of Theorem~\ref{thm:prob_bound} on the small-radius part $s < R_V/\sigma$.
+
+  The precise criterion under which the Gaussian tail does inherit the BKK rate is the break-even inequality
+  \begin{equation}\label{eq:break-even}
+    \gamma_n(R_V/\sigma)\cdot B_{\mathrm{Pf}}(t) \;\leq\; B_{\mathrm{BKK}}(t),
+  \end{equation}
+  in which case $\prob\{\mC_{\overline x}(X) > t\} \le 2\binom{m}{2} B_{\mathrm{BKK}}(t)$ is polynomial in $w$. Since the $t$-dependent brackets in $B_{\mathrm{Pf}}$ and $B_{\mathrm{BKK}}$ have ratio bounded independently of $t$, condition~\eqref{eq:break-even} is essentially a joint condition on $n$, $w$ and $R_V/\sigma$. Using~\eqref{eq:gamma-elementary} and $C_{2,1,w,n} = 6\cdot 2^{w(w-1)/2}(5n+2)^{w}$, its dominant part is governed by the Khovanskii factor $2^{w(w-1)/2}$: up to the sub-dominant factors $w^{2n}$ and $(5n+2)^{w}$, the inequality~\eqref{eq:break-even} forces the Gaussian scale to grow with the width as
+  \begin{equation}\label{eq:sigma-vs-w}
+    \frac{R_V}{\sigma} \;\lesssim\; 2^{-\,w(w-1)/\bigl(2(n+2)\bigr)},
+    \qquad\text{equivalently}\qquad
+    \sigma \;\gtrsim\; R_V\cdot 2^{\,w(w-1)/\bigl(2(n+2)\bigr)}.
+  \end{equation}
+  In words, the Khovanskii term is tempered below the BKK term only when the standard deviation $\sigma$ exceeds the enclosing radius $R_V$ by a factor growing super-exponentially in $w$; for any milder growth of $\sigma$, the exponential Khovanskii factor $2^{w(w-1)/2}$ survives and Theorem~\ref{thm:condition-gaussian} remains the sharpest unconditional Gaussian bound available. The polynomial-in-$w$ improvement of Section~\ref{sec:tubular-neural} is therefore genuine only in the uniform setting of Corollary~\ref{cor:nn-condition-single-layer}, where the ball is fixed to contain the decision boundary.
 \end{remark}
 
 \begin{example}[Sigmoid activation, multi-layer]\label{ex:sigmoid-condition}
 For the logistic sigmoid $\sigma(x) = (1+\econst^{-x})^{-1}$ with format $(2,1,1)$ and linear output layer, we get $\alpha_F = 2\ell$, $\beta_F = 1$, $s_F = h$, and $\overline{\beta}_F = 2$, so
 \begin{equation*}
-  \prob\{\mC_p(X) > t\} \leq \binom{m}{2}\cdot 6\cdot 2^{\frac{h(h-1)}{2}}\big(n(4\ell+1)+2\big)^h\left(1+\frac{2\ell+3}{t}\right)^n,
+  \prob\{\mC_p(X) > t\} \leq \binom{m}{2}\cdot 6\cdot 2^{\frac{h(h-1)}{2}}\big(n(4\ell+1)+2\big)^h\left(1+\frac{2\ell+3}{t}\right)^n.
 \end{equation*}
-provided $h\geq n$. The Gaussian variant (Theorem~\ref{thm:condition-gaussian}) gives, for $X\sim \mathcal{N}(\overline{x}, \sigma^2\mathrm{Id})$,
+The Gaussian variant (Theorem~\ref{thm:condition-gaussian}) gives, for $X\sim \mathcal{N}(\overline{x}, \sigma^2\mathrm{Id})$,
 \begin{equation*}
   \prob\{\mC_{\overline{x}}(X) > t\} \leq \binom{m}{2}\cdot 6\cdot 2^{\frac{h(h-1)}{2}}\big(n(4\ell+1)+2\big)^h\left[\left(1+\frac{2\ell+3}{t}\right)^n - \left(1+\frac{1}{t}\right)^n\right].
 \end{equation*}

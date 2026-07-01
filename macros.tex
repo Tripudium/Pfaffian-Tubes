@@ -36,9 +36,13 @@
 \usepackage[T1]{fontenc}
 
 % Bibliography
-\usepackage{natbib}
-\usepackage{bibentry}
-\usepackage{chapterbib}
+% natbib/bibentry/chapterbib removed: natbib defaults to author-year mode, which is
+% incompatible with the `alpha` label style and breaks the latexmk bibtex step.
+% None are used (the only \citep is a commented-out line in tubular.tex); plain
+% \cite + alpha renders the [Lot15]-style labels correctly.
+% \usepackage{natbib}
+% \usepackage{bibentry}
+% \usepackage{chapterbib}
 
 % Referencing
 \usepackage{url}
