@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1782914831 "main.aux" "main.bbl" "main" 1782914834 0
-  "./bib/refs.bib" 1782895706 31008 07fbd28f1d8832f3a53227aa182d6985 ""
+["bibtex main"] 1782997867 "main.aux" "main.bbl" "main" 1782997946 0
+  "./bib/refs.bib" 1782991897 32262 7f78ea0a20f668b015ee6332c0d096e3 ""
   "/usr/local/texlive/2023/texmf-dist/bibtex/bst/base/alpha.bst" 1292289607 23907 a5f93555796fb564b924339521f10a7c ""
-  "main.aux" 1782914833 13772 71d52199f6ea496625646df90bf92f22 "pdflatex"
+  "main.aux" 1782997945 14985 439db445c51a1a4fa866f95eea030709 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1782914831 "main.tex" "main.pdf" "main" 1782914834 0
+["pdflatex"] 1782997941 "main.tex" "main.pdf" "main" 1782997946 0
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm" 1136768653 1292 bd42be2f344128bff6d35d98474adfe3 ""
@@ -361,16 +361,17 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1722279068 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1722279049 7883458 bfdf2767aa9849cc0c8e4289c9e98742 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
+  "figs/lower_bound_construction_clean.pdf" 1782997539 71527 110f48b27f953fd245610d5b1733efff ""
   "macros.tex" 1782912903 21254 1888ddc86f6b5ef87cbd77c8fac9b5e5 ""
-  "main.aux" 1782914833 13772 71d52199f6ea496625646df90bf92f22 "pdflatex"
-  "main.bbl" 1782914831 8090 c3c3bdeb09100fe41f704c4452f61413 "bibtex main"
-  "main.out" 1782914833 4828 3f3dbd3492cd2823b24ca66cc96bb445 "pdflatex"
+  "main.aux" 1782997945 14985 439db445c51a1a4fa866f95eea030709 "pdflatex"
+  "main.bbl" 1782997867 8914 35428c08e57af0f1740dbd5d0200f4c7 "bibtex main"
+  "main.out" 1782997945 4828 9826d7eebe15f93b5001a2a34b0bff58 "pdflatex"
   "main.tex" 1782836712 2133 e32c82cc396ae204b9145e3861937f27 ""
   "sections/conclusions.tex" 1782814846 8479 5d8646c6f9d5b3c08e2ddec59041439b ""
-  "sections/introduction.tex" 1782911452 12784 eeff2a270441bb1fb18d121fe3defefb ""
+  "sections/introduction.tex" 1782991907 13853 d837813ca00946640d55fc3023f4d2d5 ""
   "sections/preliminaries.tex" 1782896223 14632 2ca9fb1a38a7e9d4852a1e8cbd1e9dd6 ""
   "sections/robustness.tex" 1782914515 23239 877957f8c3fd2472a3db9404b8b17f29 ""
-  "sections/tubular-neural.tex" 1782914751 43587 8c9db79e58a825c959910b24d5bd7ca2 ""
+  "sections/tubular-neural.tex" 1782997940 45497 ad7cac59bb06f38f738ede004821ddce ""
   "sections/tubular.tex" 1782913067 22963 4f294b5847f5d84b2ce93cba1469ecde ""
   "tabu.sty" 1778750319 114961 e56cefaf93c0235eff9664a2490be707 ""
   (generated)

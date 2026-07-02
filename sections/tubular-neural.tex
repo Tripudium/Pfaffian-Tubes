@@ -172,7 +172,7 @@ then we have
     g_i(x)(1-g_i(x)) & \text{ if } i=j.
   \end{cases}
 \end{equation*}
-In this case, a Pfaffian chain for $g_i$ is given by $(q_{i1}, \dotsc , \widehat{q_{ii}}, \dotsc, q_{in}, g_i)$. Note that this also gives a Pfaffian chain for any other $g_j$, but yielding a format $(3, 2, m)$ as one has to write $g_j = g_i q_{ij}$.
+In this case, a Pfaffian chain for $g_i$ is given by $(q_{i1}, \dotsc , \widehat{q_{ii}}, \dotsc, q_{im}, g_i)$. Note that this also gives a Pfaffian chain for any other $g_j$, but yielding a format $(3, 2, m)$ as one has to write $g_j = g_i q_{ij}$.
 \end{example}
 
 When using a neural network as a classifier, we can interpret $F_i(x)$ as representing the likelihood that $x$ belongs to class $i$ (for example, if the output map $g$ is the softmax function). Thus a data point $x\in \R^n$ is assigned to class $j$ if $F_j(x)>F_i(x)$ for all $i\neq j$, with an arbitrary tie break if $F_i(x)=F_j(x)$.
@@ -199,17 +199,27 @@ Consider an $\ell$-layer neural network for classification in which all the acti
 \begin{equation*}
   (2\ell + 3, 1, h + 2m),
 \end{equation*}
-where $h$ is the total number of hidden nodes. If we consider the same network without the softmax layer, then the corresponding Pfaffian format is
-$$
-    (2\ell, 1, h)
-$$
+where $h$ is the total number of hidden nodes. If we consider the same network without the softmax layer, then the corresponding Pfaffian format is $(2\ell, 1, h)$.
 \end{example}
 
+Simply applying the Pfaffian tube formula to the setting of neural networks gives the following bound.
+
+\begin{corollary}[Theorem~\ref{thm:prob_bound} for neural networks]\label{cor:nn-pfaff-tube}
+Let $V=\mathcal{Z}(g_{ij})$ for $g_{ij}=F_j-F_i$, where $F\colon \R^n\to \R^m$ is implemented by a neural network with $\ell$ hidden layers, $h$ hidden 
+nodes, activation functions with format $(2,1,1)$ and softmax outputs. Then under the assumptions of Theorem~\ref{thm:prob_bound},
+\begin{equation*}
+  \prob\{ d(X, V) \le \varepsilon \} \leq C_{\ell,h,n,m}\left(\frac{\varepsilon}{\sigma}+O\left(\frac{\varepsilon^2}{\sigma^2}\right)\right)
+\end{equation*}
+for a constant $C_{\ell,h,n,m}$. 
+\end{corollary}
+
+While Corollary~\ref{cor:nn-pfaff-tube} holds under rather simplified assumptions, the real problem with this bound is that the constant $C_{\ell,h,n,m}$ is exponential in the number of hidden units $h$. This is not only practically prohibitive, but presumably also theoretically suboptimal. We will therefore follow a different approach to bound tubular neighbourhoods of neural networks with certain specific activation functions.
+
 \subsection{The Gauss map of a neural network}
-The tubular neighbourhood bound for general Pfaffian functions involves a constant that is exponential in the length $s$ of the Pfaffian chain. In the case of neural networks, the chain consists of one element for every hidden unit, so $s=h$ and this factor becomes prohibitive. We show that, for decision boundaries of sigmoid classifiers, the bound can be improved to a polynomial in the number of hidden units.
+For decision boundaries of single-layer sigmoid classifiers, we show that (under certain assumptions) the bound from Corollary~\ref{cor:nn-pfaff-tube} can be improved to a polynomial in the number of nodes.
+Single-layer sigmoid neural networks are universal approximators~\cite{cybenko1989approximation, hornik1989multilayer}: functions of the form $c_0+\sum_{k=1}^w d_k\sigma(a_k^{\trans}x+b_k)$ are dense in the set of continuous functions on any compact set, with the width $w$ quantitatively controlling the approximation error at the dimension-independent rate $O(1/\sqrt{w})$~\cite{barron1993universal}.
 
 The strategy is to replace the Khovanskii--Rolle bound with a global argument based on the Bernstein--Kushnirenko--Khovanskii (BKK) theorem~\cite{bernstein1975} (see also~\cite[Chapter 7,\S 5]{cox2005using}). After an exponential substitution, the Gauss-map system becomes a Laurent polynomial system whose $n$ equations share a single Newton polytope, a zonotope $\conv(A)$ determined by the (integer-scaled) weight vectors. Bernstein's theorem then bounds the number of solutions by $n!\,\operatorname{Vol}(\conv(A))$, which is polynomial in the width. For networks with $\ell\geq 2$ hidden layers, the direct BKK approach does not apply due to the transcendentality of sigmoid composition, and we state the corresponding polynomial bound as a conjecture.
-
 
 \begin{proposition}\label{prop:single-layer-degree}
   Let $f\colon \R^n \to \R$ be a non-constant function given by
@@ -279,12 +289,14 @@ and there are $\binom{w}{n}\leq w^n/n!$ subsets, so
 The Bernstein bound implies that there are at most $n!\,(2L)^n\,w^n$ solutions of~\eqref{eq:single-layer-system}. This is stronger than the stated estimate, and is absorbed into the constant $C(n,L)\leq 2\cdot n!\,(2L)^n$ in~\eqref{eq:single-layer-bound}.
 \end{proof}
 
+The following lemma is a variation of a well-known fact about the Gauss map of a compact hypersurface.
+
 \begin{lemma}\label{lem:bounded-gauss-surjective}
-Let $\Sigma\subset\R^n$ be a smooth compact hypersurface that bounds a non-empty bounded open region $W$, i.e.\ $\Sigma=\partial W$. Then for every $v\in S^{n-1}$ the fibre of the generalised Gauss map $\gamma_\Sigma\colon S(N\Sigma)\to S^{n-1}$ satisfies $|\gamma_\Sigma^{-1}(v)|\ge 2$. In particular $\gamma_\Sigma$ is surjective and $\md\gamma_\Sigma\ge 2$.
+Let $\Sigma\subset\R^n$ be a smooth compact hypersurface that bounds a non-empty bounded open region $W$. Then for every $v\in S^{n-1}$ the fibre of the generalised Gauss map $\gamma_\Sigma\colon S(N\Sigma)\to S^{n-1}$ satisfies $|\gamma_\Sigma^{-1}(v)|\ge 2$. In particular $\gamma_\Sigma$ is surjective and $\md\gamma_\Sigma\ge 2$.
 \end{lemma}
 
 \begin{proof}
-Fix $v\in S^{n-1}$ and consider the linear functional $\ell(x)=\langle x,v\rangle$ on the compact set $\overline{W}$. It attains its maximum at some $p_+$ and its minimum at some $p_-$; since $\ell$ is non-constant and $W$ is open, $p_+\neq p_-$ and $p_\pm\in\partial W=\Sigma$. At $p_+$ the hyperplane $\{x:\ell(x)=\ell(p_+)\}$ supports $\overline{W}$ with $\overline W$ on the side $\{\ell\le\ell(p_+)\}$; as $\Sigma$ is smooth, $T_{p_+}\Sigma=v^{\perp}$, so the two unit normals at $p_+$ are $\pm v$ and in particular $(p_+,v)\in S(N\Sigma)$ with $\gamma_\Sigma(p_+,v)=v$. The same argument at $p_-$ (where $-v$ is an outward normal) gives $(p_-,v)\in S(N\Sigma)$ with $\gamma_\Sigma(p_-,v)=v$, since the normal sphere bundle of a hypersurface contains both signs of the normal over each base point. Thus $\{(p_+,v),(p_-,v)\}\subseteq\gamma_\Sigma^{-1}(v)$ are two distinct points, proving $|\gamma_\Sigma^{-1}(v)|\ge 2$.
+Fix $v\in S^{n-1}$ and consider the linear functional $\ell(x)=\langle x,v\rangle$ on the compact set $\overline{W}$. It attains its maximum at some $p_+$ and its minimum at some $p_-$. Since $\ell$ is non-constant and $W$ is open, $p_+\neq p_-$ and $p_\pm\in\partial W=\Sigma$. At $p_+$ the hyperplane $\{x\colon \ell(x)=\ell(p_+)\}$ supports $\overline{W}$ with $\overline W$ on the side $\{\ell\le\ell(p_+)\}$. Since $\Sigma$ is smooth, $T_{p_+}\Sigma=v^{\perp}$, so the two unit normals at $p_+$ are $\pm v$ and in particular $(p_+,v)\in S(N\Sigma)$ with $\gamma_\Sigma(p_+,v)=v$. The same argument at $p_-$ (where $-v$ is an outward normal) gives $(p_-,v)\in S(N\Sigma)$ with $\gamma_\Sigma(p_-,v)=v$, since the normal sphere bundle of a hypersurface contains both signs of the normal over each base point. Thus $\{(p_+,v),(p_-,v)\}\subseteq\gamma_\Sigma^{-1}(v)$ are two distinct points in $\gamma_\Sigma^{-1}(v)$.
 \end{proof}
 
 \begin{proposition}\label{prop:single-layer-lowerbound}
@@ -295,25 +307,36 @@ The exponent $n$ in Proposition~\ref{prop:single-layer-degree} is sharp at fixed
 \end{proposition}
 
 \begin{proof}
-Take the axis-aligned weights $a_{j,k}=e_j$ ($j\in[n],\,k\in[m]$), biases $b_{j,k}=-k$, output weights $d_{j,k}=(-1)^k$, and offset $c_0=\tfrac12+\varepsilon$ with $\varepsilon$ a generic small number fixed below. Then $q=1$ and $L=\max_{k,i}|a_{ki}|=1$, independently of $w$. Because the weights are axis aligned, the steepened network is \emph{separable},
+Take the axis-aligned weights $a_{j,k}=e_j$ ($j\in[n],\,k\in[m]$), biases $b_{j,k}=-k$, output weights $d_{j,k}=(-1)^k$, and offset $c_0=\tfrac12+\varepsilon$ with $\varepsilon$ a generic small number fixed below. Then $q=1$ and $L=1$, independently of $w$. Because the weights are axis aligned, the ``steepened'' network (with a scaling parameter $\lambda$) is separable:
 \begin{equation*}
   f_\lambda(x)=c_0+\sum_{j=1}^n h_\lambda(x_j),\qquad h_\lambda(t):=\sum_{k=1}^m(-1)^k\,\sigma\bigl(\lambda(t-k)\bigr).
 \end{equation*}
 
-\emph{Compactness.} Since $m$ is even, $\sum_{k=1}^m(-1)^k=0$, so $h_\lambda(t)\to 0$ as $t\to\pm\infty$, uniformly, and $h_\lambda$ is bounded. Hence $f_\lambda(x)\to c_0=\tfrac12+\varepsilon>0$ as $\|x\|_\infty\to\infty$, and there is $R>0$ with $f_\lambda>0$ outside the box $Q=[-R,\,m+R]^n$; thus $V=\{f_\lambda=0\}\subset Q$ is bounded.
+We first argue that $V=\mathcal{Z}(f_\lambda)$ is compact. Since $m$ is even, $\sum_{k=1}^m(-1)^k=0$, so $h_\lambda(t)\to 0$ as $t\to\pm\infty$, and $h_\lambda$ is bounded. Hence $f_\lambda(x)\to c_0=\tfrac12+\varepsilon>0$ as $\|x\|_\infty\to\infty$, and there is $R>0$ with $f_\lambda>0$ outside the box $Q=[-R,\,m+R]^n$. Thus $V=\mathcal{Z}(f_\lambda)\subset Q$ is bounded.
 
-\emph{Threshold structure.} As $\lambda\to\infty$, $h_\lambda(t)\to\sum_{k\le t}(-1)^k$ off the integers, so on the cell $\{x:\,i_j<x_j<i_j+1,\ i_j\in\{0,\dots,m\}\}$ the limit $g$ of $f_\lambda$ equals $c_0+\sum_j S_{i_j}$ with $S_i=\sum_{k\le i}(-1)^k$; here $S_i=0$ for $i$ even and $S_i=-1$ for $i$ odd. Hence $g=\tfrac12+\varepsilon-\#\{j:i_j\text{ odd}\}$, which is positive \emph{iff every $i_j$ is even}, in which case $g=\tfrac12+\varepsilon$; every other cell has $g\le-\tfrac12+\varepsilon<0$. The all-even cells are pairwise non-adjacent, separated by slabs on which $g<0$.
+As $\lambda\to\infty$, the $h_\lambda(t)$ converge pointwise to the step function
+\begin{equation*}
+  h_\lambda(t)\to \sum_{k=1}^m (-1)^k \mathbf{1}\{t\geq k\} = \sum_{k\le t}(-1)^k. 
+\end{equation*} 
+Consider a sequence $(i_1,\dots,i_n)\in [m]^n$ and the corresponding cell $\{x\colon \,i_j<x_j<i_j+1\} \subset \R^n$. The limit $g$ of $f_\lambda$ equals $c_0+\sum_j S_{i_j}$ with $S_i=\sum_{k\le i}(-1)^k$. Here $S_i=0$ for $i$ even and $S_i=-1$ for $i$ odd and hence $g=\tfrac12+\varepsilon-\#\{j:i_j\text{ odd}\}$. This expression is positive if and only if every $i_j$ is even, in which case $g=\tfrac12+\varepsilon$ and satisfies $g\le-\tfrac12+\varepsilon<0$ else. Moreover, the all-even cells are pairwise non-adjacent, separated by slabs on which $g<0$.
 
-\emph{Bounded components.} Call an all-even cell \emph{bounded} if $i_j\in\{2,4,\dots,m-2\}$ for every $j$; there are exactly $N:=\bigl(\tfrac{m-2}{2}\bigr)^n$ of them. Fix one such cell, with closed core $K=\prod_j[i_j+\tfrac14,\,i_j+\tfrac34]$ (where the limit $g$ equals $\tfrac12+\varepsilon$) and surrounding ``moat'' $\partial R$, the boundary of the enlarged box $R=\prod_j[i_j-\tfrac12,\,i_j+\tfrac32]$, which lies in cells with $g\le-\tfrac12+\varepsilon$. By uniform convergence off the thresholds there is $\lambda_0=\lambda_0(n,m)$ such that for all $\lambda\ge\lambda_0$ one has $f_\lambda>\tfrac14$ on every core and $f_\lambda<-\tfrac14$ on every moat. Since the moat $\partial R$ separates the core from infinity and from every other core, the connected component of $\{f_\lambda>0\}$ containing $K$ is trapped inside $R$: it is bounded, and the $N$ such regions $W_1,\dots,W_N$ are pairwise disjoint and disjoint from the unbounded region $\{f_\lambda>0\}\setminus\bigcup_i R_i$. Their boundaries $\Sigma_i=\partial W_i$ are $N$ pairwise disjoint compact subsets of $V$.
+Call an all-even cell \emph{bounded} if $i_j\in\{2,4,\dots,m-2\}$ for every $j$. There are exactly $N:=\bigl(\tfrac{m-2}{2}\bigr)^n$ of them. Fix one such cell, with closed core $K=\prod_j[i_j+\tfrac14,\,i_j+\tfrac34]$ (where the limit $g$ equals $\tfrac12+\varepsilon$). The boundary $\partial R$ of the enlarged box $R=\prod_j[i_j-\tfrac12,\,i_j+\tfrac32]$ lies in cells with $g\le-\tfrac12+\varepsilon$. By uniform convergence off the thresholds there is $\lambda_0=\lambda_0(n,m)$ such that for all $\lambda\ge\lambda_0$ one has $f_\lambda>\tfrac14$ on every such $K$ and $f_\lambda<-\tfrac14$ on every $\partial R$. Moreover, the connected component of $\{f_\lambda>0\}$ containing $K$ is contained inside $R$: it is bounded, and the $N$ such regions $W_1,\dots,W_N$ are pairwise disjoint and disjoint from the unbounded region $\{f_\lambda>0\}\setminus\bigcup_i R_i$. Their boundaries $\Sigma_i=\partial W_i$ are $N$ pairwise disjoint compact subsets of $V$.
 
-\emph{Smoothness.} Since $\nabla f_\lambda=(h_\lambda'(x_1),\dots,h_\lambda'(x_n))$, the critical set of $f_\lambda$ is the finite product $\prod_j\{h_\lambda'=0\}$, hence finite, and its image under $f_\lambda$ is a finite set of critical values. Choosing $\varepsilon$ outside this finite set makes $0$ a regular value of $f_\lambda$, so $V$ is a smooth hypersurface and each $\Sigma_i$ is a smooth compact connected component of $V$ bounding $W_i$. This choice of $\varepsilon$ changes neither $q$ nor $L$.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{figs/lower_bound_construction_clean.pdf}
+  \caption{Visualization of the lower-bound construction in Proposition~\ref{prop:single-layer-lowerbound}. The function is $f_\lambda=c_0+h_\lambda(x_1)+h_\lambda(x_2)$. The black lines indicate the set $V=\mathcal{Z}(f_\lambda)$ and the red regions are the regions where $f_\lambda>0$.}
+  \label{fig:lower-bound-construction}
+\end{figure}
 
-\emph{Conclusion.} Each $\Sigma_i=\partial W_i$ satisfies the hypotheses of Lemma~\ref{lem:bounded-gauss-surjective}, so for every regular value $v$ of $\gamma_V$ we have $|\gamma_V^{-1}(v)|\ge\sum_{i=1}^N|\gamma_{\Sigma_i}^{-1}(v)|\ge 2N$, the preimages being disjoint across the disjoint components. Hence $\md(V)=\md\gamma_V\ge 2N=2\bigl(\tfrac{m-2}{2}\bigr)^n$, which with $m=w/n$ is $\Omega(w^n)$.
+Since $\nabla f_\lambda=(h_\lambda'(x_1),\dots,h_\lambda'(x_n))$, the critical set of $f_\lambda$ is the finite product $\prod_j\{h_\lambda'=0\}$, and its image under $f_\lambda$ is a finite set of critical values. Choosing $\varepsilon$ outside this finite set makes $0$ a regular value of $f_\lambda$, so $V$ is a smooth hypersurface and each $\Sigma_i$ is a smooth compact connected component of $V$ bounding $W_i$. This choice of $\varepsilon$ changes neither $q$ nor $L$.
+
+Each $\Sigma_i=\partial W_i$ satisfies the hypotheses of Lemma~\ref{lem:bounded-gauss-surjective}, so for every regular value $v$ of $\gamma_V$ we have $|\gamma_V^{-1}(v)|\ge\sum_{i=1}^N|\gamma_{\Sigma_i}^{-1}(v)|\ge 2N$, the preimages being disjoint across the disjoint components. Hence $\md(V)=\md\gamma_V\ge 2N=2\bigl(\tfrac{m-2}{2}\bigr)^n$, which with $m=w/n$ is $\Omega(w^n)$.
 \end{proof}
 
-\begin{remark}\label{rem:lb-sharpness}
-Since $L=1$ is fixed while $w=nm\to\infty$, Proposition~\ref{prop:single-layer-lowerbound} shows that the exponent of $w$ in Proposition~\ref{prop:single-layer-degree} cannot be lowered, even with the lattice constant held fixed; the upper bound there gives $\md(V)\le 2\,n!\,2^n w^n$ for this family. The weights $a_{j,k}=e_j$ are repeated, which is permitted because Proposition~\ref{prop:single-layer-degree} requires no general position: the Bernstein bound and the zonotope estimate~\eqref{eq:zonotope-volume} are valid for arbitrary integer vectors $\vec p_k$, repetitions only decreasing the relevant determinants.
-\end{remark}
+%\begin{remark}\label{rem:lb-sharpness}
+%Since $L=1$ is fixed while $w=nm\to\infty$, Proposition~\ref{prop:single-layer-lowerbound} shows that the exponent of $w$ in Proposition~\ref{prop:single-layer-degree} cannot be lowered, even with the lattice %constant held fixed; the upper bound there gives $\md(V)\le 2\,n!\,2^n w^n$ for this family. The weights $a_{j,k}=e_j$ are repeated, which is permitted because Proposition~\ref{prop:single-layer-degree} requires no %general position: the Bernstein bound and the zonotope estimate~\eqref{eq:zonotope-volume} are valid for arbitrary integer vectors $\vec p_k$, repetitions only decreasing the relevant determinants.
+%\end{remark}
 
 
 \begin{remark}\label{rem:why-not-fewnomials}
@@ -330,7 +353,7 @@ For networks with more than one hidden layer, we expect the single-layer bound o
   where $C(n,L)$ depends only on $n$ and $L$.
 \end{conjecture}
 
-The conjecture is supported by two observations. The single-layer case $\ell = 1$ is Proposition~\ref{prop:single-layer-degree}, where the exponent $n$ is sharp by Proposition~\ref{prop:single-layer-lowerbound}. For piecewise-linear (ReLU) networks, which lie outside the Pfaffian framework but share the layered composition structure, the number of linear regions---and hence the number of affine pieces making up the decision boundary---is bounded by $O(\prod_j n_j^{\,n})$~\cite{montufar2014,hanin2019}, matching the form of~\eqref{eq:multi-layer-bound}. Recovering this scaling for sigmoid networks by Pfaffian methods appears to require an improvement of the Khovanskii--Rolle factor $2^{s(s-1)/2}$ for chains of length $s = n_1+\cdots+n_\ell$ to one that reflects the layered structure of the chain. A direct BKK argument on the compounded system fails because of the transcendentality of sigmoid composition: after a single layer of the exponential substitution used in Proposition~\ref{prop:single-layer-degree}, the deeper pre-activations involve exponentials of rational functions, which are not Laurent monomials in any natural substitution.
+The conjecture is supported by two observations. The single-layer case $\ell = 1$ is Proposition~\ref{prop:single-layer-degree}, where the exponent $n$ is sharp by Proposition~\ref{prop:single-layer-lowerbound}. For piecewise-linear (ReLU) networks, which lie outside the Pfaffian framework but share the layered composition structure, the number of linear regions (and hence the number of affine pieces making up the decision boundary) is bounded by $O(\prod_j n_j^{\,n})$~\cite{montufar2014,hanin2019}, matching the form of~\eqref{eq:multi-layer-bound}. Recovering this scaling for sigmoid networks by Pfaffian methods appears to require an improvement of the Khovanskii--Rolle factor $2^{s(s-1)/2}$ for chains of length $s = n_1+\cdots+n_\ell$ to one that reflects the layered structure of the chain. A direct BKK argument on the compounded system fails because of the transcendentality of sigmoid composition: after a single layer of the exponential substitution used in Proposition~\ref{prop:single-layer-degree}, the deeper pre-activations involve exponentials of rational functions, which are not Laurent monomials in any natural substitution.
 
 % \begin{remark}
 % Bianchini and Scarselli~\cite{bianchini2014complexity} obtain comparable polynomial bounds for networks \pl{of depth 3?} with arctan activation by a different route: the arctan chain has length $2$ regardless of the number of hidden units, so the Pfaffian exponential factor is trivial. For sigmoid networks the chain length grows linearly with the number of hidden units, and a polynomial bound analogous to the arctan case is the content of Conjecture~\ref{conj:multi-layer-degree}.
