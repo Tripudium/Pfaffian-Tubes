@@ -353,7 +353,7 @@ For networks with more than one hidden layer, we expect the single-layer bound o
   where $C(n,L)$ depends only on $n$ and $L$.
 \end{conjecture}
 
-The conjecture is supported by two observations. The single-layer case $\ell = 1$ is Proposition~\ref{prop:single-layer-degree}, where the exponent $n$ is sharp by Proposition~\ref{prop:single-layer-lowerbound}. For piecewise-linear (ReLU) networks, which lie outside the Pfaffian framework but share the layered composition structure, the number of linear regions (and hence the number of affine pieces making up the decision boundary) is bounded by $O(\prod_j n_j^{\,n})$~\cite{montufar2014,hanin2019}, matching the form of~\eqref{eq:multi-layer-bound}. Recovering this scaling for sigmoid networks by Pfaffian methods appears to require an improvement of the Khovanskii--Rolle factor $2^{s(s-1)/2}$ for chains of length $s = n_1+\cdots+n_\ell$ to one that reflects the layered structure of the chain. A direct BKK argument on the compounded system fails because of the transcendentality of sigmoid composition: after a single layer of the exponential substitution used in Proposition~\ref{prop:single-layer-degree}, the deeper pre-activations involve exponentials of rational functions, which are not Laurent monomials in any natural substitution.
+The conjecture is supported by two observations. The single-layer case $\ell = 1$ is Proposition~\ref{prop:single-layer-degree}, where the exponent $n$ is sharp by Proposition~\ref{prop:single-layer-lowerbound}. For piecewise-linear (ReLU) networks, which lie outside the Pfaffian framework but share the layered composition structure, the number of linear regions (and hence the number of affine pieces making up the decision boundary) is bounded by $O(\prod_j n_j^{\,n})$~\cite{montufar2014,hanin2019}, matching the form of~\eqref{eq:multi-layer-bound}.
 
 % \begin{remark}
 % Bianchini and Scarselli~\cite{bianchini2014complexity} obtain comparable polynomial bounds for networks \pl{of depth 3?} with arctan activation by a different route: the arctan chain has length $2$ regardless of the number of hidden units, so the Pfaffian exponential factor is trivial. For sigmoid networks the chain length grows linearly with the number of hidden units, and a polynomial bound analogous to the arctan case is the content of Conjecture~\ref{conj:multi-layer-degree}.
@@ -362,15 +362,7 @@ The conjecture is supported by two observations. The single-layer case $\ell = 1
 \subsection{Tubular neighbourhood bound for neural networks}\label{subsec:tube-nn}
 Throughout this subsection and Section~\ref{sec:robustness}, the symbol $\sigma$ denotes the radius of the ambient ball $B(p,\sigma)$, not the logistic sigmoid (which is always written applied to an argument); the two uses do not collide.
 The tube formula requires the full family of $i$-th maximal degrees $\md_i(V)$, $0\le i\le n-1$, each a supremum of Gauss-map degrees over the $(i+1)$-dimensional affine sections $V\cap H$, $H\in\cE^n_{i+1}$. The Bernstein argument of Proposition~\ref{prop:single-layer-degree} controls only the top degree $\md_{n-1}(V)=\md(V)$: its proof fixes a \emph{rational} regular value and keeps the integer vectors $\vec p_k=qa_k$ intact, but a generic section forces a rotation of the weights to $U^{\trans}a_k$, which is irrational, destroying the lattice underlying the zonotope $\conv(A)$. Since $\md_i$ is a supremum over \emph{all} sections, $H$ cannot be chosen rationally, and the Bernstein bound does not extend to the lower sections.
-We bound the remaining section degrees in two steps. The leading degree $\md_0(V)$ is controlled by an elementary count of zeros along a line; the intermediate degrees are controlled by passing to a multiplicative chart, in which the network becomes a Pfaffian system whose chain length is governed by the ambient dimension rather than the width. The first step rests on the following classical fact.
-
-\begin{lemma}\label{lem:polya}
-A non-trivial exponential polynomial $\varphi(t)=\sum_{i=1}^M d_i\econst^{\nu_i t}$ with $M$ pairwise distinct real frequencies has at most $M-1$ real zeros.
-\end{lemma}
-
-\begin{proof}
-Induction on $M$. For $M=1$, $\varphi$ has no zeros. For the inductive step, $\econst^{-\nu_1 t}\varphi(t)$ has the same zeros as $\varphi$, and its derivative is an exponential polynomial with $M-1$ distinct frequencies, hence at most $M-2$ zeros by the inductive hypothesis. The claim now follows by Rolle's theorem.
-\end{proof}
+We bound the remaining section degrees in two steps. The leading degree $\md_0(V)$ is controlled by an elementary count of zeros along a line; the intermediate degrees are controlled by passing to a multiplicative chart, in which the network becomes a Pfaffian system whose chain length is governed by the ambient dimension rather than the width. 
 
 \begin{lemma}\label{lem:line-intersection}
 Let $a_1,\dots,a_w\in\Q^n$ have common denominator $q\in\N_{>0}$ and set $L:=q\max_{k,i}|a_{ki}|$. For any constants $c,b_1,\dots,b_w,\gamma_1,\dots,\gamma_w\in\R$, the function
@@ -380,7 +372,13 @@ Let $a_1,\dots,a_w\in\Q^n$ have common denominator $q\in\N_{>0}$ and set $L:=q\m
 restricted to any affine line $\ell\subset\R^n$ has at most $(2Lw+1)^n-1$ isolated real zeros.
 \end{lemma}
 
-\begin{proof}
+The proof rests on the following classical fact, which is an easy application of Rolle's theorem.
+
+\begin{lemma}\label{lem:polya}
+  A non-trivial exponential polynomial $\varphi(t)=\sum_{i=1}^M d_i\econst^{\nu_i t}$ with $M$ pairwise distinct real frequencies has at most $M-1$ real zeros.
+  \end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem:line-intersection}]
 Parametrise $\ell(t)=x_0+tv$, set $\lambda_k=a_k^{\trans}v$ and $\mu_k=a_k^{\trans}x_0+b_k$, and put $u_k(t)=\econst^{-\mu_k}\econst^{-\lambda_k t}$, so $\sigma(a_k^{\trans}\ell(t)+b_k)=(1+u_k)^{-1}$. Multiplying $h(\ell(t))$ by the strictly positive factor $\prod_k(1+u_k(t))$ preserves zeros and gives, after expansion, an exponential polynomial
 \[
   G(t)=\sum_{e\in\{0,1\}^w} d_e\,\econst^{-\nu_e t},\qquad \nu_e=\sum_{k=1}^w e_k\lambda_k .
@@ -442,10 +440,10 @@ Writing $\vec p_k=qa_k\in\Z^n$ with $\|\vec p_k\|_\infty\le L$, we have $\nu_e=\
 \end{proof}
 
 \begin{remark}\label{rem:chart-chain}
-  The mechanism behind Proposition~\ref{prop:single-layer-ideg} is that the exponential substitution converts the $w$ sigmoids into rational functions, trading the width-indexed Pfaffian chain of length $w$ for the dimension-indexed chain of $\le 2n$ logarithms that records the section. The general Pfaffian bound applied to a section would peel the $w$ chain elements one at a time, incurring the factor $2^{w(w-1)/2}$.
+  The mechanism behind Proposition~\ref{prop:single-layer-ideg} is that the exponential substitution converts the $w$ sigmoids into rational functions, trading the width-indexed Pfaffian chain of length $w$ for the dimension-indexed chain of $\le 2n$ logarithms that records the section.
 \end{remark}
 
-We now state the main result of this section: the analogue of Theorem~\ref{thm:prob_bound} for the decision boundary of a single-hidden-layer sigmoid network. We restrict to the case $V\subset B(p,\sigma)$, which eliminates the sphere-boundary term $\partial M$ from the proof of Theorem~\ref{thm:prob_bound}; this assumption is natural in the robustness setting of Section~\ref{sec:robustness}, where the data distribution is supported in a bounded region and $\sigma$ exceeds its diameter. The obstruction to dropping this hypothesis is recorded in Remark~\ref{rem:sphere-obstruction} below.
+We now state the main result of this section: the analogue of Theorem~\ref{thm:prob_bound} for the decision boundary of a single-hidden-layer sigmoid network. We restrict to the case $V\subset B(p,\sigma)$, which eliminates the sphere-boundary term $\partial M$ from the proof of Theorem~\ref{thm:prob_bound}. This assumption is natural in the robustness setting of Section~\ref{sec:robustness}, where the data distribution is supported in a bounded region and $\sigma$ exceeds its diameter. The obstruction to dropping this hypothesis is recorded in Remark~\ref{rem:sphere-obstruction} below.
 
 \begin{theorem}\label{thm:prob_bound_single_layer}
   Let $f\colon\R^n\to\R$ be as in Proposition~\ref{prop:single-layer-degree} and set $V=\mathcal{Z}(f)$. Assume that $\nabla f$ is non-vanishing on $V$ and that $V\subset B(p,\sigma)$. Let $X$ be uniformly distributed on $B(p,\sigma)$, and let $K(n,L)$ be the constant of Proposition~\ref{prop:single-layer-ideg}. Then
@@ -469,16 +467,12 @@ We now state the main result of this section: the analogue of Theorem~\ref{thm:p
   The inclusion $T(V,\varepsilon)\cap B(p,\sigma)\subseteq T(V,\varepsilon)$ and division by $\vol B(p,\sigma)=\omega_n\sigma^n$ give~\eqref{eq:single-layer-prob-bound}.
 \end{proof}
 
-The polynomial dependence on the width is the point: the exponential Khovanskii prefactor $2^{h(h-1)/2}$ of the general bound (Theorem~\ref{thm:prob_bound}) is replaced by a factor $K(n,L)w^{2n}$ that is polynomial in $w$. Moreover the \emph{leading-order} term, which controls the condition-number tail, is governed by the sharp degree $\md_0(V)=O(w^n)$, as the next corollary makes explicit.
-
 \begin{corollary}\label{cor:single-layer-tight-prob-bound}
-  Under the hypotheses of Theorem~\ref{thm:prob_bound_single_layer}, separating the $i=0$ term of the tube formula and using the sharp bound $\md_0(V)\le (2Lw+1)^n-1<(2Lw+1)^n$ gives
-  \begin{equation}\label{eq:single-layer-tight}
-    \prob\{d(X,V)\le\varepsilon\}
-    \;\leq\; 2n\,(2Lw+1)^n\,\frac{\varepsilon}{\sigma}
-    \;+\; 2K(n,L)\,w^{2n}\left[\left(1+\frac{\varepsilon}{\sigma}\right)^n-1-n\,\frac{\varepsilon}{\sigma}\right].
-  \end{equation}
-  The second term is $O\bigl(w^{2n}(\varepsilon/\sigma)^2\bigr)$ as $\varepsilon/\sigma\to0$, so the leading-order behaviour is $\prob\{d(X,V)\le\varepsilon\}\le 2n(2Lw+1)^n(\varepsilon/\sigma)+O(w^{2n}(\varepsilon/\sigma)^2)$, of order $O(w^n\,\varepsilon/\sigma)$ with the sharp exponent $n$ in the width.
+  Under the hypotheses of Theorem~\ref{thm:prob_bound_single_layer},
+  \begin{equation*}
+    \prob\{d(X,V)\le\varepsilon\}\le 2n(2Lw+1)^n\frac{\varepsilon}{\sigma}+O\left(w^{2n}\left(\frac{\varepsilon}{\sigma}\right)^2\right),
+  \end{equation*}
+  which is of order $O(w^n\,\varepsilon/\sigma)$.
 \end{corollary}
 
 \begin{proof}
@@ -486,11 +480,13 @@ The polynomial dependence on the width is the point: the exponential Khovanskii 
   \[
     \prob\{d(X,V)\le\varepsilon\}\le 2\sum_{i=0}^{n-1}\binom{n}{i+1}\md_i(V)\Bigl(\frac\varepsilon\sigma\Bigr)^{i+1}.
   \]
-  Bound the $i=0$ term by $2n\md_0(V)(\varepsilon/\sigma)\le 2n(2Lw+1)^n(\varepsilon/\sigma)$, and the terms $i\ge1$ by $\md_i(V)\le K(n,L)w^{2n}$, so that $2\sum_{i=1}^{n-1}\binom{n}{i+1}K(n,L)w^{2n}(\varepsilon/\sigma)^{i+1}=2K(n,L)w^{2n}[(1+\varepsilon/\sigma)^n-1-n\varepsilon/\sigma]$ by the binomial identity. This is~\eqref{eq:single-layer-tight}.
+  Bound the $i=0$ term by $2n\md_0(V)(\varepsilon/\sigma)\le 2n(2Lw+1)^n(\varepsilon/\sigma)$, and the terms $i\ge1$ by $\md_i(V)\le K(n,L)w^{2n}$, so that 
+  \begin{equation*}
+  2\sum_{i=1}^{n-1}\binom{n}{i+1}K(n,L)w^{2n}\left(\frac{\varepsilon}{\sigma}\right)^{i+1}=2K(n,L)w^{2n}\left[\left(1+\frac{\varepsilon}{\sigma}\right)^n-1-n\frac{\varepsilon}{\sigma}\right]
+  \end{equation*} 
+  by the binomial identity. The claim follows.
 \end{proof}
 
-The linear-in-$\varepsilon/\sigma$ leading term of Corollary~\ref{cor:single-layer-tight-prob-bound}, with its sharp coefficient $O(w^n)$, is what yields condition-number tail bounds of order $O(w^n/t)$ in Section~\ref{sec:robustness}; the corresponding statement in the general Pfaffian setting is Theorem~\ref{thm:prob_bound}, whose prefactor $2^{h(h-1)/2}$ is exponential in the number of hidden units. The price of the arithmetic-free section bound is that the leading term dominates only for $t\gtrsim K(n,L)w^n$ (equivalently $\varepsilon/\sigma\lesssim K(n,L)^{-1}w^{-n}$); the remaining terms contribute the polynomial factor $w^{2n}$.
-
 \begin{remark}[Sphere obstruction]\label{rem:sphere-obstruction}
-  The hypothesis $V\subset B(p,\sigma)$ in Theorem~\ref{thm:prob_bound_single_layer} eliminates the sphere-boundary contribution $\partial M = V\cap S^{n-1}(p,\sigma+\varepsilon)$ that appears in the proof of Theorem~\ref{thm:prob_bound}. Without it, one needs to bound the maximal degrees of $\partial M$, a codimension-$2$ intersection of a Pfaffian hypersurface with a polynomial sphere. The Khovanskii complete-intersection bound~\eqref{eq:ideg} applied to $\partial M$---a complete intersection of the Pfaffian hypersurface $V$ (degree $\beta=1$) with the degree-$2$ sphere, so that the two component degrees are $(1,2)$ and the relevant degree parameter is $\overline{\beta}=\max\{1,2\}=2$---with $(\alpha,s)=(2,w)$ and $c=2$ yields a correction term of order $2^{w(w-1)/2}\cdot\mathrm{poly}(n,w)$, exponential in $w$ and dominating the main term~\eqref{eq:single-layer-prob-bound}. A polynomial-in-$w$ replacement would require either a Pfaffian--algebraic B\'ezout-type inequality of the form $\md(V\cap S)\le\md(V)\cdot\deg(S)$ for Pfaffian hypersurfaces $V$ and polynomial hypersurfaces $S$, or a BKK-style global argument that accommodates mixed Laurent-polynomial and transcendental components: under the exponential substitution of Proposition~\ref{prop:single-layer-degree}, the sphere equation $\|x-p\|^2=r^2$ becomes $\sum_j(q\log y_j+p_j)^2=r^2$, which is transcendental in $y$. This is a weaker form of the layered-Rolle obstruction discussed in Section~\ref{subsec:improved-nn} (Conjecture~\ref{conj:block-khovanskii}).
+  The hypothesis $V\subset B(p,\sigma)$ in Theorem~\ref{thm:prob_bound_single_layer} eliminates the sphere-boundary contribution $\partial M = V\cap S^{n-1}(p,\sigma+\varepsilon)$ that appears in the proof of Theorem~\ref{thm:prob_bound}. Without it, one needs to bound the maximal degrees of $\partial M$, a codimension-$2$ intersection of a Pfaffian hypersurface with a polynomial sphere. The complete-intersection bound~\eqref{eq:ideg} applied to $\partial M$ yields a correction term of order $2^{w(w-1)/2}\cdot\mathrm{poly}(n,w)$, exponential in $w$ and dominating the main term~\eqref{eq:single-layer-prob-bound}. A replacement that is polynomial in $w$ would require either a Pfaffian--algebraic B\'ezout-type inequality of the form $\md(V\cap S)\le\md(V)\cdot\deg(S)$ for Pfaffian hypersurfaces $V$ and polynomial hypersurfaces $S$, or a BKK-style global argument that accommodates mixed Laurent-polynomial and transcendental components: under the exponential substitution of Proposition~\ref{prop:single-layer-degree}, the sphere equation $\|x-p\|^2=r^2$ becomes $\sum_j(q\log y_j+p_j)^2=r^2$, which is transcendental in $y$. This is a weaker form of the layered-Rolle obstruction discussed in Section~\ref{subsec:improved-nn} (Conjecture~\ref{conj:block-khovanskii}).
 \end{remark}

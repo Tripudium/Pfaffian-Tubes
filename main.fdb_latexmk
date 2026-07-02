@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1782997867 "main.aux" "main.bbl" "main" 1782997946 0
+["bibtex main"] 1783001873 "main.aux" "main.bbl" "main" 1783001875 0
   "./bib/refs.bib" 1782991897 32262 7f78ea0a20f668b015ee6332c0d096e3 ""
   "/usr/local/texlive/2023/texmf-dist/bibtex/bst/base/alpha.bst" 1292289607 23907 a5f93555796fb564b924339521f10a7c ""
-  "main.aux" 1782997945 14985 439db445c51a1a4fa866f95eea030709 "pdflatex"
+  "main.aux" 1783001875 14848 e1ff891638dcd4bfdd02c2e5c69a3771 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1782997941 "main.tex" "main.pdf" "main" 1782997946 0
+["pdflatex"] 1783001873 "main.tex" "main.pdf" "main" 1783001875 0
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm" 1136768653 1292 bd42be2f344128bff6d35d98474adfe3 ""
@@ -363,15 +363,15 @@
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
   "figs/lower_bound_construction_clean.pdf" 1782997539 71527 110f48b27f953fd245610d5b1733efff ""
   "macros.tex" 1782912903 21254 1888ddc86f6b5ef87cbd77c8fac9b5e5 ""
-  "main.aux" 1782997945 14985 439db445c51a1a4fa866f95eea030709 "pdflatex"
-  "main.bbl" 1782997867 8914 35428c08e57af0f1740dbd5d0200f4c7 "bibtex main"
-  "main.out" 1782997945 4828 9826d7eebe15f93b5001a2a34b0bff58 "pdflatex"
+  "main.aux" 1783001875 14848 e1ff891638dcd4bfdd02c2e5c69a3771 "pdflatex"
+  "main.bbl" 1783001873 8914 35428c08e57af0f1740dbd5d0200f4c7 "bibtex main"
+  "main.out" 1783001875 4828 9826d7eebe15f93b5001a2a34b0bff58 "pdflatex"
   "main.tex" 1782836712 2133 e32c82cc396ae204b9145e3861937f27 ""
-  "sections/conclusions.tex" 1782814846 8479 5d8646c6f9d5b3c08e2ddec59041439b ""
-  "sections/introduction.tex" 1782991907 13853 d837813ca00946640d55fc3023f4d2d5 ""
+  "sections/conclusions.tex" 1783001737 9014 6eadd8e156dad85c777192212367ee80 ""
+  "sections/introduction.tex" 1783001511 13504 bf313e571763f6e2742434f48ac38897 ""
   "sections/preliminaries.tex" 1782896223 14632 2ca9fb1a38a7e9d4852a1e8cbd1e9dd6 ""
-  "sections/robustness.tex" 1782914515 23239 877957f8c3fd2472a3db9404b8b17f29 ""
-  "sections/tubular-neural.tex" 1782997940 45497 ad7cac59bb06f38f738ede004821ddce ""
+  "sections/robustness.tex" 1783001318 22252 9c2f29cff50fbcc309b9c2ebd1c04d5c ""
+  "sections/tubular-neural.tex" 1783000691 42829 5b22a166d50acb3511b6bd9add9d727b ""
   "sections/tubular.tex" 1782913067 22963 4f294b5847f5d84b2ce93cba1469ecde ""
   "tabu.sty" 1778750319 114961 e56cefaf93c0235eff9664a2490be707 ""
   (generated)

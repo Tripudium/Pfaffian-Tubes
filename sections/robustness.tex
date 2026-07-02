@@ -32,7 +32,7 @@ For absolutely continuous distributions, the probability that a random perturbat
 \begin{equation*}
   \mC_\delta(x) := \inf\left\{\eta > 0 \colon \prob_{v\in \mathbb{S}^{n-1}}\!\left\{\frac{\|x\|}{\Delta(x;v)} > \eta\right\} \leq \delta\right\},
 \end{equation*}
-in analogy with the weak condition numbers introduced in~\cite{lotz2020weak} and further studied in~\cite{burgisser2013condition}. The weak condition number captures the typical-case rather than worst-case sensitivity of a classification to perturbations.
+in analogy with the weak condition numbers introduced in~\cite{lotz2020weak}. The weak condition number captures the typical-case rather than worst-case sensitivity of a classification to perturbations.
 \end{remark}
 
 
@@ -64,7 +64,7 @@ For the global condition number $\mC(X) = \|X\|/\Delta(X)$, the bound $\|X\|\leq
 \begin{equation*}
   \prob\{\mC(X) > t\} \leq \binom{m}{2}\, C_{\alpha,\beta,s,n}\left(1 + (\alpha + \overline{\beta} + 1)\frac{\|p\| + \sigma}{t\sigma}\right)^n.
 \end{equation*}
-The local form of Theorem~\ref{thm:condition-uniform} is preferred because it is independent of~$\sigma$. As stated, its bound tends to the constant $\binom{m}{2}\,C_{\alpha,\beta,s,n}$ as $t\to\infty$; genuine $O(1/t)$ tail decay is obtained from the full form of Theorem~\ref{thm:prob_bound}, whose bracket $(1+(\alpha+\overline{\beta}+1)/t)^n-(1+1/t)^n$ is $O(1/t)$ as $t\to\infty$.
+The local form of Theorem~\ref{thm:condition-uniform} is preferred because it is independent of~$\sigma$. As stated, its bound tends to the constant $\binom{m}{2}\,C_{\alpha,\beta,s,n}$ as $t\to\infty$. The $O(1/t)$ tail decay is obtained from the full form of Theorem~\ref{thm:prob_bound}, whose bracket $(1+(\alpha+\overline{\beta}+1)/t)^n-(1+1/t)^n$ is $O(1/t)$ as $t\to\infty$.
 \end{remark}
 
 We now turn to the smoothed analysis setting, where the data point is a Gaussian perturbation of a fixed input $\overline{x}$. The following result is sharper than the uniform bound, as the Gaussian concentration around $\overline{x}$ yields a tighter estimate via a Fubini decomposition.
@@ -80,7 +80,7 @@ Under the hypotheses of Theorem~\ref{thm:condition-uniform}, let $X$ be normally
 For large $t$, the Gaussian bound decays as $\binom{m}{2}\, C_{\alpha,\beta,s,n}\cdot n(\alpha+\overline{\beta})/t$.
 \end{remark}
 
-The proof of Theorem~\ref{thm:condition-gaussian} relies on a standard reduction from Gaussian to uniform distributions (cf.~\cite[Section~3.1]{burgisser2013condition}).
+The proof of Theorem~\ref{thm:condition-gaussian} relies on a standard reduction from Gaussian to uniform distributions.
 
 \begin{lemma}\label{lem:gauss-to-uniform}
 Let $V = \mathcal{Z}(f)$ be a bounded Pfaffian hypersurface with format $(\alpha, \beta, s)$ and non-vanishing gradient. Let $X$ be normally distributed around $\overline{x}\in \R^{n}$ with covariance $\sigma^2 \mathrm{Id}$. Then
@@ -96,7 +96,7 @@ Let $U_{s}$ be uniformly distributed on a closed ball $B(\overline{x},s)$ around
   \frac{1}{\omega_n s^{n}}\cdot \onemtx\{\|x-\overline{x}\|\leq s\},
 \end{equation*}
 where $\omega_n = \vol B(0,1)$.
-For a Gaussian vector $X$ centred at $\overline{x}$ with covariance $\sigma^2\mathrm{Id}$, a standard Fubini argument (see, e.g.,~\cite{burgisser2013condition}) gives
+For a Gaussian vector $X$ centred at $\overline{x}$ with covariance $\sigma^2\mathrm{Id}$, a standard Fubini argument gives
 \begin{equation}\label{eq:gauss-to-uniform}
  \prob\{X\in A\} = \frac{\omega_n}{(2\pi)^{\frac{n}{2}}}\int_{0}^{\infty} \prob\{U_{\sigma s}\in A\}\, s^{n+1} \econst^{-\frac{s^2}{2}} \ \diff{s}.
 \end{equation}
@@ -112,7 +112,7 @@ which follows from $\omega_n = \pi^{n/2}/\Gamma(n/2+1)$ and the substitution $u=
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:condition-gaussian}]
-The event $\mC_{\overline{x}}(X) > t$ implies $\|X - \overline{x}\|/\dist(X,\Sigma) > t$; since $\dist(X,\Sigma)\ge\dist(X,V_{ij})$ for the nearest pair by~\eqref{eq:sigma-inclusion}, this in turn implies $\|X-\overline{x}\|/\dist(X,V_{ij}) > t$ for some pair $i < j$. By a union bound and Lemma~\ref{lem:gauss-to-uniform} applied to each~$V_{ij}$,
+The event $\mC_{\overline{x}}(X) > t$ implies $\|X - \overline{x}\|/\dist(X,\Sigma) > t$. Since $\dist(X,\Sigma)\ge\dist(X,V_{ij})$ for the nearest pair by~\eqref{eq:sigma-inclusion}, this in turn implies $\|X-\overline{x}\|/\dist(X,V_{ij}) > t$ for some pair $i < j$. By a union bound and Lemma~\ref{lem:gauss-to-uniform} applied to each~$V_{ij}$,
 \begin{equation*}
   \prob\{\mC_{\overline{x}}(X) > t\} \leq \binom{m}{2}\, C_{\alpha,\beta,s,n}\left[\left(1+\frac{\alpha+\overline{\beta}+1}{t}\right)^n - \left(1+\frac{1}{t}\right)^n\right]. \qedhere
 \end{equation*}
@@ -207,7 +207,7 @@ The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires 
   \begin{equation*}
     C_{2,1,w,n} \;=\; 6\cdot 2^{w(w-1)/2}\,(5n+2)^{w},
   \end{equation*}
-  which is super-exponential in $w$, and the concentration factor $\gamma_n(R_V/\sigma)$ is \emph{independent} of $w$. Consequently, for a fixed architecture in which $n$ and the ratio $R_V/\sigma$ are held fixed while $w \to \infty$, the Khovanskii contribution $\gamma_n(R_V/\sigma)\cdot B_{\mathrm{Pf}}(t)$ eventually dominates the polynomial BKK term: the Gaussian bound~\eqref{eq:single-layer-gaussian-bound} does \emph{not} inherit the polynomial-in-$w$ rate of the uniform case (Corollary~\ref{cor:nn-condition-single-layer}) at fixed Gaussian scale. This is the price of the Fubini reduction, which samples uniform balls of every radius $\sigma s$ and must fall back on the unconditional Pfaffian bound of Theorem~\ref{thm:prob_bound} on the small-radius part $s < R_V/\sigma$.
+  which is super-exponential in $w$, and the concentration factor $\gamma_n(R_V/\sigma)$ is \emph{independent} of $w$. Consequently, for a fixed architecture in which $n$ and the ratio $R_V/\sigma$ are held fixed while $w \to \infty$, the Khovanskii contribution $\gamma_n(R_V/\sigma)\cdot B_{\mathrm{Pf}}(t)$ eventually dominates the polynomial BKK term: the Gaussian bound~\eqref{eq:single-layer-gaussian-bound} does \emph{not} inherit the polynomial-in-$w$ rate of the uniform case (Corollary~\ref{cor:nn-condition-single-layer}) at fixed Gaussian scale.
 
   The precise criterion under which the Gaussian tail does inherit the BKK rate is the break-even inequality
   \begin{equation}\label{eq:break-even}
@@ -219,7 +219,6 @@ The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires 
     \qquad\text{equivalently}\qquad
     \sigma \;\gtrsim\; R_V\cdot 2^{\,w(w-1)/\bigl(2(n+2)\bigr)}.
   \end{equation}
-  In words, the Khovanskii term is tempered below the BKK term only when the standard deviation $\sigma$ exceeds the enclosing radius $R_V$ by a factor growing super-exponentially in $w$; for any milder growth of $\sigma$, the exponential Khovanskii factor $2^{w(w-1)/2}$ survives and Theorem~\ref{thm:condition-gaussian} remains the sharpest unconditional Gaussian bound available. The polynomial-in-$w$ improvement of Section~\ref{sec:tubular-neural} is therefore genuine only in the uniform setting of Corollary~\ref{cor:nn-condition-single-layer}, where the ball is fixed to contain the decision boundary.
 \end{remark}
 
 \begin{example}[Sigmoid activation, multi-layer]\label{ex:sigmoid-condition}
