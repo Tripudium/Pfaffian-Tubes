@@ -139,7 +139,7 @@ By Proposition~\ref{prop:nn-format}, the network output has Pfaffian format $(\a
 For single-hidden-layer sigmoid networks, the tube bound of Theorem~\ref{thm:prob_bound_single_layer} yields a sharper tail bound in which the Khovanskii prefactor $2^{h(h-1)/2}$ of Corollary~\ref{cor:nn-condition} is replaced by a polynomial in the width.
 
 \begin{corollary}[Single-hidden-layer sigmoid]\label{cor:nn-condition-single-layer}
-  Let $F\colon \R^n\to \R^m$ be a classifier implemented by a neural network with a single hidden layer of width $w$ and logistic sigmoid activation, a linear output layer, and first-layer weights $a_k\in\Q^n$ in general position with common denominator~$q$. Set $L=q\max_{k,i}|a_{ki}|$ and let $K(n,L)$ be the constant of Proposition~\ref{prop:single-layer-ideg}. Assume that for each pair $i<j$ the decision boundary $V_{ij}=\mathcal{Z}(g_{ij})$ is smooth with non-vanishing gradient and is contained in the closed ball $B(p,\sigma)$. If $X$ is uniformly distributed on $B(p,\sigma)$, then for every $t>0$,
+  Let $F\colon \R^n\to \R^m$ be a classifier implemented by a neural network with a single hidden layer of width $w$ and logistic sigmoid activation, a linear output layer, and first-layer weights $a_k\in\Q^n$ with common denominator~$q$. Set $L=q\max_{k,i}|a_{ki}|$ and let $K(n,L)$ be the constant of Proposition~\ref{prop:single-layer-ideg}. Assume that for each pair $i<j$ the decision boundary $V_{ij}=\mathcal{Z}(g_{ij})$ is smooth with non-vanishing gradient and is contained in the closed ball $B(p,\sigma)$. If $X$ is uniformly distributed on $B(p,\sigma)$, then for every $t>0$,
   \begin{equation}\label{eq:single-layer-condition-bound}
     \prob\{\mC_p(X)>t\} \;\leq\; \binom{m}{2}\cdot 2\,K(n,L)\,w^{2n}\left[\left(1+\frac{1}{t}\right)^n-1\right].
   \end{equation}
@@ -234,7 +234,7 @@ For large $t$, the Gaussian bound decays as $\binom{m}{2}\cdot 6\cdot 2^{h(h-1)/
 \end{example}
 
 \begin{example}[Sigmoid activation, single hidden layer]\label{ex:sigmoid-condition-single}
-For $\ell=1$ and $h=w$, with first-layer weights rational in general position and lattice constant $L$, Corollary~\ref{cor:nn-condition-single-layer} gives
+For $\ell=1$ and $h=w$, with rational first-layer weights and lattice constant $L$, Corollary~\ref{cor:nn-condition-single-layer} gives
 \begin{equation*}
   \prob\{\mC_p(X)>t\} \;\leq\; \binom{m}{2}\cdot 2\,K(n,L)\,w^{2n}\left[\left(1+\frac{1}{t}\right)^n-1\right]
 \end{equation*}
