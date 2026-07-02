@@ -106,14 +106,14 @@ In particular, at the last hidden layer ($i=\ell$), the format of $F^\ell\circ \
 where $h=\sum_{j=1}^\ell n_j$ is the total number of hidden units. 
 Similarly, if the output function is an autonomous Pfaffian function with format $(\alpha', \beta', s')$, then the function $F = F^{\ell+1} \circ F^\ell\circ \cdots \circ F^1$ is Pfaffian with format
 \begin{equation*}
-  \left(\ell(\alpha+\beta-1) + \alpha',\; \beta',\; sh + s'm\right),
+  \left(\ell(\alpha+\beta-1) + \alpha',\; \beta',\; sh + s'm\right).
 \end{equation*}
 \end{proposition}
 
 Thus, for a fixed set of activation functions (and hence fixed $\alpha$, $\beta$, $s$), the chain-degree grows linearly in the depth $\ell$, the function degree is constant, and the order grows linearly in $h$.
 
 \begin{remark}\label{re:chain-length-tight}
-The order $sh$ is essentially optimal for generic fully connected networks: the $h$ intermediate activation values are algebraically independent functions of $x$ (for generic weights), and each must appear as a chain element since it arises independently in the partial derivatives of the network output via the chain rule. The structural optimisation provided by Lemma~\ref{le:composition}(3), which keeps the order additive across layers rather than multiplicative, is already incorporated into the bound.
+The order $sh$ should not be expected to improve substantially for generic fully connected networks: the intermediate activation values arise independently in the partial derivatives of the network output via the chain rule, so one cannot generally reuse a small fixed set of chain elements across all hidden units. The structural optimisation provided by Lemma~\ref{le:composition}(3), which keeps the order additive across layers rather than multiplicative, is already incorporated into the bound.
 \end{remark}
 
 \begin{example}[Activation functions]\label{ex:activations}
@@ -208,7 +208,7 @@ Simply applying the Pfaffian tube formula to the setting of neural networks give
 Let $V=\mathcal{Z}(g_{ij})$ for $g_{ij}=F_j-F_i$, where $F\colon \R^n\to \R^m$ is implemented by a neural network with $\ell$ hidden layers, $h$ hidden 
 nodes, activation functions with format $(2,1,1)$ and softmax outputs. Then under the assumptions of Theorem~\ref{thm:prob_bound},
 \begin{equation*}
-  \prob\{ d(X, V) \le \varepsilon \} \leq C_{\ell,h,n,m}\left(\frac{\varepsilon}{\sigma}+O\left(\frac{\varepsilon^2}{\sigma^2}\right)\right)
+  \prob\{ d(X, V) \le \varepsilon \} \leq C_{\ell,h,n,m}\left(\frac{\varepsilon}{\rho}+O\left(\frac{\varepsilon^2}{\rho^2}\right)\right)
 \end{equation*}
 for a constant $C_{\ell,h,n,m}$. 
 \end{corollary}
@@ -318,9 +318,9 @@ As $\lambda\to\infty$, the $h_\lambda(t)$ converge pointwise to the step functio
 \begin{equation*}
   h_\lambda(t)\to \sum_{k=1}^m (-1)^k \mathbf{1}\{t\geq k\} = \sum_{k\le t}(-1)^k. 
 \end{equation*} 
-Consider a sequence $(i_1,\dots,i_n)\in [m]^n$ and the corresponding cell $\{x\colon \,i_j<x_j<i_j+1\} \subset \R^n$. The limit $g$ of $f_\lambda$ equals $c_0+\sum_j S_{i_j}$ with $S_i=\sum_{k\le i}(-1)^k$. Here $S_i=0$ for $i$ even and $S_i=-1$ for $i$ odd and hence $g=\tfrac12+\varepsilon-\#\{j:i_j\text{ odd}\}$. This expression is positive if and only if every $i_j$ is even, in which case $g=\tfrac12+\varepsilon$ and satisfies $g\le-\tfrac12+\varepsilon<0$ else. Moreover, the all-even cells are pairwise non-adjacent, separated by slabs on which $g<0$.
+Consider a sequence $(i_1,\dots,i_n)\in \{0,\dots,m\}^n$ and the corresponding cell $\{x\colon \,i_j<x_j<i_j+1\} \subset \R^n$. The limit $g$ of $f_\lambda$ equals $c_0+\sum_j S_{i_j}$ with $S_i=\sum_{k\le i}(-1)^k$. Here $S_i=0$ for $i$ even and $S_i=-1$ for $i$ odd and hence $g=\tfrac12+\varepsilon-\#\{j:i_j\text{ odd}\}$. This expression is positive if and only if every $i_j$ is even, in which case $g=\tfrac12+\varepsilon$ and satisfies $g\le-\tfrac12+\varepsilon<0$ else. Moreover, the all-even cells are pairwise non-adjacent, separated by slabs on which $g<0$.
 
-Call an all-even cell \emph{bounded} if $i_j\in\{2,4,\dots,m-2\}$ for every $j$. There are exactly $N:=\bigl(\tfrac{m-2}{2}\bigr)^n$ of them. Fix one such cell, with closed core $K=\prod_j[i_j+\tfrac14,\,i_j+\tfrac34]$ (where the limit $g$ equals $\tfrac12+\varepsilon$). The boundary $\partial R$ of the enlarged box $R=\prod_j[i_j-\tfrac12,\,i_j+\tfrac32]$ lies in cells with $g\le-\tfrac12+\varepsilon$. By uniform convergence off the thresholds there is $\lambda_0=\lambda_0(n,m)$ such that for all $\lambda\ge\lambda_0$ one has $f_\lambda>\tfrac14$ on every such $K$ and $f_\lambda<-\tfrac14$ on every $\partial R$. Moreover, the connected component of $\{f_\lambda>0\}$ containing $K$ is contained inside $R$: it is bounded, and the $N$ such regions $W_1,\dots,W_N$ are pairwise disjoint and disjoint from the unbounded region $\{f_\lambda>0\}\setminus\bigcup_i R_i$. Their boundaries $\Sigma_i=\partial W_i$ are $N$ pairwise disjoint compact subsets of $V$.
+Call an all-even cell bounded if $i_j\in\{2,4,\dots,m-2\}$ for every $j$; there are exactly $N:=\bigl(\tfrac{m-2}{2}\bigr)^n$ bounded cells. Fix one such cell, with closed core $K=\prod_j[i_j+\tfrac14,\,i_j+\tfrac34]$ (where the limit $g$ equals $\tfrac12+\varepsilon$). The boundary $\partial R$ of the enlarged box $R=\prod_j[i_j-\tfrac12,\,i_j+\tfrac32]$ lies in cells with $g\le-\tfrac12+\varepsilon$. By uniform convergence off the thresholds there is $\lambda_0=\lambda_0(n,m)$ such that for all $\lambda\ge\lambda_0$ one has $f_\lambda>\tfrac14$ on every such $K$ and $f_\lambda<-\tfrac14$ on every $\partial R$. Moreover, the connected component of $\{f_\lambda>0\}$ containing $K$ is contained inside $R$: it is bounded, and the $N$ such regions $W_1,\dots,W_N$ are pairwise disjoint and disjoint from the unbounded region $\{f_\lambda>0\}\setminus\bigcup_i R_i$. Their boundaries $\Sigma_i=\partial W_i$ are $N$ pairwise disjoint compact subsets of $V$.
 
 \begin{figure}[h]
   \centering
@@ -329,9 +329,9 @@ Call an all-even cell \emph{bounded} if $i_j\in\{2,4,\dots,m-2\}$ for every $j$.
   \label{fig:lower-bound-construction}
 \end{figure}
 
-Since $\nabla f_\lambda=(h_\lambda'(x_1),\dots,h_\lambda'(x_n))$, the critical set of $f_\lambda$ is the finite product $\prod_j\{h_\lambda'=0\}$, and its image under $f_\lambda$ is a finite set of critical values. Choosing $\varepsilon$ outside this finite set makes $0$ a regular value of $f_\lambda$, so $V$ is a smooth hypersurface and each $\Sigma_i$ is a smooth compact connected component of $V$ bounding $W_i$. This choice of $\varepsilon$ changes neither $q$ nor $L$.
+Since $\nabla f_\lambda=(h_\lambda'(x_1),\dots,h_\lambda'(x_n))$, the critical set of $f_\lambda$ is the finite product $\prod_j\{h_\lambda'=0\}$, and its image under $f_\lambda$ is a finite set of critical values. Choosing $\varepsilon$ outside this finite set makes $0$ a regular value of $f_\lambda$, so $V$ is a smooth hypersurface and each $\Sigma_i$ is a smooth compact hypersurface, possibly disconnected, contained in $V$ and bounding $W_i$. This choice of $\varepsilon$ changes neither $q$ nor $L$.
 
-Each $\Sigma_i=\partial W_i$ satisfies the hypotheses of Lemma~\ref{lem:bounded-gauss-surjective}, so for every regular value $v$ of $\gamma_V$ we have $|\gamma_V^{-1}(v)|\ge\sum_{i=1}^N|\gamma_{\Sigma_i}^{-1}(v)|\ge 2N$, the preimages being disjoint across the disjoint components. Hence $\md(V)=\md\gamma_V\ge 2N=2\bigl(\tfrac{m-2}{2}\bigr)^n$, which with $m=w/n$ is $\Omega(w^n)$.
+Each $\Sigma_i=\partial W_i$ satisfies the hypotheses of Lemma~\ref{lem:bounded-gauss-surjective}, so for every regular value $v$ of $\gamma_V$ we have $|\gamma_V^{-1}(v)|\ge\sum_{i=1}^N|\gamma_{\Sigma_i}^{-1}(v)|\ge 2N$, the preimages being disjoint because the hypersurfaces $\Sigma_i$ are pairwise disjoint. Hence $\md(V)=\md\gamma_V\ge 2N=2\bigl(\tfrac{m-2}{2}\bigr)^n$, which with $m=w/n$ is $\Omega(w^n)$.
 \end{proof}
 
 %\begin{remark}\label{rem:lb-sharpness}
@@ -360,12 +360,16 @@ The conjecture is supported by two observations. The single-layer case $\ell = 1
 % \end{remark}
 
 \subsection{Tubular neighbourhood bound for neural networks}\label{subsec:tube-nn}
-Throughout this subsection and Section~\ref{sec:robustness}, the symbol $\sigma$ denotes the radius of the ambient ball $B(p,\sigma)$, not the logistic sigmoid (which is always written applied to an argument); the two uses do not collide.
+Throughout this subsection and Section~\ref{sec:robustness}, the radius of an ambient ball is denoted by $\rho$. The symbol $\sigma$ is reserved for the logistic sigmoid or, in Gaussian estimates, the standard deviation.
 The tube formula requires the full family of $i$-th maximal degrees $\md_i(V)$, $0\le i\le n-1$, each a supremum of Gauss-map degrees over the $(i+1)$-dimensional affine sections $V\cap H$, $H\in\cE^n_{i+1}$. The Bernstein argument of Proposition~\ref{prop:single-layer-degree} controls only the top degree $\md_{n-1}(V)=\md(V)$: its proof fixes a \emph{rational} regular value and keeps the integer vectors $\vec p_k=qa_k$ intact, but a generic section forces a rotation of the weights to $U^{\trans}a_k$, which is irrational, destroying the lattice underlying the zonotope $\conv(A)$. Since $\md_i$ is a supremum over \emph{all} sections, $H$ cannot be chosen rationally, and the Bernstein bound does not extend to the lower sections.
 We bound the remaining section degrees in two steps. The leading degree $\md_0(V)$ is controlled by an elementary count of zeros along a line; the intermediate degrees are controlled by passing to a multiplicative chart, in which the network becomes a Pfaffian system whose chain length is governed by the ambient dimension rather than the width. 
 
 \begin{lemma}\label{lem:line-intersection}
-Let $a_1,\dots,a_w\in\Q^n$ have common denominator $q\in\N_{>0}$ and set $L:=q\max_{k,i}|a_{ki}|$. For any constants $c,b_1,\dots,b_w,\gamma_1,\dots,\gamma_w\in\R$, the function
+Let $a_1,\dots,a_w\in\Q^n$ have common denominator $q\in\N_{>0}$, and set
+\[
+  L:=q\max_{k,i}|a_{ki}|.
+\]
+For any constants $c,b_1,\dots,b_w,\gamma_1,\dots,\gamma_w\in\R$, the function
 \[
   h(x)=c+\sum_{k=1}^w\gamma_k\,\sigma(a_k^{\trans}x+b_k)
 \]
@@ -375,8 +379,8 @@ restricted to any affine line $\ell\subset\R^n$ has at most $(2Lw+1)^n-1$ isolat
 The proof rests on the following classical fact, which is an easy application of Rolle's theorem.
 
 \begin{lemma}\label{lem:polya}
-  A non-trivial exponential polynomial $\varphi(t)=\sum_{i=1}^M d_i\econst^{\nu_i t}$ with $M$ pairwise distinct real frequencies has at most $M-1$ real zeros.
-  \end{lemma}
+A non-trivial exponential polynomial $\varphi(t)=\sum_{i=1}^M d_i\econst^{\nu_i t}$ with $M$ pairwise distinct real frequencies has at most $M-1$ real zeros.
+\end{lemma}
 
 \begin{proof}[Proof of Lemma~\ref{lem:line-intersection}]
 Parametrise $\ell(t)=x_0+tv$, set $\lambda_k=a_k^{\trans}v$ and $\mu_k=a_k^{\trans}x_0+b_k$, and put $u_k(t)=\econst^{-\mu_k}\econst^{-\lambda_k t}$, so $\sigma(a_k^{\trans}\ell(t)+b_k)=(1+u_k)^{-1}$. Multiplying $h(\ell(t))$ by the strictly positive factor $\prod_k(1+u_k(t))$ preserves zeros and gives, after expansion, an exponential polynomial
@@ -443,50 +447,50 @@ Writing $\vec p_k=qa_k\in\Z^n$ with $\|\vec p_k\|_\infty\le L$, we have $\nu_e=\
   The mechanism behind Proposition~\ref{prop:single-layer-ideg} is that the exponential substitution converts the $w$ sigmoids into rational functions, trading the width-indexed Pfaffian chain of length $w$ for the dimension-indexed chain of $\le 2n$ logarithms that records the section.
 \end{remark}
 
-We now state the main result of this section: the analogue of Theorem~\ref{thm:prob_bound} for the decision boundary of a single-hidden-layer sigmoid network. We restrict to the case $V\subset B(p,\sigma)$, which eliminates the sphere-boundary term $\partial M$ from the proof of Theorem~\ref{thm:prob_bound}. This assumption is natural in the robustness setting of Section~\ref{sec:robustness}, where the data distribution is supported in a bounded region and $\sigma$ exceeds its diameter. The obstruction to dropping this hypothesis is recorded in Remark~\ref{rem:sphere-obstruction} below.
+We now state the main result of this section: the analogue of Theorem~\ref{thm:prob_bound} for the decision boundary of a single-hidden-layer sigmoid network. We restrict to the case $V\subset B(p,\rho)$, which eliminates the sphere-boundary term $\partial M$ from the proof of Theorem~\ref{thm:prob_bound}. This assumption is natural in the robustness setting of Section~\ref{sec:robustness}, where the data distribution is supported in a bounded region and $\rho$ exceeds its diameter. The obstruction to dropping this hypothesis is recorded in Remark~\ref{rem:sphere-obstruction} below.
 
 \begin{theorem}\label{thm:prob_bound_single_layer}
-  Let $f\colon\R^n\to\R$ be as in Proposition~\ref{prop:single-layer-degree} and set $V=\mathcal{Z}(f)$. Assume that $\nabla f$ is non-vanishing on $V$ and that $V\subset B(p,\sigma)$. Let $X$ be uniformly distributed on $B(p,\sigma)$, and let $K(n,L)$ be the constant of Proposition~\ref{prop:single-layer-ideg}. Then
+  Let $f\colon\R^n\to\R$ be as in Proposition~\ref{prop:single-layer-degree} and set $V=\mathcal{Z}(f)$. Assume that $\nabla f$ is non-vanishing on $V$ and that $V\subset B(p,\rho)$. Let $X$ be uniformly distributed on $B(p,\rho)$, and let $K(n,L)$ be the constant of Proposition~\ref{prop:single-layer-ideg}. Then
   \begin{equation}\label{eq:single-layer-prob-bound}
     \prob\{d(X,V)\le\varepsilon\}
-    \;\leq\; 2\,K(n,L)\,w^{2n}\left[\left(1+\frac{\varepsilon}{\sigma}\right)^n - 1\right].
+    \;\leq\; 2\,K(n,L)\,w^{2n}\left[\left(1+\frac{\varepsilon}{\rho}\right)^n - 1\right].
   \end{equation}
 \end{theorem}
 
 \begin{proof}
-  Since $V\subset B(p,\sigma)$ is compact, Theorem~\ref{thm:tube_bound} applies to $V$ as a codimension-$1$ submanifold inside the ball $B(p,\sigma)$, giving
+  Since $V\subset B(p,\rho)$ is compact, Theorem~\ref{thm:tube_bound} applies to $V$ as a codimension-$1$ submanifold inside the ball $B(p,\rho)$, giving
   \begin{equation*}
     \vol T(V,\varepsilon)
-    \;\leq\; 2\omega_n\sigma^n\sum_{i=0}^{n-1}\binom{n}{i+1}\md_i(V)\left(\frac{\varepsilon}{\sigma}\right)^{i+1}.
+    \;\leq\; 2\omega_n\rho^n\sum_{i=0}^{n-1}\binom{n}{i+1}\md_i(V)\left(\frac{\varepsilon}{\rho}\right)^{i+1}.
   \end{equation*}
-  Substituting the uniform bound $\md_i(V)\le K(n,L)w^{2n}$ from Proposition~\ref{prop:single-layer-ideg} and using the binomial identity $\sum_{j=1}^n\binom{n}{j}t^j=(1+t)^n-1$ with $t=\varepsilon/\sigma$,
+  Substituting the uniform bound $\md_i(V)\le K(n,L)w^{2n}$ from Proposition~\ref{prop:single-layer-ideg} and using the binomial identity $\sum_{j=1}^n\binom{n}{j}t^j=(1+t)^n-1$ with $t=\varepsilon/\rho$,
   \begin{equation*}
     \vol T(V,\varepsilon)
-    \;\leq\; 2\omega_n\sigma^n\,K(n,L)w^{2n}\left[\left(1+\frac{\varepsilon}{\sigma}\right)^n-1\right].
+    \;\leq\; 2\omega_n\rho^n\,K(n,L)w^{2n}\left[\left(1+\frac{\varepsilon}{\rho}\right)^n-1\right].
   \end{equation*}
-  The inclusion $T(V,\varepsilon)\cap B(p,\sigma)\subseteq T(V,\varepsilon)$ and division by $\vol B(p,\sigma)=\omega_n\sigma^n$ give~\eqref{eq:single-layer-prob-bound}.
+  The inclusion $T(V,\varepsilon)\cap B(p,\rho)\subseteq T(V,\varepsilon)$ and division by $\vol B(p,\rho)=\omega_n\rho^n$ give~\eqref{eq:single-layer-prob-bound}.
 \end{proof}
 
 \begin{corollary}\label{cor:single-layer-tight-prob-bound}
   Under the hypotheses of Theorem~\ref{thm:prob_bound_single_layer},
   \begin{equation*}
-    \prob\{d(X,V)\le\varepsilon\}\le 2n(2Lw+1)^n\frac{\varepsilon}{\sigma}+O\left(w^{2n}\left(\frac{\varepsilon}{\sigma}\right)^2\right),
+    \prob\{d(X,V)\le\varepsilon\}\le 2n(2Lw+1)^n\frac{\varepsilon}{\rho}+O\left(w^{2n}\left(\frac{\varepsilon}{\rho}\right)^2\right),
   \end{equation*}
-  which is of order $O(w^n\,\varepsilon/\sigma)$.
+  which is of order $O(w^n\,\varepsilon/\rho)$.
 \end{corollary}
 
 \begin{proof}
-  By Theorem~\ref{thm:tube_bound} and the inclusion $T(V,\varepsilon)\cap B(p,\sigma)\subseteq T(V,\varepsilon)$,
+  By Theorem~\ref{thm:tube_bound} and the inclusion $T(V,\varepsilon)\cap B(p,\rho)\subseteq T(V,\varepsilon)$,
   \[
-    \prob\{d(X,V)\le\varepsilon\}\le 2\sum_{i=0}^{n-1}\binom{n}{i+1}\md_i(V)\Bigl(\frac\varepsilon\sigma\Bigr)^{i+1}.
+    \prob\{d(X,V)\le\varepsilon\}\le 2\sum_{i=0}^{n-1}\binom{n}{i+1}\md_i(V)\Bigl(\frac\varepsilon\rho\Bigr)^{i+1}.
   \]
-  Bound the $i=0$ term by $2n\md_0(V)(\varepsilon/\sigma)\le 2n(2Lw+1)^n(\varepsilon/\sigma)$, and the terms $i\ge1$ by $\md_i(V)\le K(n,L)w^{2n}$, so that 
+  Bound the $i=0$ term by $2n\md_0(V)(\varepsilon/\rho)\le 2n(2Lw+1)^n(\varepsilon/\rho)$, and the terms $i\ge1$ by $\md_i(V)\le K(n,L)w^{2n}$, so that 
   \begin{equation*}
-  2\sum_{i=1}^{n-1}\binom{n}{i+1}K(n,L)w^{2n}\left(\frac{\varepsilon}{\sigma}\right)^{i+1}=2K(n,L)w^{2n}\left[\left(1+\frac{\varepsilon}{\sigma}\right)^n-1-n\frac{\varepsilon}{\sigma}\right]
+  2\sum_{i=1}^{n-1}\binom{n}{i+1}K(n,L)w^{2n}\left(\frac{\varepsilon}{\rho}\right)^{i+1}=2K(n,L)w^{2n}\left[\left(1+\frac{\varepsilon}{\rho}\right)^n-1-n\frac{\varepsilon}{\rho}\right]
   \end{equation*} 
   by the binomial identity. The claim follows.
 \end{proof}
 
 \begin{remark}[Sphere obstruction]\label{rem:sphere-obstruction}
-  The hypothesis $V\subset B(p,\sigma)$ in Theorem~\ref{thm:prob_bound_single_layer} eliminates the sphere-boundary contribution $\partial M = V\cap S^{n-1}(p,\sigma+\varepsilon)$ that appears in the proof of Theorem~\ref{thm:prob_bound}. Without it, one needs to bound the maximal degrees of $\partial M$, a codimension-$2$ intersection of a Pfaffian hypersurface with a polynomial sphere. The complete-intersection bound~\eqref{eq:ideg} applied to $\partial M$ yields a correction term of order $2^{w(w-1)/2}\cdot\mathrm{poly}(n,w)$, exponential in $w$ and dominating the main term~\eqref{eq:single-layer-prob-bound}. A replacement that is polynomial in $w$ would require either a Pfaffian--algebraic B\'ezout-type inequality of the form $\md(V\cap S)\le\md(V)\cdot\deg(S)$ for Pfaffian hypersurfaces $V$ and polynomial hypersurfaces $S$, or a BKK-style global argument that accommodates mixed Laurent-polynomial and transcendental components: under the exponential substitution of Proposition~\ref{prop:single-layer-degree}, the sphere equation $\|x-p\|^2=r^2$ becomes $\sum_j(q\log y_j+p_j)^2=r^2$, which is transcendental in $y$. This is a weaker form of the layered-Rolle obstruction discussed in Section~\ref{subsec:improved-nn} (Conjecture~\ref{conj:block-khovanskii}).
+  The hypothesis $V\subset B(p,\rho)$ in Theorem~\ref{thm:prob_bound_single_layer} eliminates the sphere-boundary contribution $\partial M = V\cap S^{n-1}(p,\rho+\varepsilon)$ that appears in the proof of Theorem~\ref{thm:prob_bound}. Without it, one needs to bound the maximal degrees of $\partial M$, a codimension-$2$ intersection of a Pfaffian hypersurface with a polynomial sphere. The complete-intersection bound~\eqref{eq:ideg} applied to $\partial M$ yields a correction term of order $2^{w(w-1)/2}\cdot\mathrm{poly}(n,w)$, exponential in $w$ and dominating the main term~\eqref{eq:single-layer-prob-bound}. A replacement that is polynomial in $w$ would require either a Pfaffian--algebraic B\'ezout-type inequality of the form $\md(V\cap S)\le\md(V)\cdot\deg(S)$ for Pfaffian hypersurfaces $V$ and polynomial hypersurfaces $S$, or a BKK-style global argument that accommodates mixed Laurent-polynomial and transcendental components: under the exponential substitution of Proposition~\ref{prop:single-layer-degree}, the sphere equation $\|x-p\|^2=r^2$ becomes $\sum_j(q\log y_j+p_j)^2=r^2$, which is transcendental in $y$. This is a weaker form of the layered-Rolle obstruction discussed in Section~\ref{subsec:improved-nn} (Conjecture~\ref{conj:block-khovanskii}).
 \end{remark}

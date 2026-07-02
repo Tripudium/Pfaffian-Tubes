@@ -45,12 +45,12 @@ where we use the convention $\md(M, H) = 0$ for non-tranverse intersections.
 
 A bound on the volume of $T(M,\varepsilon)$ in terms of the $i$-th degrees of $M$ was derived in~\cite[Theorem 4.3]{lotz2015volume},
 based on a version of Weyl's tube formula and integral geometry. The key takeaway of this result is that the volume of $T(M, \varepsilon)$ is bounded by a polynomial in $\varepsilon$ (the original formula due to Weyl actually yields an equality, albeit with some restrictions on the size of $\varepsilon$ and different coefficients).
-In what follows, $B(p,\sigma)$ denotes a closed ball of radius $\sigma$ around $p\in \R^n$.
+In what follows, $B(p,\rho)$ denotes a closed ball of radius $\rho$ around $p\in \R^n$.
 
 \begin{theorem} \label{thm:tube_bound}
-Let $M \subset B(p, \sigma)$ be a compact Riemannian submanifold of $\R^n$ of dimension $m$, possibly with boundary, and set $c=n-m$. Then for any $\varepsilon > 0$ we have 
+Let $M \subset B(p, \rho)$ be a compact Riemannian submanifold of $\R^n$ of dimension $m$, possibly with boundary, and set $c=n-m$. Then for any $\varepsilon > 0$ we have 
 \begin{equation*}
-\vol T(M, \varepsilon) \le 2\omega_n \sigma^n \sum_{i=0}^m \binom{n}{c+i} \md_i(M) \left(\frac{\varepsilon}{\sigma}\right)^{c+i},
+\vol T(M, \varepsilon) \le 2\omega_n \rho^n \sum_{i=0}^m \binom{n}{c+i} \md_i(M) \left(\frac{\varepsilon}{\rho}\right)^{c+i},
 \end{equation*}
 where $\omega_n = \vol B(0,1)$ and, when $M$ has boundary, the degrees $\md_i(M)$ are taken on the interior $M\setminus\partial M$.
 \end{theorem}
@@ -202,9 +202,9 @@ We can now state and prove our bound on the volume of a tubular neighbourhood of
 but the reader should note that one could readily modify the proof to get a similar bound for $\vol T(V, \varepsilon)$. 
 
 \begin{theorem} \label{thm:prob_bound}
-Let $V = \mathcal{Z}(f)$ for Pfaffian function $f\in \Pfaff_{\alpha,\beta,s}(\R^n)$. Suppose that $\nabla f$ is non-vanishing on $V$ and that $V$ is bounded. Moreover, let $p \in \R^n$, $\varepsilon, \sigma > 0$ and $X$ uniformly distributed over $B(p, \sigma)$. Then
+Let $V = \mathcal{Z}(f)$ for Pfaffian function $f\in \Pfaff_{\alpha,\beta,s}(\R^n)$. Suppose that $\nabla f$ is non-vanishing on $V$ and that $V$ is bounded. Moreover, let $p \in \R^n$, $\varepsilon, \rho > 0$ and $X$ uniformly distributed over $B(p, \rho)$. Then
 \begin{equation*}
-\prob\{ d(X, V) \le \varepsilon \} \leq C_{\alpha,\beta,s,n}\left[\left(1+(\alpha+\overline{\beta}+1)\frac{\varepsilon}{\sigma}\right)^n - \left(1+\frac{\varepsilon}{\sigma}\right)^n\right],
+\prob\{ d(X, V) \le \varepsilon \} \leq C_{\alpha,\beta,s,n}\left[\left(1+(\alpha+\overline{\beta}+1)\frac{\varepsilon}{\rho}\right)^n - \left(1+\frac{\varepsilon}{\rho}\right)^n\right],
 \end{equation*}
 where $\overline{\beta}= \max\{\beta,2\}$ and
 \begin{equation*}
@@ -213,28 +213,28 @@ C_{\alpha,\beta,s,n} =  6\cdot 2^{\frac{s(s-1)}{2}}\beta\left(n (2\alpha+\overli
 \end{theorem}
 
 \begin{remark}
-Note that the constant involves both $\beta$ and $\overline{\beta}=\max\{\beta,2\}$: the bare $\beta$ is the degree of $f$, while $\overline{\beta}$ is forced by the codimension-two boundary $V\cap S^{n-1}(p,\sigma+\varepsilon)$ arising in the proof, whose defining sphere has degree~$2$.
+Note that the constant involves both $\beta$ and $\overline{\beta}=\max\{\beta,2\}$: the bare $\beta$ is the degree of $f$, while $\overline{\beta}$ is forced by the codimension-two boundary $V\cap S^{n-1}(p,\rho+\varepsilon)$ arising in the proof, whose defining sphere has degree~$2$.
 \end{remark}
 
 \begin{proof}[Proof of Theorem~\ref{thm:prob_bound}]
-The probability that $d(X,V)\leq \varepsilon$ for $X$ uniformly distributed in $B(p,\sigma)$ is given by
+The probability that $d(X,V)\leq \varepsilon$ for $X$ uniformly distributed in $B(p,\rho)$ is given by
 \begin{equation*}
-  \prob\{d(X, V)\leq \varepsilon\} = \frac{\vol (T(V,\varepsilon)\cap B(p,\sigma))}{\vol B(p,\sigma)}.
+  \prob\{d(X, V)\leq \varepsilon\} = \frac{\vol (T(V,\varepsilon)\cap B(p,\rho))}{\vol B(p,\rho)}.
 \end{equation*}
-Fix $\varepsilon>0$ and assume first that $\sigma+\varepsilon$ is a regular value of the map $x\mapsto\|x-p\|$ on $V$, which holds for almost all $\sigma>0$ by Sard's theorem; the remaining values of $\sigma$ are handled by a limiting argument at the end of the proof. Then $M = V \cap B(p, \sigma + \varepsilon)$ is a compact manifold with boundary, and we notice that
+Fix $\varepsilon>0$ and assume first that $\rho+\varepsilon$ is a regular value of the map $x\mapsto\|x-p\|$ on $V$, which holds for almost all $\rho>0$ by Sard's theorem; the remaining values of $\rho$ are handled by a limiting argument at the end of the proof. Then $M = V \cap B(p, \rho + \varepsilon)$ is a compact manifold with boundary, and we notice that
 \begin{equation*}
-T(V, \varepsilon) \cap B(p, \sigma) \subset T(M \setminus \partial M, \varepsilon) \cup T(\partial M, \varepsilon),
+T(V, \varepsilon) \cap B(p, \rho) \subset T(M \setminus \partial M, \varepsilon) \cup T(\partial M, \varepsilon),
 \end{equation*}
-where $\partial M=M\cap S^{n-1}(p, \varepsilon+\sigma)$ is the sphere of radius $\varepsilon+\sigma$ centred at $p$.
+where $\partial M=M\cap S^{n-1}(p, \varepsilon+\rho)$ is the sphere of radius $\varepsilon+\rho$ centred at $p$.
 It is therefore enough to bound the two tubular neighbourhoods on the right-hand side.
 
-Since $M \setminus \partial M \subset V$ and $\dim(M \setminus \partial M) = \dim V$, we have $\md_i(M\setminus \partial M) \leq \md_i(V)$. Applying Theorem~\ref{thm:tube_bound} to the compact manifold-with-boundary $M\subset B(p,\sigma+\varepsilon)$ (see Remark~\ref{rem:tube_bound_boundary}) and using $\md_i(M\setminus\partial M)\le\md_i(V)$, we obtain
+Since $M \setminus \partial M \subset V$ and $\dim(M \setminus \partial M) = \dim V$, we have $\md_i(M\setminus \partial M) \leq \md_i(V)$. Applying Theorem~\ref{thm:tube_bound} to the compact manifold-with-boundary $M\subset B(p,\rho+\varepsilon)$ (see Remark~\ref{rem:tube_bound_boundary}) and using $\md_i(M\setminus\partial M)\le\md_i(V)$, we obtain
 \begin{equation*}
-  \vol T(M \setminus \partial M, \varepsilon)  \leq 2 \omega_n (\sigma+\varepsilon)^n\sum_{i=0}^{n-1} \binom{n}{i+1} \cdot \md_i(V)\cdot \left(\frac{\varepsilon}{\sigma+\varepsilon}\right)^{i+1}.
+  \vol T(M \setminus \partial M, \varepsilon)  \leq 2 \omega_n (\rho+\varepsilon)^n\sum_{i=0}^{n-1} \binom{n}{i+1} \cdot \md_i(V)\cdot \left(\frac{\varepsilon}{\rho+\varepsilon}\right)^{i+1}.
 \end{equation*}
 Since $\partial M$ has codimension $2$, we get, in addition,
 \begin{equation*}
-  \vol T(\partial M, \varepsilon) \leq 2 \omega_n (\sigma+\varepsilon)^{n}\sum_{i=1}^{n-1} \binom{n}{i+1} \cdot \md_{i-1}(\partial M)\cdot \left(\frac{\varepsilon}{\sigma+\varepsilon}\right)^{i+1}.
+  \vol T(\partial M, \varepsilon) \leq 2 \omega_n (\rho+\varepsilon)^{n}\sum_{i=1}^{n-1} \binom{n}{i+1} \cdot \md_{i-1}(\partial M)\cdot \left(\frac{\varepsilon}{\rho+\varepsilon}\right)^{i+1}.
 \end{equation*}
 Set
 \begin{equation*}
@@ -247,11 +247,11 @@ Using~\eqref{eq:ideg}, we get
 \end{align*}
 Combining these bounds, we get
 \begin{align*}
-\vol T(V, \varepsilon) \cap B(p, \sigma) &\le \vol T(M \setminus \partial M, \varepsilon) + \vol T(\partial M, \varepsilon) \\
-& \leq 6K\omega_n(\sigma+\varepsilon)^{n} \sum_{i=0}^{n-1}\binom{n}{i+1}(\alpha+\overline{\beta})^{i+1}\left(\frac{\varepsilon}{\sigma+\varepsilon}\right)^{i+1}.
+\vol T(V, \varepsilon) \cap B(p, \rho) &\le \vol T(M \setminus \partial M, \varepsilon) + \vol T(\partial M, \varepsilon) \\
+& \leq 6K\omega_n(\rho+\varepsilon)^{n} \sum_{i=0}^{n-1}\binom{n}{i+1}(\alpha+\overline{\beta})^{i+1}\left(\frac{\varepsilon}{\rho+\varepsilon}\right)^{i+1}.
 \end{align*}
-Dividing both sides by $\vol B(p, \sigma) = \omega_n \sigma^n$, substituting $j=i+1$ and using the binomial theorem
-%and setting $a=\alpha+\overline{\beta}$ and $t=\varepsilon/\sigma$, we get
+Dividing both sides by $\vol B(p, \rho) = \omega_n \rho^n$, substituting $j=i+1$ and using the binomial theorem
+%and setting $a=\alpha+\overline{\beta}$ and $t=\varepsilon/\rho$, we get
 %\begin{equation*}
 %\prob\{d(X, V)\leq \varepsilon\} \leq 6K\sum_{i=0}^{n-1}\binom{n}{i+1}(at)^{i+1}\left(1+t\right)^{n-i-1}.
 %\end{equation*}
@@ -259,16 +259,15 @@ Dividing both sides by $\vol B(p, \sigma) = \omega_n \sigma^n$, substituting $j=
 %\begin{equation*}
 %  \sum_{j=1}^{n}\binom{n}{j}(at)^j(1+t)^{n-j} = (1+(a+1)t)^n - (1+t)^n.
 %\end{equation*}
-%Recalling $C_{\alpha,\beta,s,n}=6K$, $a=\alpha+\overline{\beta}$, and $t=\varepsilon/\sigma$ 
-gives the claimed bound for every $\sigma$ such that $\sigma+\varepsilon$ is a regular value of $x\mapsto\|x-p\|$ on $V$, which by Sard's theorem is a dense set of $\sigma>0$. It remains to remove this genericity assumption. Both sides of the inequality are continuous in $\sigma$: the right-hand side is a polynomial in $\varepsilon/\sigma$, while the left-hand side equals $\vol\bigl(T(V,\varepsilon)\cap B(p,\sigma)\bigr)/(\omega_n\sigma^n)$, which is continuous because $\sigma\mapsto\vol\bigl(T(V,\varepsilon)\cap B(p,\sigma)\bigr)$ is. Since the bound holds on a dense set of $\sigma$ and both sides are continuous, it holds for all $\sigma,\varepsilon>0$, completing the proof.
+%Recalling $C_{\alpha,\beta,s,n}=6K$, $a=\alpha+\overline{\beta}$, and $t=\varepsilon/\rho$ 
+gives the claimed bound for every $\rho$ such that $\rho+\varepsilon$ is a regular value of $x\mapsto\|x-p\|$ on $V$, which by Sard's theorem is a dense set of $\rho>0$. It remains to remove this genericity assumption. Both sides of the inequality are continuous in $\rho$: the right-hand side is a polynomial in $\varepsilon/\rho$, while the left-hand side equals $\vol\bigl(T(V,\varepsilon)\cap B(p,\rho)\bigr)/(\omega_n\rho^n)$, which is continuous because $\rho\mapsto\vol\bigl(T(V,\varepsilon)\cap B(p,\rho)\bigr)$ is. Since the bound holds on a dense set of $\rho$ and both sides are continuous, it holds for all $\rho,\varepsilon>0$, completing the proof.
 \end{proof}
 
 \begin{remark}\label{rem:prob_bound_simple}
-Discarding the non-positive term $-(1+\varepsilon/\sigma)^n$ gives the simpler bound
+Discarding the non-positive term $-(1+\varepsilon/\rho)^n$ gives the simpler bound
 \begin{equation*}
- \prob\{ d(X, V) \le \varepsilon \} \leq C_{\alpha,\beta,s,n}\left(1+(\alpha+\overline{\beta}+1)\frac{\varepsilon}{\sigma}\right)^n.
+ \prob\{ d(X, V) \le \varepsilon \} \leq C_{\alpha,\beta,s,n}\left(1+(\alpha+\overline{\beta}+1)\frac{\varepsilon}{\rho}\right)^n.
 \end{equation*}
-The full bound of Theorem~\ref{thm:prob_bound} is sharper in two ways: it vanishes as $\varepsilon\to 0$ (as it must), and for large $\sigma/\varepsilon$ it decays as $C_{\alpha,\beta,s,n}\cdot n(\alpha+\overline{\beta})\varepsilon/\sigma$. This $O(\varepsilon/\sigma)$ behaviour is essential for deriving the $O(1/t)$ tail bounds on condition numbers in Section~\ref{sec:robustness}.
+The full bound of Theorem~\ref{thm:prob_bound} is sharper in two ways: it vanishes as $\varepsilon\to 0$ (as it must), and for large $\rho/\varepsilon$ it decays as $C_{\alpha,\beta,s,n}\cdot n(\alpha+\overline{\beta})\varepsilon/\rho$. This $O(\varepsilon/\rho)$ behaviour is essential for deriving the $O(1/t)$ tail bounds on condition numbers in Section~\ref{sec:robustness}.
 \end{remark}
-
 
