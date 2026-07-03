@@ -356,7 +356,7 @@ For networks with more than one hidden layer, we expect the single-layer bound o
 The conjecture is supported by two observations. The single-layer case $\ell = 1$ is Proposition~\ref{prop:single-layer-degree}, where the exponent $n$ is sharp by Proposition~\ref{prop:single-layer-lowerbound}. For piecewise-linear (ReLU) networks, which lie outside the Pfaffian framework but share the layered composition structure, the number of linear regions (and hence the number of affine pieces making up the decision boundary) is bounded by $O(\prod_j n_j^{\,n})$~\cite{montufar2014,hanin2019}, matching the form of~\eqref{eq:multi-layer-bound}.
 
 % \begin{remark}
-% Bianchini and Scarselli~\cite{bianchini2014complexity} obtain comparable polynomial bounds for networks \pl{of depth 3?} with arctan activation by a different route: the arctan chain has length $2$ regardless of the number of hidden units, so the Pfaffian exponential factor is trivial. For sigmoid networks the chain length grows linearly with the number of hidden units, and a polynomial bound analogous to the arctan case is the content of Conjecture~\ref{conj:multi-layer-degree}.
+% Bianchini and Scarselli~\cite{bianchini2014complexity} obtain comparable polynomial bounds for networks with arctan activation by a different route: the arctan chain has length $2$ regardless of the number of hidden units, so the Pfaffian exponential factor is trivial. For sigmoid networks the chain length grows linearly with the number of hidden units, and a polynomial bound analogous to the arctan case is the content of Conjecture~\ref{conj:multi-layer-degree}.
 % \end{remark}
 
 \subsection{Tubular neighbourhood bound for neural networks}\label{subsec:tube-nn}
