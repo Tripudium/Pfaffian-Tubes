@@ -313,7 +313,7 @@
 % Paths
 %=================================================
 
-\graphicspath{{figures/}}
+\graphicspath{{figs/}}
 
 %=================================================
 % Formatting
@@ -707,22 +707,13 @@
 \newcommand{\nablabar}{\overline{\nabla}}
 \newcommand{\expm}{\mathrm{exp}}
 \newcommand{\Rc}{\mathrm{Rc}}
-\newcommand{\NJ}{\mathrm{NJ}}
 \DeclarePairedDelimiterX{\infdivx}[2]{(}{)}{%
   #1\;\delimsize\|\;#2%
 }
-\newcommand{\KL}{D_{\mathrm{KL}}\infdivx}
-%\newcommand{\KL}[2]{D_{\mathrm{KL}}(#1 \ || \ #2}
-\newcommand{\ELBO}{\mathrm{ELBO}}
-% %\newcommand{\GL}[1]{\mathrm{GL}(#1)}
 
 \newcommand{\cover}{\lessdot}
 
-% Semidefinite programming
-\newcommand{\Sym}{\mathcal{S}}
-\newcommand{\SDP}{\mathcal{S}_+}
-\newcommand{\psd}{\succeq}
-\newcommand{\bdot}{\bullet}
+\newcommand{\Q}{\mathbb{Q}}
 
 % Machine learning
 \newcommand{\emprad}{\hat{\mathcal{R}}}
@@ -731,5 +722,3 @@
 
 \newcommand{\Pfaff}{\mathrm{Pfaff}}
 \newcommand{\pfaffchain}[1]{\vec{#1}}
-
-\newcommand{\Q}{\mathbb{Q}}

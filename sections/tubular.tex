@@ -181,7 +181,7 @@ where the $f_i$ are Pfaffian functions of format $(\alpha, \beta, s)$, and such 
 % Since $f$ is Pfaffian with format $(\alpha, \beta, s)$, it follows from Lemma~\ref{le:pfaffalgebra} that $\frac{\partial f}{\partial x_i}$ is Pfaffian with format $(\alpha, \alpha + \beta - 1, s)$, and the bound on the number of solutions of the system~\eqref{eq:paffian-hyper} follows from Khovanskii's inequality, Theorem~\ref{thm:khovanskii}. 
 % \end{proof}
 
-For $i\in [m]$, we bound the $i$-th maximal degree as follows. Fix a section $H\in\cE^n_{c+i}$ meeting $M$ transversally. Since $H$ is an affine subspace, there is an affine isometry $h\colon \R^n\to \R^n$ (a rigid motion) carrying $H$ onto the coordinate subspace
+For $0\le i\le m$, we bound the $i$-th maximal degree as follows. Fix a section $H\in\cE^n_{c+i}$ meeting $M$ transversally. Since $H$ is an affine subspace, there is an affine isometry $h\colon \R^n\to \R^n$ (a rigid motion) carrying $H$ onto the coordinate subspace
 \begin{equation*}
   \tilde{H} = \{x\in \R^n \colon x_{c+i+1}=\cdots =x_{n}=0\}\cong\R^{c+i};
 \end{equation*}
@@ -189,7 +189,7 @@ such an $h$ exists for any affine $(c+i)$-subspace, obtained by translating $H$ 
 \begin{equation*}
   \md(M,H) = \md(\tilde{M},\tilde{H}),\qquad \tilde{M} := h(M) = \mathcal{Z}(\tilde{f}_1,\dots,\tilde{f}_c),\quad \tilde{f}_j := f_j\circ h^{-1}.
 \end{equation*}
-By Remark~\ref{re:affine}, each $\tilde{f}_j$ is Pfaffian of the same format $(\alpha,\beta,s)$ as $f_j$, so $\tilde{M}$ is a Pfaffian complete intersection of that format; in particular the resulting bound is independent of $H$, and it suffices to bound $\md(\tilde{M},\tilde{H})$. Restricting to $\tilde{H}$, that is, setting $x_{c+i+1}=\cdots=x_n=0$, realises $\tilde{M}\cap\tilde{H}$ as a Pfaffian complete intersection of $c$ functions of format $(\alpha,\beta,s)$ in the $c+i$ variables $x_1,\dots,x_{c+i}$, so applying Proposition~\ref{prop:pfaffian-degree-bound} in dimension $c+i$ gives
+By Remark~\ref{re:affine}, each $\tilde{f}_j$ is Pfaffian of the same format $(\alpha,\beta,s)$ as $f_j$, so $\tilde{M}$ is a Pfaffian complete intersection of that format; in particular the resulting bound is independent of $H$, and it suffices to bound $\md(\tilde{M},\tilde{H})$. Restricting to $\tilde{H}$, that is, setting $x_{c+i+1}=\cdots=x_n=0$, realises $\tilde{M}\cap\tilde{H}$ as a Pfaffian complete intersection of $c$ functions of format $(\alpha,\beta,s)$ in the $c+i$ variables $x_1,\dots,x_{c+i}$. When $i=0$, this is a zero-dimensional transverse complete intersection, and its generalised Gauss-map degree is just the number of points in the section, so the same argument applies. Applying Proposition~\ref{prop:pfaffian-degree-bound} in dimension $c+i$ gives
 \begin{equation} 
   \label{eq:ideg}
   \md_i(M) \leq 2^{\frac{s(s-1)}{2}}(\alpha+\beta)^{c+i}\beta^c
@@ -270,4 +270,3 @@ Discarding the non-positive term $-(1+\varepsilon/\rho)^n$ gives the simpler bou
 \end{equation*}
 The full bound of Theorem~\ref{thm:prob_bound} is sharper in two ways: it vanishes as $\varepsilon\to 0$ (as it must), and for large $\rho/\varepsilon$ it decays as $C_{\alpha,\beta,s,n}\cdot n(\alpha+\overline{\beta})\varepsilon/\rho$. This $O(\varepsilon/\rho)$ behaviour is essential for deriving the $O(1/t)$ tail bounds on condition numbers in Section~\ref{sec:robustness}.
 \end{remark}
-
