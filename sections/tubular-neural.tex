@@ -289,15 +289,16 @@ and there are $\binom{w}{n}\leq w^n/n!$ subsets, so
 The Bernstein bound implies that there are at most $n!\,(2L)^n\,w^n$ solutions of~\eqref{eq:single-layer-system}. This is stronger than the stated estimate, and is absorbed into the constant $C(n,L)\leq 2\cdot n!\,(2L)^n$ in~\eqref{eq:single-layer-bound}.
 \end{proof}
 
+We next show that the bound is essentially sharp in its dependence on $w$. 
 The following lemma is a variation of a well-known fact about the Gauss map of a compact hypersurface.
 
 \begin{lemma}\label{lem:bounded-gauss-surjective}
 Let $\Sigma\subset\R^n$ be a smooth compact hypersurface that bounds a non-empty bounded open region $W$. Then for every $v\in S^{n-1}$ the fibre of the generalised Gauss map $\gamma_\Sigma\colon S(N\Sigma)\to S^{n-1}$ satisfies $|\gamma_\Sigma^{-1}(v)|\ge 2$. In particular $\gamma_\Sigma$ is surjective and $\md\gamma_\Sigma\ge 2$.
 \end{lemma}
 
-\begin{proof}
-Fix $v\in S^{n-1}$ and consider the linear functional $\ell(x)=\langle x,v\rangle$ on the compact set $\overline{W}$. It attains its maximum at some $p_+$ and its minimum at some $p_-$. Since $\ell$ is non-constant and $W$ is open, $p_+\neq p_-$ and $p_\pm\in\partial W=\Sigma$. At $p_+$ the hyperplane $\{x\colon \ell(x)=\ell(p_+)\}$ supports $\overline{W}$ with $\overline W$ on the side $\{\ell\le\ell(p_+)\}$. Since $\Sigma$ is smooth, $T_{p_+}\Sigma=v^{\perp}$, so the two unit normals at $p_+$ are $\pm v$ and in particular $(p_+,v)\in S(N\Sigma)$ with $\gamma_\Sigma(p_+,v)=v$. The same argument at $p_-$ (where $-v$ is an outward normal) gives $(p_-,v)\in S(N\Sigma)$ with $\gamma_\Sigma(p_-,v)=v$, since the normal sphere bundle of a hypersurface contains both signs of the normal over each base point. Thus $\{(p_+,v),(p_-,v)\}\subseteq\gamma_\Sigma^{-1}(v)$ are two distinct points in $\gamma_\Sigma^{-1}(v)$.
-\end{proof}
+%\begin{proof}
+%Fix $v\in S^{n-1}$ and consider the linear functional $\ell(x)=\langle x,v\rangle$ on the compact set $\overline{W}$. It attains its maximum at some $p_+$ and its minimum at some $p_-$. Since $\ell$ is non-constant and $W$ is open, $p_+\neq p_-$ and $p_\pm\in\partial W=\Sigma$. At $p_+$ the hyperplane $\{x\colon \ell(x)=\ell(p_+)\}$ supports $\overline{W}$ with $\overline W$ on the side $\{\ell\le\ell(p_+)\}$. Since $\Sigma$ is smooth, $T_{p_+}\Sigma=v^{\perp}$, so the two unit normals at $p_+$ are $\pm v$ and in particular $(p_+,v)\in S(N\Sigma)$ with $\gamma_\Sigma(p_+,v)=v$. The same argument at $p_-$ (where $-v$ is an outward normal) gives $(p_-,v)\in S(N\Sigma)$ with $\gamma_\Sigma(p_-,v)=v$, since the normal sphere bundle of a hypersurface contains both signs of the normal over each base point. Thus $\{(p_+,v),(p_-,v)\}\subseteq\gamma_\Sigma^{-1}(v)$ are two distinct points in $\gamma_\Sigma^{-1}(v)$.
+%\end{proof}
 
 \begin{proposition}\label{prop:single-layer-lowerbound}
 The exponent $n$ in Proposition~\ref{prop:single-layer-degree} is sharp at fixed lattice constant. Precisely, for every $n\ge 1$ and every even $m\ge 4$ there is a single-hidden-layer sigmoid network with $w=nm$ units and lattice constant $L=1$ whose zero set $V=\mathcal{Z}(f)$ is a smooth compact hypersurface with
@@ -340,7 +341,7 @@ Each $\Sigma_i=\partial W_i$ satisfies the hypotheses of Lemma~\ref{lem:bounded-
 
 
 \begin{remark}\label{rem:why-not-fewnomials}
-One might hope to sharpen~\eqref{eq:single-layer-bound} using a real-fewnomial bound in place of BKK, since the system~\eqref{eq:laurent-system}--\eqref{eq:laurent-system-j} has highly structured support. However, fewnomial bounds such as the Bihan--Sottile bound~\cite{bihansottile2007} are controlled by the number of monomials $|A|$, not by $\operatorname{Vol}(\conv(A))$.
+\comm{TODO: check this} One might hope to sharpen~\eqref{eq:single-layer-bound} using a real-fewnomial bound in place of BKK, since the system~\eqref{eq:laurent-system}--\eqref{eq:laurent-system-j} has highly structured support. However, fewnomial bounds such as the Bihan--Sottile bound~\cite{bihansottile2007} are controlled by the number of monomials $|A|$, not by $\operatorname{Vol}(\conv(A))$.
 \end{remark}
 
 For networks with more than one hidden layer, we expect the single-layer bound of Proposition~\ref{prop:single-layer-degree} to extend to a fully polynomial bound in each layer width, as recorded in the conjecture below.

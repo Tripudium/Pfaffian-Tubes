@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1783255061 "main.aux" "main.bbl" "main" 1783255275 0
+["bibtex main"] 1783418297 "main.aux" "main.bbl" "main" 1783418563 0
   "./bib/refs.bib" 1783068969 32266 ed03e77b488c11b8b77a0e07150f965e ""
   "/usr/local/texlive/2023/texmf-dist/bibtex/bst/base/alpha.bst" 1292289607 23907 a5f93555796fb564b924339521f10a7c ""
-  "main.aux" 1783255275 14849 8bb78a92da1ce18eb0e24dbdbc263307 "pdflatex"
+  "main.aux" 1783418563 14849 74aae03d657d28957ec6ec2e738e94da "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1783255272 "main.tex" "main.pdf" "main" 1783255275 0
+["pdflatex"] 1783418561 "main.tex" "main.pdf" "main" 1783418563 0
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm" 1136768653 1292 bd42be2f344128bff6d35d98474adfe3 ""
@@ -363,16 +363,16 @@
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
   "figs/lower_bound_construction_clean.pdf" 1782997539 71527 110f48b27f953fd245610d5b1733efff ""
   "macros.tex" 1783254688 20819 f63277ee79f54bd112470ce0d46199eb ""
-  "main.aux" 1783255275 14849 8bb78a92da1ce18eb0e24dbdbc263307 "pdflatex"
-  "main.bbl" 1783255061 9016 3a26172f276ad8dca4b6343d8866d4a0 "bibtex main"
-  "main.out" 1783255275 4828 1f088cff9e051468b915cfb948f1e897 "pdflatex"
+  "main.aux" 1783418563 14849 74aae03d657d28957ec6ec2e738e94da "pdflatex"
+  "main.bbl" 1783418298 9016 3a26172f276ad8dca4b6343d8866d4a0 "bibtex main"
+  "main.out" 1783418563 4828 1f088cff9e051468b915cfb948f1e897 "pdflatex"
   "main.tex" 1783254702 1906 d427f87426418d4f7924c47b5312a271 ""
   "sections/conclusions.tex" 1783001737 9014 6eadd8e156dad85c777192212367ee80 ""
   "sections/introduction.tex" 1783255247 14558 8bde4a03e7ac1a7a3888d0c47d726983 ""
-  "sections/preliminaries.tex" 1783255271 14629 54b160685a308945e707312971b5ef1f ""
+  "sections/preliminaries.tex" 1783255303 14629 54b160685a308945e707312971b5ef1f ""
   "sections/robustness.tex" 1783004483 22079 995036828dd3832f72e1c6014ef2ea91 ""
-  "sections/tubular-neural.tex" 1783068969 42883 b9debfb0c53fa2591916aa0484fb317a ""
-  "sections/tubular.tex" 1783100350 23050 6dbe14724fc898543ee4fb79c203957a ""
+  "sections/tubular-neural.tex" 1783418561 42986 2dbe0e4008ad1cb4e85700e215e09998 ""
+  "sections/tubular.tex" 1783418168 22833 549daf429c2fcc8553027b85da713a1e ""
   "tabu.sty" 1778750319 114961 e56cefaf93c0235eff9664a2490be707 ""
   (generated)
   "main.aux"

@@ -56,10 +56,8 @@ where $\omega_n = \vol B(0,1)$ and, when $M$ has boundary, the degrees $\md_i(M)
 \end{theorem}
 
 \begin{remark}\label{rem:tube_bound_boundary}
-The estimate of Theorem~\ref{thm:tube_bound} is a one-sided, integral-geometric bound: it controls $\vol T(M,\varepsilon)$ by the integrals of absolute curvature over the interior $M\setminus\partial M$, which are themselves bounded by the section degrees $\md_i$ via Crofton's formula. The upper bound follows from the surjectivity of the normal exponential map $S(NM)\times[0,\varepsilon]\to T(M,\varepsilon)$ together with the area formula, and therefore holds verbatim for a bounded compact manifold with boundary, the curvature integrals and degrees being taken over the interior; boundarylessness is needed only for the equality (Weyl) form that is valid for small $\varepsilon$. The result is stated and proved in this generality in~\cite[Theorems 3.1 and 4.3]{lotz2015volume}.
+The estimate of Theorem~\ref{thm:tube_bound} is a one-sided, integral-geometric bound: it controls $\vol T(M,\varepsilon)$ by the integrals of absolute curvature over the interior $M\setminus\partial M$, which are themselves bounded by the section degrees $\md_i$ via Crofton's formula. The upper bound follows from the surjectivity of the normal exponential map $S(NM)\times[0,\varepsilon]\to T(M,\varepsilon)$ together with the area formula, and therefore holds verbatim for a bounded compact manifold with boundary, the curvature integrals and degrees being taken over the interior. The result is stated and proved in this generality in~\cite[Theorems 3.1 and 4.3]{lotz2015volume}.
 \end{remark}
-
-To turn this into an effective bound, we need to bound the $i$-th degrees of $M$.
 
 \subsection{Bounding the degree of the Gauss map}
 The key to deriving an effective bound on the volume of $T(M, \varepsilon)$ is to bound the degree of the generalised Gauss map.
@@ -68,12 +66,12 @@ can be expressed in the form
 \begin{equation*}
 M = \mathcal{Z}(f_1, \dots, f_c),
 \end{equation*}
-where the $f_i$ are Pfaffian functions of format $(\alpha, \beta, s)$, and such that the gradients $\nabla f_i$ are linearly independent at each point.
+where the $f_i$ are Pfaffian functions, and such that the gradients $\nabla f_i$ are linearly independent at each point.
 
 \begin{proposition}\label{prop:pfaffian-degree-bound}
-  Let $M=\mathcal{Z}(f_1,\dots,f_c)$ be a compact Pfaffian complete intersection, where the $f_i$ are Pfaffian with format $(\alpha, \beta_i, s)$ with respect to the same Pfaffian chain and $\beta_i\le \beta$ for all $i$. Then
+  Let $M=\mathcal{Z}(f_1,\dots,f_c)$ be a compact Pfaffian complete intersection, where the $f_i$ are Pfaffian with format $(\alpha, \beta_i, s)$ with respect to the same Pfaffian chain and $\beta_i\le \overline{\beta}$ for all $i$. Then
   \begin{equation*}
-    \md_{n-c}(M) \le{} 2^{\frac{s(s-1)}{2}}(\alpha+\beta)^n\beta^c \cdot \left((n+\min\{n,s\})\alpha+(n+c)(\beta-1)+1\right)^s.
+    \md_{n-c}(M) \le{} 2^{\frac{s(s-1)}{2}}(\alpha+\overline{\beta})^n \cdot \prod_{i-1}^c \beta_i \cdot \left[(n+\min\{n,s\})\alpha+n(\overline{\beta}-1)+\sum_{i=1}^c (\beta_i-1)+1\right]^s.
   \end{equation*}
   %\begin{align*}
   %  \md(M) \le{} & 2^{\frac{s(s-1)}{2}}(\alpha+\beta)^n\beta_1\cdots \beta_c \\
@@ -95,7 +93,7 @@ where the $f_i$ are Pfaffian functions of format $(\alpha, \beta, s)$, and such 
     v-\sum_{i=1}^c \lambda_i \nabla f_i(x) &= 0.
   \end{split}
   \end{align}
-  All functions involved are Pfaffian and we can apply Theorem~\ref{thm:khovanskii} to get a bound on the number of solutions, using the fact that the $c$ equations $f_i=0$ have degrees $\beta_i$ and the $n$ gradient equations have degree $\alpha+\beta$ by Lemma~\ref{le:pfaffalgebra}(3). The chain depends on $n$ of the $n+c$ variables (the $x$-variables only). By Sard's theorem, for a generic regular value $v$ of $\gamma$, all solutions of~\eqref{eq:pfaffian-system} are non-degenerate. Since $|\gamma^{-1}(v)|$ is locally constant on regular values, the maximum degree is achieved at such generic values.
+  All functions involved are Pfaffian and we can apply Theorem~\ref{thm:khovanskii} to get a bound on the number of solutions, using the fact that the $c$ equations $f_i=0$ have degrees $\beta_i$ and the $n$ gradient equations have degree $\alpha+\overline{\beta}$ by Lemma~\ref{le:pfaffalgebra}(3). The chain depends on $n$ of the $n+c$ variables (the $x$-variables only). By Sard's theorem, for a generic regular value $v$ of $\gamma$, all solutions of~\eqref{eq:pfaffian-system} are non-degenerate. Since $|\gamma^{-1}(v)|$ is locally constant on regular values, the maximum degree is achieved at such generic values.
   \end{proof}
 
   \begin{remark}\label{rem:lagrange-vs-minors}
@@ -106,9 +104,9 @@ where the $f_i$ are Pfaffian functions of format $(\alpha, \beta, s)$, and such 
       \nabla f_1(x) & \cdots & \nabla f_c(x) & v
     \end{bmatrix}
   \end{equation}
-  has rank at most $c$, i.e., that all $(c{+}1)\times(c{+}1)$ minors of $J$ vanish. Each such minor has degree at most $c(\alpha+\beta-1)$ in the variables $x_1,\dots,x_n$, by Lemma~\ref{le:pfaffalgebra}(3). The resulting (overdetermined) system involves only the $n$ variables $x_i$, so one can apply the connected-components bound~\eqref{eq:jones} with $D = \max\{\beta, c(\alpha+\beta-1)\}$ playing the role of $\beta$.
-  While this reduces the number of variables from $n+c$ to $n$, the exponential base in~\eqref{eq:jones} becomes $\alpha + 2D - 1$, which for $c = 2$ equals $5\alpha + 4\beta - 5$. This is significantly larger than $\alpha + \beta$, the base appearing in Proposition~\ref{prop:pfaffian-degree-bound}.
-  For the parameter ranges typical in neural-network applications ($c = 2$, $\alpha, \beta \le 3$), this base inflation dominates the savings from reducing the number of variables, and the Lagrange-multiplier approach gives substantially better bounds. For instance, when $\alpha = 2$, $\beta = 1$, $s = 1$, Proposition~\ref{prop:pfaffian-degree-bound} yields $\md(M) \le 3^n(2n+3)$, whereas the minor-elimination approach gives a bound of order $9^n \cdot n$.
+  has rank at most $c$, i.e., that all $(c{+}1)\times(c{+}1)$ minors of $J$ vanish. Each such minor has degree at most $c(\alpha+\overline{\beta}-1)$ in the variables $x_1,\dots,x_n$, by Lemma~\ref{le:pfaffalgebra}(3). The resulting (overdetermined) system involves only the $n$ variables $x_i$, so one can apply the connected-components bound~\eqref{eq:jones} with $D = \max\{\overline{\beta}, c(\alpha+\overline{\beta}-1)\}$ playing the role of $\overline{\beta}$.
+  While this reduces the number of variables from $n+c$ to $n$, the exponential base in~\eqref{eq:jones} becomes $\alpha + 2D - 1$, which for $c = 2$ equals $5\alpha + 4\overline{\beta} - 5$. This is significantly larger than $\alpha + \overline{\beta}$, the base appearing in Proposition~\ref{prop:pfaffian-degree-bound}.
+  For the parameter ranges typical in neural-network applications ($c = 2$, $\alpha, \overline{\beta} \le 3$), this base inflation dominates the savings from reducing the number of variables, and the Lagrange-multiplier approach gives substantially better bounds. For instance, when $\alpha = 2$, $\overline{\beta} = 1$, $s = 1$, Proposition~\ref{prop:pfaffian-degree-bound} yields $\md(M) \le 3^n(2n+3)$, whereas the minor-elimination approach gives a bound of order $9^n \cdot n$.
 \end{remark}
 
 % \begin{lemma}\label{le:gauss-hypersurface}
@@ -183,18 +181,20 @@ where the $f_i$ are Pfaffian functions of format $(\alpha, \beta, s)$, and such 
 
 For $0\le i\le m$, we bound the $i$-th maximal degree as follows. Fix a section $H\in\cE^n_{c+i}$ meeting $M$ transversally. Since $H$ is an affine subspace, there is an affine isometry $h\colon \R^n\to \R^n$ (a rigid motion) carrying $H$ onto the coordinate subspace
 \begin{equation*}
-  \tilde{H} = \{x\in \R^n \colon x_{c+i+1}=\cdots =x_{n}=0\}\cong\R^{c+i};
+  \tilde{H} = \{x\in \R^n \colon x_{c+i+1}=\cdots =x_{n}=0\}\cong\R^{c+i}.
 \end{equation*}
-such an $h$ exists for any affine $(c+i)$-subspace, obtained by translating $H$ to pass through the origin and then rotating its direction space onto $\R^{c+i}\times\{0\}$. The generalised Gauss-map degree is invariant under isometries, so
+The generalised Gauss-map degree is invariant under isometries, so
 \begin{equation*}
   \md(M,H) = \md(\tilde{M},\tilde{H}),\qquad \tilde{M} := h(M) = \mathcal{Z}(\tilde{f}_1,\dots,\tilde{f}_c),\quad \tilde{f}_j := f_j\circ h^{-1}.
 \end{equation*}
-By Remark~\ref{re:affine}, each $\tilde{f}_j$ is Pfaffian of the same format $(\alpha,\beta,s)$ as $f_j$, so $\tilde{M}$ is a Pfaffian complete intersection of that format; in particular the resulting bound is independent of $H$, and it suffices to bound $\md(\tilde{M},\tilde{H})$. Restricting to $\tilde{H}$, that is, setting $x_{c+i+1}=\cdots=x_n=0$, realises $\tilde{M}\cap\tilde{H}$ as a Pfaffian complete intersection of $c$ functions of format $(\alpha,\beta,s)$ in the $c+i$ variables $x_1,\dots,x_{c+i}$. When $i=0$, this is a zero-dimensional transverse complete intersection, and its generalised Gauss-map degree is just the number of points in the section, so the same argument applies. Applying Proposition~\ref{prop:pfaffian-degree-bound} in dimension $c+i$ gives
-\begin{equation} 
+By Remark~\ref{re:affine}, each $\tilde{f}_j$ is Pfaffian of the same format $(\alpha,\beta_j,s)$ as $f_j$, so $\tilde{M}$ is a Pfaffian complete intersection of that format; in particular the resulting bound is independent of $H$, and it suffices to bound $\md(\tilde{M},\tilde{H})$. Restricting to $\tilde{H}$, that is, setting $x_{c+i+1}=\cdots=x_n=0$, realises $\tilde{M}\cap\tilde{H}$ as a Pfaffian complete intersection of $c$ functions in the $c+i$ variables $x_1,\dots,x_{c+i}$. When $i=0$, this is a zero-dimensional transverse complete intersection, and its generalised Gauss-map degree is just the number of points in the section, so the same argument applies. Applying Proposition~\ref{prop:pfaffian-degree-bound} in dimension $c+i$ gives
+\begin{align}
+  \begin{split} 
   \label{eq:ideg}
-  \md_i(M) \leq 2^{\frac{s(s-1)}{2}}(\alpha+\beta)^{c+i}\beta^c
-  \cdot\left((c+i+\min\{c+i,s\})\alpha+(2c+i)(\beta-1)+1\right)^s.
-\end{equation}
+  \md_i(M) \leq &2^{\frac{s(s-1)}{2}}(\alpha+\overline{\beta})^{c+i}\prod_{j=1}^c \beta_j\\
+  &\cdot\left[(c+i+\min\{c+i,s\})\alpha+(c+i)(\overline{\beta}-1)+\sum_{j=1}^c (\beta_j-1)+1\right]^s.
+\end{split}
+\end{align}
 
 
 \subsection{A Pfaffian tube formula}
@@ -225,10 +225,10 @@ Fix $\varepsilon>0$ and assume first that $\rho+\varepsilon$ is a regular value 
 \begin{equation*}
 T(V, \varepsilon) \cap B(p, \rho) \subset T(M \setminus \partial M, \varepsilon) \cup T(\partial M, \varepsilon),
 \end{equation*}
-where $\partial M=M\cap S^{n-1}(p, \varepsilon+\rho)$ is the sphere of radius $\varepsilon+\rho$ centred at $p$.
+where $\partial M=M\cap S^{n-1}(p, \varepsilon+\rho)$.
 It is therefore enough to bound the two tubular neighbourhoods on the right-hand side.
 
-Since $M \setminus \partial M \subset V$ and $\dim(M \setminus \partial M) = \dim V$, we have $\md_i(M\setminus \partial M) \leq \md_i(V)$. Applying Theorem~\ref{thm:tube_bound} to the compact manifold-with-boundary $M\subset B(p,\rho+\varepsilon)$ (see Remark~\ref{rem:tube_bound_boundary}) and using $\md_i(M\setminus\partial M)\le\md_i(V)$, we obtain
+Since $M \setminus \partial M \subset V$ and $\dim(M \setminus \partial M) = \dim V$, we have $\md_i(M\setminus \partial M) \leq \md_i(V)$. Applying Theorem~\ref{thm:tube_bound} to the compact manifold with boundary $M\subset B(p,\rho+\varepsilon)$ (see Remark~\ref{rem:tube_bound_boundary}) and using $\md_i(M\setminus\partial M)\le\md_i(V)$, we obtain
 \begin{equation*}
   \vol T(M \setminus \partial M, \varepsilon)  \leq 2 \omega_n (\rho+\varepsilon)^n\sum_{i=0}^{n-1} \binom{n}{i+1} \cdot \md_i(V)\cdot \left(\frac{\varepsilon}{\rho+\varepsilon}\right)^{i+1}.
 \end{equation*}
@@ -238,12 +238,12 @@ Since $\partial M$ has codimension $2$, we get, in addition,
 \end{equation*}
 Set
 \begin{equation*}
-  K := 2^{\frac{s(s-1)}{2}}\beta\left(n(2\alpha+\overline{\beta}-1)+\beta+1\right)^s.
+  K := 2^{\frac{s(s-1)}{2}}\beta\big[n(2\alpha+\overline{\beta}-1)+\beta+1\big]^s.
 \end{equation*}
 Using~\eqref{eq:ideg}, we get
 \begin{align*}
-\md_i(V) &\leq 2^{\frac{s(s-1)}{2}}(\alpha+\beta)^{i+1}\beta\left((i+1)(2\alpha+\beta-1)+\beta\right)^s\leq K (\alpha+\overline{\beta})^{i+1},\\
-\md_i(\partial M) &\leq 2^{\frac{s(s-1)}{2}+1}(\alpha+\overline{\beta})^{i+2}\beta\left((i+2)(2\alpha+\overline{\beta}-1)+\beta+1\right)^s\leq 2K (\alpha+\overline{\beta})^{i+2}.
+\md_i(V) &\leq 2^{\frac{s(s-1)}{2}}(\alpha+\beta)^{i+1}\beta\big[(i+1)(2\alpha+\beta-1)+\beta\big]^s\leq K (\alpha+\overline{\beta})^{i+1},\\
+\md_{i-1}(\partial M) &\leq 2^{\frac{s(s-1)}{2}+1}(\alpha+\overline{\beta})^{i+1}\beta\big[(i+1)(2\alpha+\overline{\beta}-1)+\beta+1\big]^s\leq 2K (\alpha+\overline{\beta})^{i+1}.
 \end{align*}
 Combining these bounds, we get
 \begin{align*}
