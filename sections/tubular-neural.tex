@@ -363,45 +363,16 @@ The conjecture is supported by two observations. The single-layer case $\ell = 1
 \subsection{Tubular neighbourhood bound for neural networks}\label{subsec:tube-nn}
 Throughout this subsection and Section~\ref{sec:robustness}, the radius of an ambient ball is denoted by $\rho$. The symbol $\sigma$ is reserved for the logistic sigmoid or, in Gaussian estimates, the standard deviation.
 The tube formula requires the full family of $i$-th maximal degrees $\md_i(V)$, $0\le i\le n-1$, each a supremum of Gauss-map degrees over the $(i+1)$-dimensional affine sections $V\cap H$, $H\in\cE^n_{i+1}$. The Bernstein argument of Proposition~\ref{prop:single-layer-degree} controls only the top degree $\md_{n-1}(V)=\md(V)$: its proof fixes a \emph{rational} regular value and keeps the integer vectors $\vec p_k=qa_k$ intact, but a generic section forces a rotation of the weights to $U^{\trans}a_k$, which is irrational, destroying the lattice underlying the zonotope $\conv(A)$. Since $\md_i$ is a supremum over \emph{all} sections, $H$ cannot be chosen rationally, and the Bernstein bound does not extend to the lower sections.
-We bound the remaining section degrees in two steps. The leading degree $\md_0(V)$ is controlled by an elementary count of zeros along a line; the intermediate degrees are controlled by passing to a multiplicative chart, in which the network becomes a Pfaffian system whose chain length is governed by the ambient dimension rather than the width. 
-
-\begin{lemma}\label{lem:line-intersection}
-Let $a_1,\dots,a_w\in\Q^n$ have common denominator $q\in\N_{>0}$, and set
-\[
-  L:=q\max_{k,i}|a_{ki}|.
-\]
-For any constants $c,b_1,\dots,b_w,\gamma_1,\dots,\gamma_w\in\R$, the function
-\[
-  h(x)=c+\sum_{k=1}^w\gamma_k\,\sigma(a_k^{\trans}x+b_k)
-\]
-restricted to any affine line $\ell\subset\R^n$ has at most $(2Lw+1)^n-1$ isolated real zeros.
-\end{lemma}
-
-The proof rests on the following classical fact, which is an easy application of Rolle's theorem.
-
-\begin{lemma}\label{lem:polya}
-A non-trivial exponential polynomial $\varphi(t)=\sum_{i=1}^M d_i\econst^{\nu_i t}$ with $M$ pairwise distinct real frequencies has at most $M-1$ real zeros.
-\end{lemma}
-
-\begin{proof}[Proof of Lemma~\ref{lem:line-intersection}]
-Parametrise $\ell(t)=x_0+tv$, set $\lambda_k=a_k^{\trans}v$ and $\mu_k=a_k^{\trans}x_0+b_k$, and put $u_k(t)=\econst^{-\mu_k}\econst^{-\lambda_k t}$, so $\sigma(a_k^{\trans}\ell(t)+b_k)=(1+u_k)^{-1}$. Multiplying $h(\ell(t))$ by the strictly positive factor $\prod_k(1+u_k(t))$ preserves zeros and gives, after expansion, an exponential polynomial
-\[
-  G(t)=\sum_{e\in\{0,1\}^w} d_e\,\econst^{-\nu_e t},\qquad \nu_e=\sum_{k=1}^w e_k\lambda_k .
-\]
-Writing $\vec p_k=qa_k\in\Z^n$ with $\|\vec p_k\|_\infty\le L$, we have $\nu_e=\tfrac1q\bigl(\sum_k e_k\vec p_k\bigr)^{\trans}v$, so $\nu_e=\nu_{e'}$ whenever $\sum_k e_k\vec p_k=\sum_k e'_k\vec p_k$ in $\Z^n$. The number of distinct frequencies is therefore at most the number of distinct lattice vectors $\sum_k e_k\vec p_k$. Each coordinate lies in $[-Lw,Lw]$, so there are at most $(2Lw+1)^n$ of them. Lemma~\ref{lem:polya} bounds the zeros of $G$, hence of $h|_\ell$, by $(2Lw+1)^n-1$.
-\end{proof}
+We instead bound all section degrees uniformly by passing to a multiplicative chart. In that chart the sigmoid terms become rational functions, while the affine section is encoded by logarithms; the resulting Pfaffian chain has length governed by the ambient dimension rather than by the width.
 
 \begin{proposition}\label{prop:single-layer-ideg}
   Let $f\colon\R^n\to\R$ and $V = \mathcal{Z}(f)$ be as in Proposition~\ref{prop:single-layer-degree}, with lattice constant $L=q\max_{k,i}|a_{ki}|$. Then there is a constant $K(n,L)$, depending only on $n$ and $L$, such that
   \begin{equation}\label{eq:single-layer-ideg}
     \md_i(V) \;\leq\; K(n,L)\,w^{2n}\qquad \text{ for } \qquad i\in \{0,\dots,n-1\}.
   \end{equation}
-  Moreover the leading degree satisfies the sharp estimate $\md_0(V)\le (2Lw+1)^n-1$, and the top degree obeys $\md_{n-1}(V)=\md(V)\le 2\,n!\,(2L)^n w^n$.
 \end{proposition}
 
 \begin{proof}
-  The estimate for $\md_0(V)$ follows from Lemma~\ref{lem:line-intersection} and the estimate for $\md_{n-1}(V)=\md(V)$ is derived in Proposition~\ref{prop:single-layer-degree}. It remains to establish the uniform bound~\eqref{eq:single-layer-ideg}.
-
   Fix $i$ with $0\le i\le n-1$ and an affine subspace $H=x_0+\vec H \in\cE^n_{i+1}$ meeting $V$ transversally, with $\vec H\cong \R^{i+1}$ linear, so that $W:=V\cap H$ is a smooth hypersurface of $H$. Let $v\in S^{i}\subset\vec H$ be a regular value of the Gauss map of $W$.
   Choose an orthonormal basis $\omega_1,\dots,\omega_{n-i-1}$ of the orthogonal complement $\vec H^\perp$, so that
   \[
@@ -444,9 +415,9 @@ Writing $\vec p_k=qa_k\in\Z^n$ with $\|\vec p_k\|_\infty\le L$, we have $\nu_e=\
   The exponent of $w$ on the right is $(i+1)+(2n-i-1)=2n$, while the factor $2^{\binom{2n}{2}}$ is independent of $w$. Hence $N\le K(n,L)\,w^{2n}$ for a constant $K(n,L)$ depending only on $n$ and $L$. Therefore $\md(V,H)\le 2N\le 2K(n,L)w^{2n}$, and taking the supremum over $H\in\cE^n_{i+1}$ yields~\eqref{eq:single-layer-ideg}, after absorbing the factor $2$ into $K(n,L)$.
 \end{proof}
 
-\begin{remark}\label{rem:chart-chain}
-  The mechanism behind Proposition~\ref{prop:single-layer-ideg} is that the exponential substitution converts the $w$ sigmoids into rational functions, trading the width-indexed Pfaffian chain of length $w$ for the dimension-indexed chain of $\le 2n$ logarithms that records the section.
-\end{remark}
+%\begin{remark}\label{rem:chart-chain}
+%  The mechanism behind Proposition~\ref{prop:single-layer-ideg} is that the exponential substitution converts the $w$ %sigmoids into rational functions, trading the width-indexed Pfaffian chain of length $w$ for the dimension-indexed %chain of $\le 2n$ logarithms that records the section.
+%\end{remark}
 
 We now state the main result of this section: the analogue of Theorem~\ref{thm:prob_bound} for the decision boundary of a single-hidden-layer sigmoid network. We restrict to the case $V\subset B(p,\rho)$, which eliminates the sphere-boundary term $\partial M$ from the proof of Theorem~\ref{thm:prob_bound}. This assumption is natural in the robustness setting of Section~\ref{sec:robustness}, where the data distribution is supported in a bounded region and $\rho$ exceeds its diameter. The obstruction to dropping this hypothesis is recorded in Remark~\ref{rem:sphere-obstruction} below.
 
@@ -471,6 +442,39 @@ We now state the main result of this section: the analogue of Theorem~\ref{thm:p
   \end{equation*}
   The inclusion $T(V,\varepsilon)\cap B(p,\rho)\subseteq T(V,\varepsilon)$ and division by $\vol B(p,\rho)=\omega_n\rho^n$ give~\eqref{eq:single-layer-prob-bound}.
 \end{proof}
+
+We now sharpen the leading term in~\eqref{eq:single-layer-prob-bound}. Unlike the higher section degrees, the degree $\md_0(V)$ only involves intersections with affine lines, so it can be bounded by a one-variable zero count.
+
+The proof rests on the following classical fact, which is an easy application of Rolle's theorem.
+
+\begin{lemma}\label{lem:polya}
+A non-trivial exponential polynomial $\varphi(t)=\sum_{i=1}^M d_i\econst^{\nu_i t}$ with $M$ pairwise distinct real frequencies has at most $M-1$ real zeros.
+\end{lemma}
+
+\begin{lemma}\label{lem:line-intersection}
+Let $a_1,\dots,a_w\in\Q^n$ have common denominator $q\in\N_{>0}$, and set
+\[
+  L:=q\max_{k,i}|a_{ki}|.
+\]
+For any constants $c,b_1,\dots,b_w,\gamma_1,\dots,\gamma_w\in\R$, the function
+\[
+  h(x)=c+\sum_{k=1}^w\gamma_k\,\sigma(a_k^{\trans}x+b_k)
+\]
+restricted to any affine line $\ell\subset\R^n$ has at most $(2Lw+1)^n-1$ isolated real zeros.
+\end{lemma}
+
+\begin{proof}
+Parametrise $\ell(t)=x_0+tv$, set $\lambda_k=a_k^{\trans}v$ and $\mu_k=a_k^{\trans}x_0+b_k$, and put $u_k(t)=\econst^{-\mu_k}\econst^{-\lambda_k t}$, so $\sigma(a_k^{\trans}\ell(t)+b_k)=(1+u_k)^{-1}$. Multiplying $h(\ell(t))$ by the strictly positive factor $\prod_k(1+u_k(t))$ preserves zeros and gives, after expansion, an exponential polynomial
+\[
+  G(t)=\sum_{e\in\{0,1\}^w} d_e\,\econst^{-\nu_e t},\qquad \nu_e=\sum_{k=1}^w e_k\lambda_k .
+\]
+If $G$ is identically zero, then $h|_\ell$ is identically zero and has no isolated zeros. Otherwise, combine terms with the same frequency. Writing $\vec p_k=qa_k\in\Z^n$ with $\|\vec p_k\|_\infty\le L$, we have $\nu_e=\tfrac1q\bigl(\sum_k e_k\vec p_k\bigr)^{\trans}v$, so $\nu_e=\nu_{e'}$ whenever $\sum_k e_k\vec p_k=\sum_k e'_k\vec p_k$ in $\Z^n$. The number of distinct frequencies is therefore at most the number of distinct lattice vectors $\sum_k e_k\vec p_k$. Each coordinate lies in $[-Lw,Lw]$, so there are at most $(2Lw+1)^n$ of them. Lemma~\ref{lem:polya} bounds the zeros of $G$, hence of $h|_\ell$, by $(2Lw+1)^n-1$.
+\end{proof}
+
+Under the hypotheses of Theorem~\ref{thm:prob_bound_single_layer}, every transverse affine line section $V\cap\ell$ consists of isolated zeros of $f|_\ell$. Lemma~\ref{lem:line-intersection} therefore gives
+\[
+  \md_0(V)\le (2Lw+1)^n-1.
+\]
 
 \begin{corollary}\label{cor:single-layer-tight-prob-bound}
   Under the hypotheses of Theorem~\ref{thm:prob_bound_single_layer},

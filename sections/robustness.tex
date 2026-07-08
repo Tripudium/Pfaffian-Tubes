@@ -7,7 +7,7 @@ the set of inputs whose top-scoring class is not unique. Writing $V_{ij} = \math
 \begin{equation}\label{eq:sigma-inclusion}
   \Sigma \;\subseteq\; \bigcup_{i<j} V_{ij}.
 \end{equation}
-The union on the right is in general strictly larger, since it also records coincidences $F_i=F_j$ between non-maximal scores. The bounds below control proximity to this larger union --- one pairwise hypersurface $V_{ij}$ at a time --- and so, by~\eqref{eq:sigma-inclusion}, bound proximity to $\Sigma$ a fortiori. For $x\in \R^n\setminus \Sigma$, the distance to misclassification is
+The union on the right is in general strictly larger, since it also records coincidences $F_i=F_j$ between non-maximal scores. The bounds below control proximity to this larger union. For $x\in \R^n\setminus \Sigma$, the distance to misclassification is
 \begin{equation*}
   \Delta(x) := \dist(x, \Sigma) = \inf\{\|x - y\| \colon y \in \Sigma\}.
 \end{equation*}
@@ -25,10 +25,10 @@ More generally, the \emph{local condition number} centred at $p\in \R^n$ is
 \end{equation*}
 \end{definition}
 
-The condition number $\mC(x)$ is the reciprocal of the relative distance to the decision boundary, so that $\mC(x) > t$ means the classification of $x$ can be changed by a perturbation of relative size less than $1/t$. This is entirely analogous to the role of the condition number in numerical analysis, where the ``ill-posed problems'' correspond to the decision boundary~$\Sigma$.
+The condition number $\mC(x)$ is the reciprocal of the relative distance to the decision boundary, so that $\mC(x) > t$ means the classification of $x$ can be changed by a perturbation of relative size less than $1/t$. This is analogous to the role of the condition number in numerical analysis, where the ``ill-posed problems'' correspond to the decision boundary~$\Sigma$.
 
 \begin{remark}[Weak condition number]\label{rem:weak-condition}
-For absolutely continuous distributions, the probability that a random perturbation of size exactly $\Delta(x)$ leads to misclassification is zero. For a random direction $v$ uniformly distributed on $\mathbb{S}^{n-1}$, define the directional distance $\Delta(x;v) = \inf\{\eta > 0 \colon \hat{j}(x+\eta v) \neq \hat{j}(x)\}$. If $C_{\hat{j}(x)}$ is star-shaped with respect to~$x$, the $(1-\delta)$-quantile of $\|x\|/\Delta(x;v)$ defines a \emph{weak condition number}
+For absolutely continuous distributions, the probability that a random perturbation of size exactly $\Delta(x)$ leads to misclassification is zero. For a random direction $v$ uniformly distributed on $\mathbb{S}^{n-1}$, define the directional distance $\Delta(x;v) = \inf\{\eta > 0 \colon \hat{j}(x+\eta v) \neq \hat{j}(x)\}$, where $\hat{j}(x)$ denotes the class of $x$. If $C_{\hat{j}(x)}$ is star-shaped with respect to~$x$, the $(1-\delta)$-quantile of $\|x\|/\Delta(x;v)$ defines a \emph{weak condition number}
 \begin{equation*}
   \mC_\delta(x) := \inf\left\{\eta > 0 \colon \prob_{v\in \mathbb{S}^{n-1}}\!\left\{\frac{\|x\|}{\Delta(x;v)} > \eta\right\} \leq \delta\right\},
 \end{equation*}
@@ -59,13 +59,13 @@ where $C_{\alpha,\beta,s,n}$ and $\overline{\beta}$ are as in Theorem~\ref{thm:p
 \end{equation*}
 \end{proof}
 
-\begin{remark}\label{rem:global-condition}
-For the global condition number $\mC(X) = \|X\|/\Delta(X)$, the bound $\|X\|\leq \|p\| + \rho$ gives the variant
-\begin{equation*}
-  \prob\{\mC(X) > t\} \leq \binom{m}{2}\, C_{\alpha,\beta,s,n}\left[\left(1 + (\alpha + \overline{\beta} + 1)\frac{\|p\| + \rho}{t\rho}\right)^n-\left(1+\frac{\|p\|+\rho}{t\rho}\right)^n\right].
-\end{equation*}
-The local form of Theorem~\ref{thm:condition-uniform} is preferred because it is independent of~$\rho$. In particular, its right-hand side is $O(1/t)$ as $t\to\infty$.
-\end{remark}
+%\begin{remark}\label{rem:global-condition}
+%For the global condition number $\mC(X) = \|X\|/\Delta(X)$, the bound $\|X\|\leq \|p\| + \rho$ gives the variant
+%\begin{equation*}
+%  \prob\{\mC(X) > t\} \leq \binom{m}{2}\, C_{\alpha,\beta,s,n}\left[\left(1 + (\alpha + \overline{\beta} + 1)\frac{\|%p\| + \rho}{t\rho}\right)^n-\left(1+\frac{\|p\|+\rho}{t\rho}\right)^n\right].
+%\end{equation*}
+%The local form of Theorem~\ref{thm:condition-uniform} is preferred because it is independent of~$\rho$. In particular, %its right-hand side is $O(1/t)$ as $t\to\infty$.
+%\end{remark}
 
 We now turn to the smoothed analysis setting, where the data point is a Gaussian perturbation of a fixed input $\overline{x}$. A Fubini decomposition reduces the Gaussian estimate to the uniform-ball estimate at all radii, yielding the same tail profile for the local condition number.
 
@@ -166,8 +166,12 @@ For single-hidden-layer sigmoid networks, the tube bound of Theorem~\ref{thm:pro
 \end{remark}
 
 The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires more care. The Fubini reduction of Lemma~\ref{lem:gauss-to-uniform} expresses a Gaussian probability as an integral of uniform-ball probabilities at all radii $s\sigma$, $s \in (0,\infty)$, but Theorem~\ref{thm:prob_bound_single_layer} applies only when the ball contains $V_{ij}$. Splitting the integral at the threshold $s^* = R_V/\sigma$ determined by an enclosing radius $R_V$ of $V_{ij}$, and using the general Pfaffian bound on the small-$s$ part, gives a hybrid bound in which the Khovanskii contribution is multiplied by a Gaussian concentration factor $\gamma_n(R_V/\sigma)$ that decays in $n$ but is independent of the width; see Remark~\ref{rem:gaussian-concentration-regime} for its effect on the width scaling.
+In the following result, we use the notation
+\begin{equation*}
+  \gamma_n(u) \;:=\; \frac{\omega_n}{(2\pi)^{n/2}}\int_0^u s^{n+1}\econst^{-s^2/2}\,\diff s.
+\end{equation*}
 
-\begin{proposition}[Gaussian tail, single-hidden-layer sigmoid]\label{prop:single-layer-gaussian}
+\begin{proposition}\label{prop:single-layer-gaussian}
   Under the hypotheses of Corollary~\ref{cor:nn-condition-single-layer}, assume further that each pairwise decision boundary $V_{ij}$ is contained in a common ball $B(\overline x, R_V)$ around a fixed centre $\overline x \in \R^n$. Let $X$ be normally distributed around $\overline x$ with covariance $\sigma^2\mathrm{Id}$. Then for every $t > 0$,
   \begin{equation}\label{eq:single-layer-gaussian-bound}
     \prob\{\mC_{\overline x}(X) > t\} \;\leq\; \binom{m}{2}\Bigl[\,B_{\mathrm{BKK}}(t) \;+\; \gamma_n(R_V/\sigma)\cdot B_{\mathrm{Pf}}(t)\,\Bigr],
@@ -177,10 +181,7 @@ The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires 
     B_{\mathrm{BKK}}(t) &\;:=\; 2\,K(n,L)\,w^{2n}\!\left[\left(1+\frac1t\right)^{\!n}-1\right],\\
     B_{\mathrm{Pf}}(t) &\;:=\; C_{2,1,w,n}\!\left[\left(1+\frac{5}{t}\right)^{\!n} - \left(1+\frac{1}{t}\right)^{\!n}\right],
   \end{align*}
-  $K(n,L)$ is the constant from Proposition~\ref{prop:single-layer-ideg}, $C_{2,1,w,n}$ is the Pfaffian constant of Theorem~\ref{thm:prob_bound} applied to the format $(\alpha,\beta,s) = (2,1,w)$ of a single-hidden-layer sigmoid network, and
-  \begin{equation*}
-    \gamma_n(u) \;:=\; \frac{\omega_n}{(2\pi)^{n/2}}\int_0^u s^{n+1}\econst^{-s^2/2}\,\diff s.
-  \end{equation*}
+  $K(n,L)$ is the constant from Proposition~\ref{prop:single-layer-ideg} and $C_{2,1,w,n}$ is the Pfaffian constant of Theorem~\ref{thm:prob_bound} applied to the format $(\alpha,\beta,s) = (2,1,w)$ of a single-hidden-layer sigmoid network.
 \end{proposition}
 
 \begin{proof}
@@ -190,12 +191,12 @@ The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires 
   \end{equation*}
   with $U_{\sigma s}$ uniform on $B(\overline x, \sigma s)$. Split the integral at $s^* := R_V/\sigma$.
 
-  \emph{Region $s \geq s^*$.} The hypothesis gives $V_{ij} \subset B(\overline x, R_V) \subset B(\overline x, \sigma s)$. The event $U_{\sigma s} \in A_{ij}$ implies $\dist(U_{\sigma s}, V_{ij}) \leq \sigma s/t$, and Theorem~\ref{thm:prob_bound_single_layer} applied to $V_{ij}$ with ball radius $\sigma s$ and $\varepsilon = \sigma s/t$ gives $\prob\{U_{\sigma s} \in A_{ij}\} \leq B_{\mathrm{BKK}}(t)$, a bound independent of $s$ since $\varepsilon/(\sigma s) = 1/t$. Using $\frac{\omega_n}{(2\pi)^{n/2}}\int_0^\infty s^{n+1}\econst^{-s^2/2}\,\diff s = 1$,
+  In the region $s \geq s^*$, we get $V_{ij} \subset B(\overline x, R_V) \subset B(\overline x, \sigma s)$. The event $U_{\sigma s} \in A_{ij}$ implies $\dist(U_{\sigma s}, V_{ij}) \leq \sigma s/t$, and Theorem~\ref{thm:prob_bound_single_layer} applied to $V_{ij}$ with ball radius $\sigma s$ and $\varepsilon = \sigma s/t$ gives $\prob\{U_{\sigma s} \in A_{ij}\} \leq B_{\mathrm{BKK}}(t)$, a bound independent of $s$ since $\varepsilon/(\sigma s) = 1/t$. Using $\frac{\omega_n}{(2\pi)^{n/2}}\int_0^\infty s^{n+1}\econst^{-s^2/2}\,\diff s = 1$,
   \begin{equation*}
     \frac{\omega_n}{(2\pi)^{n/2}}\int_{s^*}^\infty \prob\{U_{\sigma s} \in A_{ij}\}\,s^{n+1}\econst^{-s^2/2}\,\diff s \;\leq\; B_{\mathrm{BKK}}(t).
   \end{equation*}
 
-  \emph{Region $s < s^*$.} Without the containment hypothesis we use the unconditional Pfaffian bound: each $g_{ij}$ is Pfaffian of format $(2,1,w)$ (Example~\ref{ex:activations}), so Theorem~\ref{thm:prob_bound} applied to $V_{ij}$ with ball radius $\sigma s$ and $\varepsilon = \sigma s/t$ gives $\prob\{U_{\sigma s} \in A_{ij}\} \leq B_{\mathrm{Pf}}(t)$, again independent of $s$. Integrating over $[0, s^*]$ contributes $\gamma_n(R_V/\sigma)\,B_{\mathrm{Pf}}(t)$.
+  In the region $s < s^*$ we use the unconditional Pfaffian bound: each $g_{ij}$ is Pfaffian of format $(2,1,w)$ (Example~\ref{ex:activations}), so Theorem~\ref{thm:prob_bound} applied to $V_{ij}$ with ball radius $\sigma s$ and $\varepsilon = \sigma s/t$ gives $\prob\{U_{\sigma s} \in A_{ij}\} \leq B_{\mathrm{Pf}}(t)$, again independent of $s$. Integrating over $[0, s^*]$ contributes $\gamma_n(R_V/\sigma)\,B_{\mathrm{Pf}}(t)$.
 
   Summing the two regions and applying a union bound over the $\binom{m}{2}$ pairs $i < j$ yields~\eqref{eq:single-layer-gaussian-bound}.
 \end{proof}
