@@ -26,7 +26,7 @@ and the $i$-th degree of $M$ as
 \begin{equation*}
 \md_i(M) := \sup_{H \in \cE^n_{c+i}} \ \md(M, H),
 \end{equation*}
-where we use the convention $\md(M, H) = 0$ for non-tranverse intersections.
+where we use the convention $\md(M, H) = 0$ for non-transverse intersections.
 %\begin{figure}
 %    \centering
 %        \begin{tikzpicture}
@@ -56,7 +56,7 @@ where $\omega_n = \vol B(0,1)$ and, when $M$ has boundary, the degrees $\md_i(M)
 \end{theorem}
 
 \begin{remark}\label{rem:tube_bound_boundary}
-The estimate of Theorem~\ref{thm:tube_bound} is a one-sided, integral-geometric bound: it controls $\vol T(M,\varepsilon)$ by the integrals of absolute curvature over the interior $M\setminus\partial M$, which are themselves bounded by the section degrees $\md_i$ via Crofton's formula. The upper bound follows from the surjectivity of the normal exponential map $S(NM)\times[0,\varepsilon]\to T(M,\varepsilon)$ together with the area formula, and therefore holds verbatim for a bounded compact manifold with boundary, the curvature integrals and degrees being taken over the interior. The result is stated and proved in this generality in~\cite[Theorems 3.1 and 4.3]{lotz2015volume}.
+The estimate of Theorem~\ref{thm:tube_bound} is a one-sided, integral-geometric bound: it controls $\vol T(M,\varepsilon)$ by the integrals of absolute curvature over the interior $M\setminus\partial M$, which are themselves bounded by the section degrees $\md_i$ via Crofton's formula. The upper bound follows from the surjectivity of the normal exponential map $S(NM)\times[0,\varepsilon]\to T(M,\varepsilon)$ together with the area formula, and therefore holds verbatim for a bounded compact manifold with boundary, the curvature integrals and degrees being taken over the interior. The curvature-integral bound is stated and proved in this generality in~\cite[Theorem 3.1]{lotz2015volume}, whose statement explicitly allows a boundary. The passage from curvature integrals to section degrees is~\cite[Theorem 4.3]{lotz2015volume}; it is stated there for manifolds without boundary, but extends to the boundary case with the degrees taken over the interior, as indicated in the remark following~\cite[Lemma 4.2]{lotz2015volume} and used in the proof of~\cite[Theorem 1.1]{lotz2015volume}.
 \end{remark}
 
 \subsection{Bounding the degree of the Gauss map}
@@ -71,7 +71,7 @@ where the $f_i$ are Pfaffian functions, and such that the gradients $\nabla f_i$
 \begin{proposition}\label{prop:pfaffian-degree-bound}
   Let $M=\mathcal{Z}(f_1,\dots,f_c)$ be a compact Pfaffian complete intersection, where the $f_i$ are Pfaffian with format $(\alpha, \beta_i, s)$ with respect to the same Pfaffian chain and $\beta_i\le \overline{\beta}$ for all $i$. Then
   \begin{equation*}
-    \md_{n-c}(M) \le{} 2^{\frac{s(s-1)}{2}}(\alpha+\overline{\beta})^n \cdot \prod_{i-1}^c \beta_i \cdot \left[(n+\min\{n,s\})\alpha+n(\overline{\beta}-1)+\sum_{i=1}^c (\beta_i-1)+1\right]^s.
+    \md_{n-c}(M) \le{} 2^{\frac{s(s-1)}{2}}(\alpha+\overline{\beta})^n \cdot \prod_{i=1}^c \beta_i \cdot \left[(n+\min\{n,s\})\alpha+n(\overline{\beta}-1)+\sum_{i=1}^c (\beta_i-1)+1\right]^s.
   \end{equation*}
   %\begin{align*}
   %  \md(M) \le{} & 2^{\frac{s(s-1)}{2}}(\alpha+\beta)^n\beta_1\cdots \beta_c \\

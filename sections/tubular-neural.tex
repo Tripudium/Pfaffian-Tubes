@@ -221,13 +221,52 @@ Single-layer sigmoid neural networks are universal approximators~\cite{cybenko19
 
 The strategy is to replace the Khovanskii--Rolle bound with a global argument based on the Bernstein--Kushnirenko--Khovanskii (BKK) theorem~\cite{bernstein1975} (see also~\cite[Chapter 7,\S 5]{cox2005using}). After an exponential substitution, the Gauss-map system becomes a Laurent polynomial system whose $n$ equations share a single Newton polytope, a zonotope $\conv(A)$ determined by the (integer-scaled) weight vectors. Bernstein's theorem then bounds the number of solutions by $n!\,\operatorname{Vol}(\conv(A))$, which is polynomial in the width. For networks with $\ell\geq 2$ hidden layers, the direct BKK approach does not apply due to the transcendentality of sigmoid composition, and we state the corresponding polynomial bound as a conjecture.
 
+The Bernstein-type count below requires that every solution of the system of equations derived from a Gauss-map fibre be non-degenerate. Since the argument forces the direction $v$ to be \emph{rational}, non-degeneracy cannot be arranged by a Sard-type genericity argument, which only yields full-measure sets of good directions. The following lemma shows that non-degeneracy is automatic at any regular value of the Gauss map; the proof is an application of the implicit function theorem.
+
+\begin{lemma}\label{le:gauss-nondegenerate}
+Let $f\colon\R^n\to\R$ be a smooth function such that $\nabla f$ does not vanish on $V=\mathcal{Z}(f)$, so that $V$ is a smooth hypersurface, and let $\gamma\colon S(NV)\to S^{n-1}$ be the generalised Gauss map of $V$. Let $v\in S^{n-1}$ be a regular value of $\gamma$ with $v_n\neq 0$, and define $\Phi_v\colon\R^n\to\R^n$ by
+\begin{equation}\label{eq:gauss-cross-system}
+  \Phi_v(x) = \Bigl(f(x),\ v_n\frac{\partial f}{\partial x_1}(x)-v_1\frac{\partial f}{\partial x_n}(x),\ \dots,\ v_n\frac{\partial f}{\partial x_{n-1}}(x)-v_{n-1}\frac{\partial f}{\partial x_n}(x)\Bigr).
+\end{equation}
+Then the solutions of $\Phi_v(x)=0$ are exactly the points $x\in V$ with $(x,v)\in\gamma^{-1}(v)$, and the Jacobian of $\Phi_v$ is non-singular at every solution.
+\end{lemma}
+
+\begin{proof}
+Let $A\colon\R^n\to\R^{n-1}$ be the linear map $Aw=(v_nw_1-v_1w_n,\dots,v_nw_{n-1}-v_{n-1}w_n)$, so that $\Phi_v=(f,A\nabla f)$. Since $v_n\neq0$, the map $A$ is surjective with kernel $\R v$. If $\Phi_v(x)=0$, then $x\in V$ and $\nabla f(x)\in\ker A=\R v$; since $\nabla f(x)\neq0$, the unit vector $v$ is normal to $V$ at $x$, that is, $(x,v)\in\gamma^{-1}(v)$. Conversely, if $(x,v)\in\gamma^{-1}(v)$, then $\nabla f(x)\in\R v$ and $\Phi_v(x)=0$.
+
+For the non-degeneracy, we first reduce to the case $v=e_n$. Choose an orthogonal matrix $Q$ with $Qe_n=v$ and set $g:=f\circ Q$ and $W:=\mathcal{Z}(g)=Q^{-1}V$, so that $\nabla g=Q^{\trans}(\nabla f\circ Q)$ does not vanish on $W$. The map $(x,u)\mapsto(Q^{\trans}x,Q^{\trans}u)$ is a diffeomorphism $S(NV)\to S(NW)$ intertwining the Gauss maps, so $e_n=Q^{\trans}v$ is a regular value of the Gauss map $\gamma_W$ of $W$. Let $B\colon\R^n\to\R^{n-1}$ be given by $Bw=((Q^{\trans}w)_1,\dots,(Q^{\trans}w)_{n-1})$; then $B$ is surjective with $\ker B=Q(\R e_n)=\R v=\ker A$. Two surjective linear maps with the same kernel differ by an invertible map, so $A=T\circ B$ for some $T\in\mathrm{GL}_{n-1}(\R)$. Writing $y=Q^{\trans}x$ and $\Psi(y):=(g(y),\partial_1 g(y),\dots,\partial_{n-1}g(y))$, we have $B\nabla f(x)=(\partial_1g(y),\dots,\partial_{n-1}g(y))$ and hence
+\[
+  \Phi_v(x)=\begin{pmatrix}1&0\\0&T\end{pmatrix}\Psi(Q^{\trans}x),
+\]
+so the solutions of $\Phi_v=0$ and $\Psi=0$ correspond under $x=Qy$, and $D\Phi_v(x)$ is non-singular if and only if $D\Psi(y)$ is. It therefore suffices to show that $D\Psi$ is non-singular at every solution of $\Psi(y)=0$.
+
+Let $y$ be such a solution. Then $\nabla g(y)=(0,\dots,0,\partial_ng(y))$ with $\partial_ng(y)\neq0$. By the implicit function theorem there are an open neighbourhood $U\subset\R^{n-1}$ of $u_0:=(y_1,\dots,y_{n-1})$ and a smooth function $h\colon U\to\R$ with $h(u_0)=y_n$ such that $(u,h(u))$ parametrises $W$ near $y$. Differentiating $g(u,h(u))=0$ with respect to $u_i$ gives
+\begin{equation}\label{eq:ift-local}
+  \frac{\partial g}{\partial x_i}+\frac{\partial g}{\partial x_n}\frac{\partial h}{\partial u_i}=0 \qquad\text{on } U,
+\end{equation}
+so in particular $\nabla h(u_0)=0$; differentiating~\eqref{eq:ift-local} with respect to $u_j$ and evaluating at $u_0$, where the terms involving $\nabla h$ vanish, yields
+\begin{equation*}
+  \frac{\partial^2g}{\partial x_j\partial x_i}(y)=-\frac{\partial g}{\partial x_n}(y)\,\frac{\partial^2h}{\partial u_j\partial u_i}(u_0),\qquad 1\le i,j\le n-1.
+\end{equation*}
+The Jacobian $D\Psi(y)$ has first row $\nabla g(y)=\partial_ng(y)\,e_n^{\trans}$ and remaining rows $\nabla(\partial_jg)(y)$, $j\le n-1$; expanding the determinant along the first row,
+\begin{equation*}
+  |\det D\Psi(y)|=|\partial_ng(y)|\cdot\Bigl|\det\Bigl(\frac{\partial^2g}{\partial x_j\partial x_i}(y)\Bigr)_{i,j\le n-1}\Bigr|
+  =|\partial_ng(y)|^{\,n}\,\bigl|\det\operatorname{Hess}h(u_0)\bigr|.
+\end{equation*}
+In the chart $u\mapsto(u,h(u))$, the unit normal to $W$ with positive $n$-th component is
+\begin{equation*}
+  \nu(u)=\frac{(-\nabla h(u),1)}{\sqrt{1+\|\nabla h(u)\|^2}},
+\end{equation*}
+and $u\mapsto\bigl((u,h(u)),\nu(u)\bigr)$ parametrises the sheet of $S(NW)$ through $(y,e_n)$, on which $\gamma_W$ is given by $\nu$. Since $\nabla h(u_0)=0$, differentiating gives $\partial\nu_j/\partial u_i(u_0)=-\partial^2h/\partial u_i\partial u_j(u_0)$ for $i,j\le n-1$. Regularity of $\gamma_W$ at the preimage $(y,e_n)\in\gamma_W^{-1}(e_n)$ therefore forces $\det\operatorname{Hess}h(u_0)\neq0$, and hence $\det D\Psi(y)\neq0$.
+\end{proof}
+
 \begin{proposition}\label{prop:single-layer-degree}
   Let $f\colon \R^n \to \R$ be a non-constant function given by
   \begin{equation*}
   f(x) = c_0+\sum_{k=1}^w d_k \sigma(a_k^{\trans}x+b_k), 
   \end{equation*}
   where $\sigma$ is the logistic sigmoid, $c_0,b_k, d_k\in \R$ and the $a_k\in \mathbb{Q}^{n}$ have common denominator $q\in\N_{>0}$. Set $V=\mathcal{Z}(f)$ and $L := q\cdot\max_{k,i}|a_{ki}|$.
-  If $V$ is a smooth compact hypersurface, then the maximum degree satisfies
+  If $V$ is a smooth compact hypersurface and $\nabla f$ is non-vanishing on $V$, then the maximum degree satisfies
   \begin{equation}\label{eq:single-layer-bound}
     \md(V) \;\leq\; C(n,L)\cdot w^{n},
   \end{equation}
@@ -272,7 +311,7 @@ By Bernstein's theorem, a system of $n$ Laurent polynomials in $n$ variables wit
 \begin{equation*}
   n!\,\operatorname{MV}(P_0,\ldots,P_{n-1})
 \end{equation*}
-isolated solutions in $(\C^*)^n$, counted with multiplicity, where $\operatorname{MV}$ denotes the Euclidean mixed volume, normalized so that $\operatorname{MV}(P,\ldots,P)=\operatorname{Vol}(P)$. Since $P_j\subseteq\conv(A)$ for all $j$ and the mixed volume is monotone in each argument, the bound is at most $n!\,\operatorname{Vol}(\conv(A))$. The diffeomorphism $\Psi\colon x_j\mapsto y_j=\econst^{-x_j/q}$ embeds $\R^n$ bijectively onto $(\R_{>0})^n\subset(\C^*)^n$, and multiplication by $\Phi(y)$ is non-vanishing there. Since $v$ is a regular value of the Gauss map, every solution of~\eqref{eq:single-layer-system} is non-degenerate, and hence corresponds under $\Psi$ to a non-degenerate solution of~\eqref{eq:laurent-system}--\eqref{eq:laurent-system-j} in $(\C^*)^n$. These real solutions are therefore among the isolated torus solutions counted above, so the real count is bounded by $n!\,\operatorname{Vol}(\conv(A))$.
+isolated solutions in $(\C^*)^n$, counted with multiplicity, where $\operatorname{MV}$ denotes the Euclidean mixed volume, normalized so that $\operatorname{MV}(P,\ldots,P)=\operatorname{Vol}(P)$. Since $P_j\subseteq\conv(A)$ for all $j$ and the mixed volume is monotone in each argument, the bound is at most $n!\,\operatorname{Vol}(\conv(A))$. The diffeomorphism $\Psi\colon x_j\mapsto y_j=\econst^{-x_j/q}$ embeds $\R^n$ bijectively onto $(\R_{>0})^n\subset(\C^*)^n$, and multiplication by $\Phi(y)$ is non-vanishing there. Since $v$ is a regular value of the Gauss map with $v_n\neq0$ and $\nabla f$ does not vanish on $V$, Lemma~\ref{le:gauss-nondegenerate} shows that every solution of~\eqref{eq:single-layer-system} is non-degenerate, and hence corresponds under $\Psi$ to a non-degenerate solution of~\eqref{eq:laurent-system}--\eqref{eq:laurent-system-j} in $(\C^*)^n$. These real solutions are therefore among the isolated torus solutions counted above, so the real count is bounded by $n!\,\operatorname{Vol}(\conv(A))$.
 
 The set $A$ lies in the zonotope $Z := \sum_{k=1}^w[0,2\vec p_k]$, so $\conv(A)\subseteq Z$. The zonotope volume formula (see~\cite[Ch.~7]{ziegler1995}) gives
 \begin{equation}\label{eq:zonotope-volume}
@@ -296,43 +335,51 @@ The following lemma is a variation of a well-known fact about the Gauss map of a
 Let $\Sigma\subset\R^n$ be a smooth compact hypersurface that bounds a non-empty bounded open region $W$. Then for every $v\in S^{n-1}$ the fibre of the generalised Gauss map $\gamma_\Sigma\colon S(N\Sigma)\to S^{n-1}$ satisfies $|\gamma_\Sigma^{-1}(v)|\ge 2$. In particular $\gamma_\Sigma$ is surjective and $\md\gamma_\Sigma\ge 2$.
 \end{lemma}
 
-%\begin{proof}
-%Fix $v\in S^{n-1}$ and consider the linear functional $\ell(x)=\langle x,v\rangle$ on the compact set $\overline{W}$. It attains its maximum at some $p_+$ and its minimum at some $p_-$. Since $\ell$ is non-constant and $W$ is open, $p_+\neq p_-$ and $p_\pm\in\partial W=\Sigma$. At $p_+$ the hyperplane $\{x\colon \ell(x)=\ell(p_+)\}$ supports $\overline{W}$ with $\overline W$ on the side $\{\ell\le\ell(p_+)\}$. Since $\Sigma$ is smooth, $T_{p_+}\Sigma=v^{\perp}$, so the two unit normals at $p_+$ are $\pm v$ and in particular $(p_+,v)\in S(N\Sigma)$ with $\gamma_\Sigma(p_+,v)=v$. The same argument at $p_-$ (where $-v$ is an outward normal) gives $(p_-,v)\in S(N\Sigma)$ with $\gamma_\Sigma(p_-,v)=v$, since the normal sphere bundle of a hypersurface contains both signs of the normal over each base point. Thus $\{(p_+,v),(p_-,v)\}\subseteq\gamma_\Sigma^{-1}(v)$ are two distinct points in $\gamma_\Sigma^{-1}(v)$.
-%\end{proof}
+\begin{proof}
+Fix $v\in S^{n-1}$ and consider the linear functional $\ell(x)=\langle x,v\rangle$ on the compact set $\overline{W}$. It attains its maximum at some $p_+$ and its minimum at some $p_-$. Since $\ell$ is non-constant and $W$ is open, $p_+\neq p_-$ and $p_\pm\in\partial W=\Sigma$. At $p_+$ the hyperplane $\{x\colon \ell(x)=\ell(p_+)\}$ supports $\overline{W}$ with $\overline W$ on the side $\{\ell\le\ell(p_+)\}$. Since $\Sigma$ is smooth, $T_{p_+}\Sigma=v^{\perp}$, so the two unit normals at $p_+$ are $\pm v$ and in particular $(p_+,v)\in S(N\Sigma)$ with $\gamma_\Sigma(p_+,v)=v$. The same argument at $p_-$ (where $-v$ is an outward normal) gives $(p_-,v)\in S(N\Sigma)$ with $\gamma_\Sigma(p_-,v)=v$, since the normal sphere bundle of a hypersurface contains both signs of the normal over each base point. Thus $\{(p_+,v),(p_-,v)\}\subseteq\gamma_\Sigma^{-1}(v)$ are two distinct points in $\gamma_\Sigma^{-1}(v)$.
+\end{proof}
 
 \begin{proposition}\label{prop:single-layer-lowerbound}
-The exponent $n$ in Proposition~\ref{prop:single-layer-degree} is sharp at fixed lattice constant. Precisely, for every $n\ge 1$ and every even $m\ge 4$ there is a single-hidden-layer sigmoid network with $w=nm$ units and lattice constant $L=1$ whose zero set $V=\mathcal{Z}(f)$ is a smooth compact hypersurface with
+The exponent $n$ in Proposition~\ref{prop:single-layer-degree} is sharp at fixed lattice constant. Precisely, for every $n\ge 1$ and every even $m\ge 4$ there is a single-hidden-layer sigmoid network with $w=n(m+2)$ units and lattice constant $L=1$ whose zero set $V=\mathcal{Z}(f)$ is a smooth compact hypersurface, with $0$ a regular value of $f$ and
 \begin{equation}\label{eq:single-layer-lb}
   \md(V)\;\ge\; 2\Bigl(\tfrac{m-2}{2}\Bigr)^{\!n}\;=\;\Omega(w^n)\qquad(n\text{ fixed}).
 \end{equation}
 \end{proposition}
 
 \begin{proof}
-Take the axis-aligned weights $a_{j,k}=e_j$ ($j\in[n],\,k\in[m]$), biases $b_{j,k}=-k$, output weights $d_{j,k}=(-1)^k$, and offset $c_0=\tfrac12+\varepsilon$ with $\varepsilon$ a generic small number fixed below. Then $q=1$ and $L=1$, independently of $w$. Because the weights are axis aligned, the ``steepened'' network (with a scaling parameter $\lambda$) is separable:
+For a scaling parameter $\lambda\ge 1$ to be fixed below, consider the separable function
 \begin{equation*}
-  f_\lambda(x)=c_0+\sum_{j=1}^n h_\lambda(x_j),\qquad h_\lambda(t):=\sum_{k=1}^m(-1)^k\,\sigma\bigl(\lambda(t-k)\bigr).
+  f_\lambda(x)=c_0+\sum_{j=1}^n \hat h_\lambda(x_j),\qquad
+  \hat h_\lambda(t):=h_\lambda(t)-2\sigma\bigl(\lambda(t-(m+1))\bigr)-2\sigma(-\lambda t),
 \end{equation*}
+where $h_\lambda(t):=\sum_{k=1}^m(-1)^k\,\sigma\bigl(\lambda(t-k)\bigr)$ and $c_0=\tfrac12+\varepsilon$, with $\varepsilon\in(0,\tfrac14)$ a generic small number fixed below. Each coordinate thus contributes $m$ alternating units together with two ``capping'' units, whose role is to make $f_\lambda$ negative far away from the box $[0,m+1]^n$; in total, $f_\lambda$ is a single-hidden-layer sigmoid network with $w=n(m+2)$ units and axis-aligned weights $\pm\lambda e_j$. The steepening parameter $\lambda$ will be removed at the end of the proof by a homothety, yielding a network with $q=1$ and $L=1$.
 
-We first argue that $V=\mathcal{Z}(f_\lambda)$ is compact. Since $m$ is even, $\sum_{k=1}^m(-1)^k=0$, so $h_\lambda(t)\to 0$ as $t\to\pm\infty$, and $h_\lambda$ is bounded. Hence $f_\lambda(x)\to c_0=\tfrac12+\varepsilon>0$ as $\|x\|_\infty\to\infty$, and there is $R>0$ with $f_\lambda>0$ outside the box $Q=[-R,\,m+R]^n$. Thus $V=\mathcal{Z}(f_\lambda)\subset Q$ is bounded.
-
-As $\lambda\to\infty$, the $h_\lambda(t)$ converge pointwise to the step function
+We first argue that $V=\mathcal{Z}(f_\lambda)$ is compact for every $\lambda>0$. Pairing consecutive terms and using that $\sigma$ is strictly increasing,
 \begin{equation*}
-  h_\lambda(t)\to \sum_{k=1}^m (-1)^k \mathbf{1}\{t\geq k\} = \sum_{k\le t}(-1)^k. 
-\end{equation*} 
-Consider a sequence $(i_1,\dots,i_n)\in \{0,\dots,m\}^n$ and the corresponding cell $\{x\colon \,i_j<x_j<i_j+1\} \subset \R^n$. The limit $g$ of $f_\lambda$ equals $c_0+\sum_j S_{i_j}$ with $S_i=\sum_{k\le i}(-1)^k$. Here $S_i=0$ for $i$ even and $S_i=-1$ for $i$ odd and hence $g=\tfrac12+\varepsilon-\#\{j:i_j\text{ odd}\}$. This expression is positive if and only if every $i_j$ is even, in which case $g=\tfrac12+\varepsilon$ and satisfies $g\le-\tfrac12+\varepsilon<0$ else. Moreover, the all-even cells are pairwise non-adjacent, separated by slabs on which $g<0$.
+  h_\lambda(t)=\sum_{i=1}^{m/2}\Bigl(\sigma\bigl(\lambda(t-2i)\bigr)-\sigma\bigl(\lambda(t-2i+1)\bigr)\Bigr)<0,
+\end{equation*}
+so $\hat h_\lambda<0$ on all of $\R$. Since $m$ is even, $\sum_{k=1}^m(-1)^k=0$, so $h_\lambda(t)\to 0$ as $t\to\pm\infty$, while the two capping terms tend to $-2$ as $t\to+\infty$ and as $t\to-\infty$, respectively; hence $\hat h_\lambda(t)\to-2$ as $|t|\to\infty$. Choose $R>0$ with $\hat h_\lambda(t)\le -1$ for $|t|\ge R$. If $\|x\|_\infty\ge R$ then, bounding the contributions of the remaining coordinates by $\hat h_\lambda<0$, we get $f_\lambda(x)\le c_0-1<0$. Thus $V=\mathcal{Z}(f_\lambda)\subset[-R,R]^n$ is compact.
 
-Call an all-even cell bounded if $i_j\in\{2,4,\dots,m-2\}$ for every $j$; there are exactly $N:=\bigl(\tfrac{m-2}{2}\bigr)^n$ bounded cells. Fix one such cell, with closed core $K=\prod_j[i_j+\tfrac14,\,i_j+\tfrac34]$ (where the limit $g$ equals $\tfrac12+\varepsilon$). The boundary $\partial R$ of the enlarged box $R=\prod_j[i_j-\tfrac12,\,i_j+\tfrac32]$ lies in cells with $g\le-\tfrac12+\varepsilon$. By uniform convergence off the thresholds there is $\lambda_0=\lambda_0(n,m)$ such that for all $\lambda\ge\lambda_0$ one has $f_\lambda>\tfrac14$ on every such $K$ and $f_\lambda<-\tfrac14$ on every $\partial R$. Moreover, the connected component of $\{f_\lambda>0\}$ containing $K$ is contained inside $R$: it is bounded, and the $N$ such regions $W_1,\dots,W_N$ are pairwise disjoint and disjoint from the unbounded region $\{f_\lambda>0\}\setminus\bigcup_i R_i$. Their boundaries $\Sigma_i=\partial W_i$ are $N$ pairwise disjoint compact subsets of $V$.
+As $\lambda\to\infty$, $\hat h_\lambda$ converges pointwise, off the thresholds $\{0,1,\dots,m+1\}$, to the step function taking the value $S_i:=\sum_{k\le i}(-1)^k$ on $(i,i+1)$ for $i\in\{0,\dots,m\}$, and the value $-2$ on $(-\infty,0)$ and on $(m+1,\infty)$. Here $S_i=0$ for $i$ even and $S_i=-1$ for $i$ odd. Consequently, the pointwise limit $g$ of $f_\lambda$ is constant on every cell of the corresponding product decomposition of $\R^n$: on a cell $\prod_j(i_j,i_j+1)$ with all $i_j\in\{0,\dots,m\}$ it equals $\tfrac12+\varepsilon-\#\{j:i_j\text{ odd}\}$, which is positive if and only if every $i_j$ is even, and on every cell with some coordinate in $(-\infty,0)$ or $(m+1,\infty)$ it is at most $\tfrac12+\varepsilon-2<0$. Hence $g=\tfrac12+\varepsilon$ on the all-even cells and $g\le-\tfrac12+\varepsilon<0$ on all other cells, including all unbounded ones. Moreover, the all-even cells are pairwise non-adjacent, separated by slabs on which $g<0$.
+
+Consider the all-even cells with $i_j\in\{2,4,\dots,m-2\}$ for every $j$; there are exactly $N:=\bigl(\tfrac{m-2}{2}\bigr)^n$ of them. Fix one such cell, with closed core $K=\prod_j[i_j+\tfrac14,\,i_j+\tfrac34]$ (where the limit $g$ equals $\tfrac12+\varepsilon$). The boundary $\partial R$ of the enlarged box $R=\prod_j[i_j-\tfrac12,\,i_j+\tfrac32]$ lies in cells with $g\le-\tfrac12+\varepsilon$. By uniform convergence off the thresholds there is $\lambda_0=\lambda_0(n,m)$ such that for all $\lambda\ge\lambda_0$ one has $f_\lambda>\tfrac14$ on every such $K$ and $f_\lambda<-\tfrac14$ on every $\partial R$. Consequently, the connected component of $\{f_\lambda>0\}$ containing $K$ is contained in the interior of $R$, and the $N$ such regions $W_1,\dots,W_N$ are pairwise disjoint. Their boundaries $\Sigma_i=\partial W_i$ are $N$ pairwise disjoint compact subsets of $V$.
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.4\textwidth]{figs/lower_bound_construction_clean.pdf}
-  \caption{Visualization of the lower-bound construction in Proposition~\ref{prop:single-layer-lowerbound}. The function is $f_\lambda=c_0+h_\lambda(x_1)+h_\lambda(x_2)$. The black lines indicate the set $V=\mathcal{Z}(f_\lambda)$ and the red regions are the regions where $f_\lambda>0$.}
+  \caption{Visualization of the lower-bound construction in Proposition~\ref{prop:single-layer-lowerbound} for $n=2$, shown without the capping units: the function plotted is $c_0+h_\lambda(x_1)+h_\lambda(x_2)$. The black lines indicate its zero set and the red regions are the regions where it is positive. The unbounded components visible towards the boundary of the picture are removed by the capping units.}
   \label{fig:lower-bound-construction}
 \end{figure}
 
-Since $\nabla f_\lambda=(h_\lambda'(x_1),\dots,h_\lambda'(x_n))$, the critical set of $f_\lambda$ is the finite product $\prod_j\{h_\lambda'=0\}$, and its image under $f_\lambda$ is a finite set of critical values. Choosing $\varepsilon$ outside this finite set makes $0$ a regular value of $f_\lambda$, so $V$ is a smooth hypersurface and each $\Sigma_i$ is a smooth compact hypersurface, possibly disconnected, contained in $V$ and bounding $W_i$. This choice of $\varepsilon$ changes neither $q$ nor $L$.
+Since $\nabla f_\lambda=(\hat h_\lambda'(x_1),\dots,\hat h_\lambda'(x_n))$, the critical set of $f_\lambda$ is the product $\prod_j\{\hat h_\lambda'=0\}$. The set $\{\hat h_\lambda'=0\}$ is finite: multiplying $\hat h_\lambda'$ by the product of the squares of the (strictly positive) sigmoid denominators turns it into an exponential polynomial, non-trivial because $\hat h_\lambda$ is non-constant, which has finitely many zeros by Lemma~\ref{lem:polya} below. The image of the critical set under $f_\lambda$ is therefore a finite set of critical values. Choosing $\varepsilon$ outside this finite set makes $0$ a regular value of $f_\lambda$, so $V$ is a smooth hypersurface and each $\Sigma_i$ is a smooth compact hypersurface, possibly disconnected, contained in $V$ and bounding $W_i$.
 
-Each $\Sigma_i=\partial W_i$ satisfies the hypotheses of Lemma~\ref{lem:bounded-gauss-surjective}, so for every regular value $v$ of $\gamma_V$ we have $|\gamma_V^{-1}(v)|\ge\sum_{i=1}^N|\gamma_{\Sigma_i}^{-1}(v)|\ge 2N$, the preimages being disjoint because the hypersurfaces $\Sigma_i$ are pairwise disjoint. Hence $\md(V)=\md\gamma_V\ge 2N=2\bigl(\tfrac{m-2}{2}\bigr)^n$, which with $m=w/n$ is $\Omega(w^n)$.
+Each $\Sigma_i=\partial W_i$ satisfies the hypotheses of Lemma~\ref{lem:bounded-gauss-surjective}, so for every regular value $v$ of $\gamma_V$ we have $|\gamma_V^{-1}(v)|\ge\sum_{i=1}^N|\gamma_{\Sigma_i}^{-1}(v)|\ge 2N$, the preimages being disjoint because the hypersurfaces $\Sigma_i$ are pairwise disjoint. Hence $\md(V)=\md\gamma_V\ge 2N=2\bigl(\tfrac{m-2}{2}\bigr)^n$, which with $m=w/n-2$ is $\Omega(w^n)$ for fixed $n$.
+
+Finally, we remove the steepening. The function $f(x):=f_\lambda(x/\lambda)$ is implemented by a single-hidden-layer sigmoid network with the same $w=n(m+2)$ units: explicitly,
+\begin{equation*}
+  f(x)=c_0+\sum_{j=1}^n\Bigl(\sum_{k=1}^m(-1)^k\,\sigma(x_j-\lambda k)-2\sigma\bigl(x_j-\lambda(m+1)\bigr)-2\sigma(-x_j)\Bigr),
+\end{equation*}
+with weights $a\in\{\pm e_1,\dots,\pm e_n\}$, so that $q=1$ and $L=1$ independently of $w$ and $\lambda$. Its zero set is $\mathcal{Z}(f)=\lambda V$, and $0$ is a regular value of $f$ because it is one of $f_\lambda$. The homothety $x\mapsto\lambda x$ leaves tangent and normal spaces unchanged, $T_{\lambda x}(\lambda V)=T_xV$, so $(x,u)\mapsto(\lambda x,u)$ identifies $S(NV)$ with $S(N(\lambda V))$ and the two generalised Gauss maps have the same fibres. Hence $\mathcal{Z}(f)=\lambda V$ is a smooth compact hypersurface with $\md(\lambda V)=\md(V)\ge 2\bigl(\tfrac{m-2}{2}\bigr)^n$, proving~\eqref{eq:single-layer-lb}.
 \end{proof}
 
 %\begin{remark}\label{rem:lb-sharpness}
@@ -354,7 +401,7 @@ For networks with more than one hidden layer, we expect the single-layer bound o
   where $C(n,L)$ depends only on $n$ and $L$.
 \end{conjecture}
 
-The conjecture is supported by two observations. The single-layer case $\ell = 1$ is Proposition~\ref{prop:single-layer-degree}, where the exponent $n$ is sharp by Proposition~\ref{prop:single-layer-lowerbound}. For piecewise-linear (ReLU) networks, which lie outside the Pfaffian framework but share the layered composition structure, the number of linear regions (and hence the number of affine pieces making up the decision boundary) is bounded by $O(\prod_j n_j^{\,n})$~\cite{montufar2014,hanin2019}, matching the form of~\eqref{eq:multi-layer-bound}.
+The conjecture is supported by two observations. The single-layer case $\ell = 1$ is Proposition~\ref{prop:single-layer-degree}, where the exponent $n$ is sharp by Proposition~\ref{prop:single-layer-lowerbound}. For piecewise-linear (ReLU) networks, which lie outside the Pfaffian framework but share the layered composition structure, the number of linear regions (and hence the number of affine pieces making up the decision boundary) is bounded by $O(\prod_j n_j^{\,n})$~\cite{raghu2017,serra2018,hanin2019}, matching the form of~\eqref{eq:multi-layer-bound}.
 
 % \begin{remark}
 % Bianchini and Scarselli~\cite{bianchini2014complexity} obtain comparable polynomial bounds for networks with arctan activation by a different route: the arctan chain has length $2$ regardless of the number of hidden units, so the Pfaffian exponential factor is trivial. For sigmoid networks the chain length grows linearly with the number of hidden units, and a polynomial bound analogous to the arctan case is the content of Conjecture~\ref{conj:multi-layer-degree}.
@@ -406,7 +453,7 @@ We instead bound all section degrees uniformly by passing to a multiplicative ch
   \]
   Indeed $\partial_{y_l}(y_j^{-1})=-\delta_{jl}(y_j^{-1})^2$ and $\partial_{y_l}\bigl(\sum_j\omega_{sj}\log y_j\bigr)=\omega_{sl}\,y_l^{-1}$ are polynomials of degree $\alpha=2$ in the chain, the chain is triangular, and it depends on all $k=n$ variables. Note that, after the substitution, the $w$ sigmoids have become rational and contribute nothing to the chain: the only transcendental functions are the $\le n$ logarithms encoding the affine section $H$, so the chain length is $s=2n-i-1\le 2n$, independently of the width~$w$.
 
-  We can now apply Khovanskii's bound, Theorem~\ref{thm:khovanskii}, to the resulting system of equations. Note that since $v$ is a regular value, all solutions are non-degenerate. 
+  We can now apply Khovanskii's bound, Theorem~\ref{thm:khovanskii}, to the resulting system of equations. In contrast with Proposition~\ref{prop:single-layer-degree}, here the direction $v$ is not constrained to be rational: by Sard's theorem, for a generic regular value $v$ of the Gauss map of $W$ all solutions of~\eqref{eq:section-gauss-ambient} are non-degenerate, and since the fibre cardinality is locally constant on the set of regular values, $\md\gamma_W$ is attained at such $v$. We may therefore assume that all solutions are non-degenerate.
   The polynomials $F_0,\dots,F_i$ have degree $\beta_F\le 4nLw$, while $G_1,\dots,G_{n-i-1}$ have degree $1$. Their sum of degrees is $\sum_r\beta_r=(i+1)\beta_F+(n-i-1)$, and since $\min\{k,s\}=\min\{n,2n-i-1\}=n$ the base term of the Khovanskii bound is $\sum_r\beta_r-n+\min\{k,s\}\alpha+1=(i+1)\beta_F+2n-i$. Khovanskii's theorem~\ref{thm:khovanskii}, applied with domain $\cU=\R_{>0}^n$ (on which the chain $\boldq$ is defined), these component-wise formats, $\alpha=2$, and chain length $s=2n-i-1$, therefore gives
   \[
     N\ \le\ 2^{\binom{s}{2}}\,\beta_F^{\,i+1}\bigl((i+1)\beta_F+2n-i\bigr)^{s}
@@ -481,7 +528,7 @@ Under the hypotheses of Theorem~\ref{thm:prob_bound_single_layer}, every transve
   \begin{equation*}
     \prob\{d(X,V)\le\varepsilon\}\le 2n(2Lw+1)^n\frac{\varepsilon}{\rho}+O\left(w^{2n}\left(\frac{\varepsilon}{\rho}\right)^2\right),
   \end{equation*}
-  which is of order $O(w^n\,\varepsilon/\rho)$.
+  which is of order $O(w^n\,\varepsilon/\rho)$ in the regime $\varepsilon/\rho=O(w^{-n})$, where the leading term dominates.
 \end{corollary}
 
 \begin{proof}

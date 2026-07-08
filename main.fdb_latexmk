@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1783506833 "main.aux" "main.bbl" "main" 1783509347 0
-  "./bib/refs.bib" 1783506832 34162 bf22901161189ec614a07a1cbe073556 ""
+["bibtex main"] 1783518753 "main.aux" "main.bbl" "main" 1783518756 0
+  "./bib/refs.bib" 1783517919 34503 42c0eb4f59d8f876b0dbae84068e40bd ""
   "/usr/local/texlive/2023/texmf-dist/bibtex/bst/base/alpha.bst" 1292289607 23907 a5f93555796fb564b924339521f10a7c ""
-  "main.aux" 1783509346 14808 8a164ce711b33d9f8734ad057c3f230a "pdflatex"
+  "main.aux" 1783518755 15384 12dde033de14c5fa46220df6f4d8c9ab "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1783509344 "main.tex" "main.pdf" "main" 1783509347 0
+["pdflatex"] 1783518753 "main.tex" "main.pdf" "main" 1783518756 0
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm" 1136768653 1292 bd42be2f344128bff6d35d98474adfe3 ""
@@ -239,16 +239,16 @@
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
   "figs/lower_bound_construction_clean.pdf" 1782997539 71527 110f48b27f953fd245610d5b1733efff ""
   "macros.tex" 1783502261 2380 d30ef91fa5ed5219cd49da6f18bd4ebe ""
-  "main.aux" 1783509346 14808 8a164ce711b33d9f8734ad057c3f230a "pdflatex"
-  "main.bbl" 1783506906 10474 a38162358e47f02d13cfb23e3b888b83 "bibtex main"
-  "main.out" 1783509346 4828 7653f042fcc40351ab5ccb89580768d9 "pdflatex"
-  "main.tex" 1783254702 1906 d427f87426418d4f7924c47b5312a271 ""
-  "sections/conclusions.tex" 1783001737 9014 6eadd8e156dad85c777192212367ee80 ""
-  "sections/introduction.tex" 1783509343 15369 f7226fbb10f116aeffd95f4d413c1878 ""
-  "sections/preliminaries.tex" 1783255303 14629 54b160685a308945e707312971b5ef1f ""
-  "sections/robustness.tex" 1783502280 21940 6d3e4ccaef49f9a5d158d99aab02acfb ""
-  "sections/tubular-neural.tex" 1783504058 43072 f8c1247dae9dd76c5eb80df9a86695ef ""
-  "sections/tubular.tex" 1783418168 22833 549daf429c2fcc8553027b85da713a1e ""
+  "main.aux" 1783518755 15384 12dde033de14c5fa46220df6f4d8c9ab "pdflatex"
+  "main.bbl" 1783518753 10775 c5238865fdd6fc3e7d1665baa523cb92 "bibtex main"
+  "main.out" 1783518755 4828 7653f042fcc40351ab5ccb89580768d9 "pdflatex"
+  "main.tex" 1783513310 1906 d427f87426418d4f7924c47b5312a271 ""
+  "sections/conclusions.tex" 1783518053 8956 b8d30de638f479d882ee327ba4c2dfad ""
+  "sections/introduction.tex" 1783517949 15682 40b9d08b1f269b35a58e8d7959a10309 ""
+  "sections/preliminaries.tex" 1783517965 14728 a66ce3083f981c1ddfa0a4d6c382fbdc ""
+  "sections/robustness.tex" 1783518092 21909 bfac5c2633590174492fae4a4f85308e ""
+  "sections/tubular-neural.tex" 1783518750 50905 b5943d772351dce616c859ace73f7928 ""
+  "sections/tubular.tex" 1783517973 23241 24786ca3cf411e34e3d29263a18a1a28 ""
   (generated)
   "main.aux"
   "main.log"

@@ -1,5 +1,5 @@
 \section{Robustness}\label{sec:robustness}
-We now apply the tube bounds from the previous section to the classification setting introduced in Section~\ref{sec:pfaffian}. Recall from Section~\ref{sec:tubular-neural} that a classifier $F\colon \R^n \to \R^m$ induces decision regions $C_j = \{x\colon g_{ij}(x)\ge 0 \text{ for all } i\neq j\}$, where $g_{ij} = F_j - F_i$, and that the decision boundary is
+We now apply the tube bounds from the previous sections to the classification setting introduced in Section~\ref{sec:tubular-neural}. Recall that a classifier $F\colon \R^n \to \R^m$ induces decision regions $C_j = \{x\colon g_{ij}(x)\ge 0 \text{ for all } i\neq j\}$, where $g_{ij} = F_j - F_i$, and that the decision boundary is
 \begin{equation*}
   \Sigma = \bigcup_{i<j}(C_i\cap C_j),
 \end{equation*}
@@ -91,24 +91,24 @@ Let $V = \mathcal{Z}(f)$ be a bounded Pfaffian hypersurface with format $(\alpha
 
 \begin{proof}
 Set $A:=\{x\in \R^{n} \mid \|x-\overline{x}\|\cdot \dist(x,V)^{-1}\geq t\}$.
-Let $U_{s}$ be uniformly distributed on a closed ball $B(\overline{x},s)$ around $\overline{x}$ of radius $s$, with density
+Let $U_{r}$ be uniformly distributed on a closed ball $B(\overline{x},r)$ around $\overline{x}$ of radius $r$, with density
 \begin{equation*}
-  \frac{1}{\omega_n s^{n}}\cdot \mathbf{1}\{\|x-\overline{x}\|\leq s\},
+  \frac{1}{\omega_n r^{n}}\cdot \mathbf{1}\{\|x-\overline{x}\|\leq r\},
 \end{equation*}
 where $\omega_n = \vol B(0,1)$.
 For a Gaussian vector $X$ centred at $\overline{x}$ with covariance $\sigma^2\mathrm{Id}$, a standard Fubini argument gives
 \begin{equation}\label{eq:gauss-to-uniform}
- \prob\{X\in A\} = \frac{\omega_n}{(2\pi)^{\frac{n}{2}}}\int_{0}^{\infty} \prob\{U_{\sigma s}\in A\}\, s^{n+1} \econst^{-\frac{s^2}{2}} \ \diff{s}.
+ \prob\{X\in A\} = \frac{\omega_n}{(2\pi)^{\frac{n}{2}}}\int_{0}^{\infty} \prob\{U_{\sigma r}\in A\}\, r^{n+1} \econst^{-\frac{r^2}{2}} \ \diff{r}.
 \end{equation}
-Since $U_{\sigma s}\in A$ implies $\dist(U_{\sigma s},V)\leq \sigma s/t$, we can apply Theorem~\ref{thm:prob_bound} with ball radius $\sigma s$ and $\varepsilon = \sigma s/t$. The ratio $\varepsilon/(\sigma s) = 1/t$ is independent of $s$, so
+Since $U_{\sigma r}\in A$ implies $\dist(U_{\sigma r},V)\leq \sigma r/t$, we can apply Theorem~\ref{thm:prob_bound} with ball radius $\sigma r$ and $\varepsilon = \sigma r/t$. The ratio $\varepsilon/(\sigma r) = 1/t$ is independent of $r$, so
 \begin{equation*}
-  \prob\{U_{\sigma s}\in A\} \leq C_{\alpha,\beta,s,n}\left[\left(1+\frac{\alpha+\overline{\beta}+1}{t}\right)^n - \left(1+\frac{1}{t}\right)^n\right].
+  \prob\{U_{\sigma r}\in A\} \leq C_{\alpha,\beta,s,n}\left[\left(1+\frac{\alpha+\overline{\beta}+1}{t}\right)^n - \left(1+\frac{1}{t}\right)^n\right].
 \end{equation*}
-This is independent of $s$ and factors out of the integral~\eqref{eq:gauss-to-uniform}. The remaining integral evaluates to
+This is independent of $r$ and factors out of the integral~\eqref{eq:gauss-to-uniform}. The remaining integral evaluates to
 \begin{equation*}
-  \frac{\omega_n}{(2\pi)^{\frac{n}{2}}}\int_{0}^{\infty} s^{n+1} \econst^{-\frac{s^2}{2}} \ \diff{s} = 1,
+  \frac{\omega_n}{(2\pi)^{\frac{n}{2}}}\int_{0}^{\infty} r^{n+1} \econst^{-\frac{r^2}{2}} \ \diff{r} = 1,
 \end{equation*}
-which follows from $\omega_n = \pi^{n/2}/\Gamma(n/2+1)$ and the substitution $u=s^2/2$ in the Gamma function.
+which follows from $\omega_n = \pi^{n/2}/\Gamma(n/2+1)$ and the substitution $u=r^2/2$ in the Gamma function.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:condition-gaussian}]
@@ -165,10 +165,10 @@ For single-hidden-layer sigmoid networks, the tube bound of Theorem~\ref{thm:pro
   an explicit $O(w^n/t)$ tail bound, polynomial in the width, valid in the tail regime $t\gtrsim K(n,L)w^n$.
 \end{remark}
 
-The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires more care. The Fubini reduction of Lemma~\ref{lem:gauss-to-uniform} expresses a Gaussian probability as an integral of uniform-ball probabilities at all radii $s\sigma$, $s \in (0,\infty)$, but Theorem~\ref{thm:prob_bound_single_layer} applies only when the ball contains $V_{ij}$. Splitting the integral at the threshold $s^* = R_V/\sigma$ determined by an enclosing radius $R_V$ of $V_{ij}$, and using the general Pfaffian bound on the small-$s$ part, gives a hybrid bound in which the Khovanskii contribution is multiplied by a Gaussian concentration factor $\gamma_n(R_V/\sigma)$ that decays in $n$ but is independent of the width; see Remark~\ref{rem:gaussian-concentration-regime} for its effect on the width scaling.
+The Gaussian analogue of Corollary~\ref{cor:nn-condition-single-layer} requires more care. The Fubini reduction of Lemma~\ref{lem:gauss-to-uniform} expresses a Gaussian probability as an integral of uniform-ball probabilities at all radii $r\sigma$, $r \in (0,\infty)$, but Theorem~\ref{thm:prob_bound_single_layer} applies only when the ball contains $V_{ij}$. Splitting the integral at the threshold $r^* = R_V/\sigma$ determined by an enclosing radius $R_V$ of $V_{ij}$, and using the general Pfaffian bound on the small-$r$ part, gives a hybrid bound in which the Khovanskii contribution is multiplied by a Gaussian concentration factor $\gamma_n(R_V/\sigma)$ that decays in $n$ but is independent of the width; see Remark~\ref{rem:gaussian-concentration-regime} for its effect on the width scaling.
 In the following result, we use the notation
 \begin{equation*}
-  \gamma_n(u) \;:=\; \frac{\omega_n}{(2\pi)^{n/2}}\int_0^u s^{n+1}\econst^{-s^2/2}\,\diff s.
+  \gamma_n(u) \;:=\; \frac{\omega_n}{(2\pi)^{n/2}}\int_0^u r^{n+1}\econst^{-r^2/2}\,\diff r.
 \end{equation*}
 
 \begin{proposition}\label{prop:single-layer-gaussian}
@@ -187,22 +187,22 @@ In the following result, we use the notation
 \begin{proof}
   Fix a pair $i < j$ and set $A_{ij} := \{x \in \R^n : \|x - \overline x\|\cdot\dist(x, V_{ij})^{-1} \geq t\}$. By the Fubini identity~\eqref{eq:gauss-to-uniform} of Lemma~\ref{lem:gauss-to-uniform},
   \begin{equation*}
-    \prob\{X \in A_{ij}\} \;=\; \frac{\omega_n}{(2\pi)^{n/2}} \int_0^\infty \prob\{U_{\sigma s} \in A_{ij}\}\,s^{n+1}\econst^{-s^2/2}\,\diff s,
+    \prob\{X \in A_{ij}\} \;=\; \frac{\omega_n}{(2\pi)^{n/2}} \int_0^\infty \prob\{U_{\sigma r} \in A_{ij}\}\,r^{n+1}\econst^{-r^2/2}\,\diff r,
   \end{equation*}
-  with $U_{\sigma s}$ uniform on $B(\overline x, \sigma s)$. Split the integral at $s^* := R_V/\sigma$.
+  with $U_{\sigma r}$ uniform on $B(\overline x, \sigma r)$. Split the integral at $r^* := R_V/\sigma$.
 
-  In the region $s \geq s^*$, we get $V_{ij} \subset B(\overline x, R_V) \subset B(\overline x, \sigma s)$. The event $U_{\sigma s} \in A_{ij}$ implies $\dist(U_{\sigma s}, V_{ij}) \leq \sigma s/t$, and Theorem~\ref{thm:prob_bound_single_layer} applied to $V_{ij}$ with ball radius $\sigma s$ and $\varepsilon = \sigma s/t$ gives $\prob\{U_{\sigma s} \in A_{ij}\} \leq B_{\mathrm{BKK}}(t)$, a bound independent of $s$ since $\varepsilon/(\sigma s) = 1/t$. Using $\frac{\omega_n}{(2\pi)^{n/2}}\int_0^\infty s^{n+1}\econst^{-s^2/2}\,\diff s = 1$,
+  In the region $r \geq r^*$, we get $V_{ij} \subset B(\overline x, R_V) \subset B(\overline x, \sigma r)$. The event $U_{\sigma r} \in A_{ij}$ implies $\dist(U_{\sigma r}, V_{ij}) \leq \sigma r/t$, and Theorem~\ref{thm:prob_bound_single_layer} applied to $V_{ij}$ with ball radius $\sigma r$ and $\varepsilon = \sigma r/t$ gives $\prob\{U_{\sigma r} \in A_{ij}\} \leq B_{\mathrm{BKK}}(t)$, a bound independent of $r$ since $\varepsilon/(\sigma r) = 1/t$. Using $\frac{\omega_n}{(2\pi)^{n/2}}\int_0^\infty r^{n+1}\econst^{-r^2/2}\,\diff r = 1$,
   \begin{equation*}
-    \frac{\omega_n}{(2\pi)^{n/2}}\int_{s^*}^\infty \prob\{U_{\sigma s} \in A_{ij}\}\,s^{n+1}\econst^{-s^2/2}\,\diff s \;\leq\; B_{\mathrm{BKK}}(t).
+    \frac{\omega_n}{(2\pi)^{n/2}}\int_{r^*}^\infty \prob\{U_{\sigma r} \in A_{ij}\}\,r^{n+1}\econst^{-r^2/2}\,\diff r \;\leq\; B_{\mathrm{BKK}}(t).
   \end{equation*}
 
-  In the region $s < s^*$ we use the unconditional Pfaffian bound: each $g_{ij}$ is Pfaffian of format $(2,1,w)$ (Example~\ref{ex:activations}), so Theorem~\ref{thm:prob_bound} applied to $V_{ij}$ with ball radius $\sigma s$ and $\varepsilon = \sigma s/t$ gives $\prob\{U_{\sigma s} \in A_{ij}\} \leq B_{\mathrm{Pf}}(t)$, again independent of $s$. Integrating over $[0, s^*]$ contributes $\gamma_n(R_V/\sigma)\,B_{\mathrm{Pf}}(t)$.
+  In the region $r < r^*$ we use the unconditional Pfaffian bound: each $g_{ij}$ is Pfaffian of format $(2,1,w)$ (Example~\ref{ex:activations}), so Theorem~\ref{thm:prob_bound} applied to $V_{ij}$ with ball radius $\sigma r$ and $\varepsilon = \sigma r/t$ gives $\prob\{U_{\sigma r} \in A_{ij}\} \leq B_{\mathrm{Pf}}(t)$, again independent of $r$. Integrating over $[0, r^*]$ contributes $\gamma_n(R_V/\sigma)\,B_{\mathrm{Pf}}(t)$.
 
   Summing the two regions and applying a union bound over the $\binom{m}{2}$ pairs $i < j$ yields~\eqref{eq:single-layer-gaussian-bound}.
 \end{proof}
 
 \begin{remark}[Concentration regime and the width dependence]\label{rem:gaussian-concentration-regime}
-  The factor $\gamma_n(u)$ is a chi-type probability, concentrated near $u = \sqrt{n+1}$ (the mode of the density $s^{n+1}\econst^{-s^2/2}$). Dropping the exponential factor in the integrand yields the elementary upper bound
+  The factor $\gamma_n(u)$ is a chi-type probability, concentrated near $u = \sqrt{n+1}$ (the mode of the density $r^{n+1}\econst^{-r^2/2}$). Dropping the exponential factor in the integrand yields the elementary upper bound
   \begin{equation}\label{eq:gamma-elementary}
     \gamma_n(u) \;\leq\; \frac{u^{n+2}}{(n+2)\,2^{n/2}\,\Gamma(n/2+1)},
   \end{equation}
