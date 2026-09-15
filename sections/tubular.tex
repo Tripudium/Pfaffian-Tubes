@@ -1,272 +1,201 @@
 \section{Tubular neighbourhoods of Pfaffian hypersurfaces}\label{sec:tubular}
-Let $M$ be an $m$-dimensional Riemannian submanifold of $\R^n$ with the metric induced from the Euclidean metric, and denote by $c = n - m$ the codimension of $M$ in $\R^n$.
-The $\varepsilon$-tubular neighbourhood of $M$ in $\R^n$, $T(M, \varepsilon)$, is the set of points in $\R^n$ that can be joined perpendicularly to $M$ by a segment of length $\le \varepsilon$. If $M$ is compact, $T(M, \varepsilon)$ is equal to the closed $\varepsilon$-neighbourhood of $M$.
-In this section we derive a bound on the probability that a random point lies in $T(M, \varepsilon)$ in the case where $M$ is defined by Pfaffian functions. The bound is derived by combining
-a variant of Weyl's tube formula with degree bounds on the generalised Gauss map, following the approach of~\cite{lotz2015volume}.
+For $A\subseteq\R^n$ and $\varepsilon>0$, write
+\[
+T(A,\varepsilon)=\{z\in\R^n\colon\dist(z,A)\le\varepsilon\}
+\]
+for the full closed distance neighbourhood. If $M$ is a smooth $m$-dimensional submanifold of $\R^n$, with the induced Euclidean metric and positive codimension $c=n-m$, define its \emph{normal tube} by
+\[
+T^\perp(M,\varepsilon)
+=\{x+u\colon x\in M,\ u\perp T_xM,\ \|u\|\le\varepsilon\}.
+\]
+Always $T^\perp(M,\varepsilon)\subseteq T(M,\varepsilon)$. If $M$ is closed as a subset of $\R^n$ and has no boundary, equality holds for every $\varepsilon>0$: a nearest point exists and the displacement to it is normal to $M$. Neither boundedness nor uniqueness of the nearest point is needed. For manifolds with boundary, the two neighbourhoods can differ.
+
+We combine a tube-volume estimate from~\cite{lotz2015volume} with effective bounds for the generalised Gauss map. A localisation argument will allow the hypersurface itself to be unbounded.
 
 \subsection{Generalised Gauss map}
- For $p\in M$, let $N_{p} M = \{ v \in \R^n \colon v \perp T_{p} M \}$ denote the normal space to $M$ at $p$ and  $S(NM)=\{(p,v)\in M\times S^{n-1}\colon v \perp T_{p} M\}$ the normal sphere bundle of $M$. The normal sphere bundle $S(NM)$ is a smooth manifold of dimension $n-1$ for any submanifold $M$, and is compact when $M$ is.
+For $x\in M$, write $N_xM=(T_xM)^\perp$ and
+\[
+S(NM)=\{(x,v)\in M\times S^{n-1}\colon v\in N_xM\}
+\]
+for the normal space and normal sphere bundle, respectively. The latter is a smooth manifold of dimension $n-1$.
 
 \begin{definition}
-The map $\gamma\colon S(NM) \to S^{n-1}$, $(p, v) \mapsto v$ is called the generalised Gauss map.
+The \emph{generalised Gauss map} is
+\[
+\gamma_M\colon S(NM)\longrightarrow S^{n-1},\qquad (x,v)\longmapsto v.
+\]
 \end{definition}
 
-For a smooth map $f$ between manifolds of the same dimension, the fibre $f^{-1}(v)$ over a regular value $v$ is discrete, and finite if the domain is compact~\cite[\S 1]{milnor1997topology}. We define the maximum degree of $f$ by
-\begin{equation*}
-\md f = \sup_{v \in \reg f} |f^{-1} (v)| \;\in\; \N\cup\{\infty\},
-\end{equation*}
-where $\reg f$ is the set of regular values of $f$. For compact $M$, the degree is finite. From our degree bounds it will follow that for the generalised Gauss maps of (sections of) Pfaffian sets 
-this degree is finite, even without the assumption that the domain is compact.
+For a smooth map $\psi$ between manifolds of the same dimension, define its \emph{maximal degree} by
+\[
+\md(\psi):=\sup_{v\in\reg(\psi)}|\psi^{-1}(v)|\in\N\cup\{\infty\},
+\]
+where $\reg(\psi)$ is the set of regular values and $|\psi^{-1}(v)|$ counts distinct points, without signs or multiplicities. Each regular fibre is discrete, and is finite when the domain is compact~\cite[\S 1]{milnor1997topology}. A uniform bound on these cardinalities requires further information; for the Pfaffian manifolds below it follows from effective zero counts.
 
-Let $\cE^n_{j}$ be the set of dimension $j$ affine subspaces of $\R^n$. For almost all $H\in \cE^n_{c+i}$, the intersection $M\cap H$ is either empty or transverse, meaning that $\codim(T_{p}M\cap T_{p}H)=\codim T_{p}M+\codim T_{p}H$.  If $H \in \cE^n_{c+i}$ intersects $M$ transversally, then $M\cap H$ is an $i$-dimensional submanifold of $H \cong\R^{c+i}$. In this case, we can define the degree of $M$ with respect to $H$ as the maximum degree of the generalised Gauss map of $M\cap H$ as a submanifold of $H\cong \R^{c+i}$:
-\begin{equation*}
-\md(M, H) := \md \gamma_{M \cap H},
-\end{equation*}
-and the $i$-th degree of $M$ as 
-\begin{equation*}
-\md_i(M) := \sup_{H \in \cE^n_{c+i}} \ \md(M, H),
-\end{equation*}
-where we use the convention $\md(M, H) = 0$ for non-transverse intersections.
-%\begin{figure}
-%    \centering
-%        \begin{tikzpicture}
-%            \definecolor{lightblue}{HTML}{D9ECEA}
-%            \fill [lightblue,even odd rule] (0,0) circle[radius=2.40cm] circle[radius=.60cm];
-%            \draw[blue] (0,0) circle (0.60cm);
-%            \draw (0,0) circle (1.5cm);
-%            \draw[blue] (0,0) circle (2.40cm);
-%            \node [shift={(0.95cm,0.80cm)}] {$S^1$};
-%            \node [shift={(2.1cm,2.1cm)}] {$T(S^1, \varepsilon)$};
-%            \draw[>=triangle 45, <->, dashed](0, 1.5cm) -- (0,2.40cm) node[midway,right] {$\varepsilon$};
-%        \end{tikzpicture}
-%    \caption{Tubular neighbourhood of a circle}
-%    \label{fig:my_label}
-%\end{figure}
+Let $\cE_j^n$ denote the space of $j$-dimensional affine subspaces of $\R^n$. Almost every $H\in\cE_{c+i}^n$ meets $M$ transversally, and then $M\cap H$ is an $i$-dimensional submanifold of $H\cong\R^{c+i}$. Define
+\[
+\md(M,H):=\md(\gamma_{M\cap H}),
+\qquad
+\md_i(M):=\sup_{H\in\cE_{c+i}^n}\md(M,H),
+\quad 0\le i\le m,
+\]
+with $\md(M,H)=0$ for a non-transverse intersection or an empty section. The normal spaces of $M\cap H$ are taken within $H$. We abbreviate $\md(M):=\md_m(M)=\md(\gamma_M)$.
 
-A bound on the volume of $T(M,\varepsilon)$ in terms of the $i$-th degrees of $M$ was derived in~\cite[Theorem 4.3]{lotz2015volume},
-based on a version of Weyl's tube formula and integral geometry. The key takeaway of this result is that the volume of $T(M, \varepsilon)$ is bounded by a polynomial in $\varepsilon$ (the original formula due to Weyl actually yields an equality, albeit with some restrictions on the size of $\varepsilon$ and different coefficients).
-In what follows, $B(p,\rho)$ denotes a closed ball of radius $\rho$ around $p\in \R^n$.
+\begin{lemma}\label{lem:degree-restriction}
+If $U$ is an open subset of $M$, then $\md_i(U)\le\md_i(M)$ for every $0\le i\le m$.
+\end{lemma}
 
-\begin{theorem} \label{thm:tube_bound}
-Let $M \subset B(p, \rho)$ be a compact Riemannian submanifold of $\R^n$ of dimension $m$, possibly with boundary, and set $c=n-m$. Then for any $\varepsilon > 0$ we have 
-\begin{equation*}
-\vol T(M, \varepsilon) \le 2\omega_n \rho^n \sum_{i=0}^m \binom{n}{c+i} \md_i(M) \left(\frac{\varepsilon}{\rho}\right)^{c+i},
-\end{equation*}
-where $\omega_n = \vol B(0,1)$ and, when $M$ has boundary, the degrees $\md_i(M)$ are taken on the interior $M\setminus\partial M$.
+\begin{proof}
+Fix a transverse section of $U$, a regular value of its Gauss map, and finitely many points of that fibre. Transversality and the inverse function theorem imply that these distinct regular preimages persist under sufficiently small changes of the affine section and normal direction. Choose a nearby section transverse to all of $M$, and then a nearby direction regular for its Gauss map; such choices exist by transversality and Sard's theorem. The chosen finite collection has cardinality at most $\md_i(M)$. Taking suprema over finite collections, regular values and sections proves the claim.
+\end{proof}
+
+The following normal-tube estimate follows from~\cite[Theorems 3.1 and 4.3]{lotz2015volume}, with the boundary convention explained below.
+
+\begin{theorem}[Normal-tube bound]\label{thm:tube_bound}
+Let $M\subset B(p,\rho)$ be a compact smooth submanifold of dimension $0\le m<n$, possibly with boundary, and set $c=n-m$. Then
+\[
+\vol T^\perp(M,\varepsilon)\le
+2\omega_n\rho^n\sum_{i=0}^m\binom n{c+i}\md_i(M^\circ)
+\left(\frac{\varepsilon}{\rho}\right)^{c+i},
+\]
+where $M^\circ=M\setminus\partial M$ and $\varepsilon,\rho>0$.
 \end{theorem}
 
 \begin{remark}\label{rem:tube_bound_boundary}
-The estimate of Theorem~\ref{thm:tube_bound} is a one-sided, integral-geometric bound: it controls $\vol T(M,\varepsilon)$ by the integrals of absolute curvature over the interior $M\setminus\partial M$, which are themselves bounded by the section degrees $\md_i$ via Crofton's formula. The upper bound follows from the surjectivity of the normal exponential map $S(NM)\times[0,\varepsilon]\to T(M,\varepsilon)$ together with the area formula, and therefore holds verbatim for a bounded compact manifold with boundary, the curvature integrals and degrees being taken over the interior. The curvature-integral bound is stated and proved in this generality in~\cite[Theorem 3.1]{lotz2015volume}, whose statement explicitly allows a boundary. The passage from curvature integrals to section degrees is~\cite[Theorem 4.3]{lotz2015volume}; it is stated there for manifolds without boundary, but extends to the boundary case with the degrees taken over the interior, as indicated in the remark following~\cite[Lemma 4.2]{lotz2015volume} and used in the proof of~\cite[Theorem 1.1]{lotz2015volume}.
+Theorem 3.1 of~\cite{lotz2015volume} bounds the normal tube based on an open subset $U\subseteq M\setminus\partial M$. Apply it with $U=M^\circ$ and use the section-degree argument of its Theorem 4.3; the extension of the Gauss-map estimate to such $U$ is stated after its Lemma 4.2. This gives the displayed bound for $\vol T^\perp(M^\circ,\varepsilon)$. Normal vectors of length at most $\varepsilon$ based on $\partial M$, with normal taken relative to $M$, form a disk bundle of dimension $(m-1)+c=n-1$. Its image has zero $n$-dimensional volume, so $\vol T^\perp(M,\varepsilon)=\vol T^\perp(M^\circ,\varepsilon)$.
+
+This does not bound the full distance neighbourhood $T(M,\varepsilon)$ when $M$ has boundary. For example, the normal tube of a line segment in $\R^2$ is a rectangle, whereas its distance neighbourhood also includes two semicircular caps. The tube $T^\perp(\partial M,\varepsilon)$ uses normals to $\partial M$ as a separate submanifold and can have positive $n$-dimensional volume.
 \end{remark}
 
-\subsection{Bounding the degree of the Gauss map}
-The key to deriving an effective bound on the volume of $T(M, \varepsilon)$ is to bound the degree of the generalised Gauss map.
-We are interested in the case where $M$ is a complete intersection of $c$ smooth Pfaffian functions. By this, we mean that $M$ 
-can be expressed in the form
-\begin{equation*}
-M = \mathcal{Z}(f_1, \dots, f_c),
-\end{equation*}
-where the $f_i$ are Pfaffian functions, and such that the gradients $\nabla f_i$ are linearly independent at each point.
+\subsection{Localisation and Gauss-map degree bounds}
+The next observation avoids introducing a separate tube around the boundary of a truncation.
+
+\begin{proposition}\label{prop:local-tube}
+Let $V\subset\R^n$ be a closed smooth hypersurface without boundary, with finite degrees $\md_i(V)$. If $X$ is uniform in $B(p,\rho)$, where $\rho,\varepsilon>0$, and $u=\varepsilon/\rho$, then
+\begin{equation}\label{eq:local-tube}
+\prob\{\dist(X,V)\le\varepsilon\}\le
+2\sum_{i=0}^{n-1}\binom n{i+1}\md_i(V) u^{i+1}(1+u)^{n-i-1}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The empty case is immediate. Choose $R>\rho+\varepsilon$ such that the sphere $S^{n-1}(p,R)$ meets $V$ transversally. Then $M_R=V\cap B(p,R)$ is a compact manifold with boundary. If $z\in B(p,\rho)$ has distance at most $\varepsilon$ from $V$, choose a nearest point $x\in V$. We have
+\[
+\|x-p\|\le\|x-z\|+\|z-p\|\le\varepsilon+\rho<R,
+\]
+so $x\in M_R^\circ$. The nearest-point condition gives $z-x\perp T_xV$, and hence
+\[
+T(V,\varepsilon)\cap B(p,\rho)
+\subseteq T^\perp(M_R^\circ,\varepsilon)
+\subseteq T^\perp(M_R,\varepsilon).
+\]
+Apply Theorem~\ref{thm:tube_bound} to the compact manifold $M_R$, and Lemma~\ref{lem:degree-restriction} to its interior, which is open in $V$. Dividing by $\omega_n\rho^n$ bounds the probability by
+\[
+2\sum_{i=0}^{n-1}\binom n{i+1}\md_i(V)
+u^{i+1}\left(\frac R\rho\right)^{n-i-1}.
+\]
+By Sard's theorem, regular radii can be chosen decreasing to $\rho+\varepsilon$. Taking this limit proves~\eqref{eq:local-tube}.
+\end{proof}
+
+For hypersurfaces, a Gauss fibre is described by a square system without auxiliary variables. The following non-degeneracy statement will be used in both the Pfaffian and Bernstein bounds. In what follows, the notation $\partial_{\tau}f=\langle\nabla f,\tau\rangle$ is used for the directional derivative.
+
+\begin{lemma}\label{le:gauss-nondegenerate}
+Let $f:\R^d\to\R$ be smooth with $\nabla f\ne0$ on $V=\mathcal Z(f)$, and let $v\in S^{d-1}$ be a regular value of $\gamma_V$. Choose any basis $\tau_1,\dots,\tau_{d-1}$ of $v^\perp$. Then the solutions of
+\begin{equation}\label{eq:gauss-directional-system}
+f=\partial_{\tau_1}f=\cdots=\partial_{\tau_{d-1}}f=0
+\end{equation}
+are in bijection with $\gamma_V^{-1}(v)$, and every solution is non-degenerate. In particular, when $v_d\ne0$, choosing $\tau_j=v_de_j-v_je_d$ gives
+\begin{equation}\label{eq:gauss-cross-system}
+f=0,\qquad v_d\partial_j f-v_j\partial_d f=0,\quad 1\le j<d.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The derivative equations say exactly that the nonzero gradient of $f$ is parallel to $v$. Each such point $x$ contributes precisely the bundle point $(x,v)$ to the specified fibre.
+
+A rotation and an invertible change of the derivative equations reduce non-degeneracy to $v=e_d$ and $\tau_j=e_j$. At a solution $x$, we have $\partial_d f(x)\ne0$, and the implicit function theorem represents $V$ locally as $u\mapsto(u,h(u))$. Write $x=(u_0,h(u_0))$; then $\nabla h(u_0)=0$. Twice differentiating $f(u,h(u))=0$ gives
+\[
+\partial_{jk}f(x)=-\partial_d f(x)\,\partial_{jk}h(u_0)
+\quad(1\le j,k<d).
+\]
+Regularity of the Gauss map is equivalent to nonsingularity of $\operatorname{Hess}h(u_0)$. Expanding the Jacobian determinant of $(f,\partial_1f,\dots,\partial_{d-1}f)$ along its first row gives absolute value
+\[
+|\partial_d f(x)|^d\,|\det\operatorname{Hess}h(u_0)|>0.
+\]
+For $d=1$, the system is simply $f=0$ and the assertion follows from $f'(x)\ne0$.
+\end{proof}
+
+\begin{proposition}\label{prop:hypersurface-degree}
+Let $f\in\Pfaff_{\alpha,\beta,s}(\R^n)$, where $\alpha,\beta\ge1$, and assume that $0$ is a regular value. For $V=\mathcal Z(f)$ and $0\le i<n$,
+\begin{equation}\label{eq:hypersurface-ideg}
+\md_i(V)\le
+2^{\frac{s(s-1)}2}\beta(\alpha+\beta-1)^i
+\left[\beta+i(\alpha+\beta-2)+\min\{i+1,s\}\alpha\right]^s.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Parametrise a transverse affine section $H\in\cE_{i+1}^n$ by an affine isometry from $\R^{i+1}$. By Remark~\ref{re:affine}, the restricted function has the same format and $0$ remains a regular value. For each regular Gauss direction, Lemma~\ref{le:gauss-nondegenerate} supplies a non-degenerate square system with one equation of degree $\beta$ and $i$ equations of degree at most $\alpha+\beta-1$, by Lemma~\ref{le:pfaffalgebra}(3). Theorem~\ref{thm:khovanskii} gives~\eqref{eq:hypersurface-ideg}. The bound holds for every such fibre, so taking the two suprema proves the result without a compactness assumption.
+\end{proof}
+
+For completeness, a similar argument with Lagrange multipliers gives a bound for complete intersections.
 
 \begin{proposition}\label{prop:pfaffian-degree-bound}
-  Let $M=\mathcal{Z}(f_1,\dots,f_c)$ be a compact Pfaffian complete intersection, where the $f_i$ are Pfaffian with format $(\alpha, \beta_i, s)$ with respect to the same Pfaffian chain and $\beta_i\le \overline{\beta}$ for all $i$. Then
-  \begin{equation*}
-    \md_{n-c}(M) \le{} 2^{\frac{s(s-1)}{2}}(\alpha+\overline{\beta})^n \cdot \prod_{i=1}^c \beta_i \cdot \left[(n+\min\{n,s\})\alpha+n(\overline{\beta}-1)+\sum_{i=1}^c (\beta_i-1)+1\right]^s.
-  \end{equation*}
-  %\begin{align*}
-  %  \md(M) \le{} & 2^{\frac{s(s-1)}{2}}(\alpha+\beta)^n\beta_1\cdots \beta_c \\
-  %  &\cdot \left((n+\min\{n,s\})\alpha+n(\beta-1)+\sum_{i=1}^c(\beta_i-1)+1\right)^s.
-  %\end{align*}
-  \end{proposition}
-  
-  \begin{proof}
-  Let $v\in S^{n-1}$ be a regular value of the generalised Gauss map $\gamma\colon S(NM)\to S^{n-1}$. At each point $x\in M$,
-  the normal sphere bundle is spanned by the normalized gradients of the $f_i$, and the number of points in the pre-image $\gamma^{-1}(v)$ is the same as the number of points in the set
-  \begin{equation*}
-    S:= \left\{x\in M \colon \exists \lambda_1,\dots,\lambda_c \text{ s.t. } \sum_{i=1}^c \lambda_i \nabla f_i(x) = v\right\}.
-  \end{equation*}
-  Note that since the gradients are linearly independent at each point, for every $x\in M$ the coefficients $\lambda_i$ are uniquely determined. The number of points in $S$ is therefore bounded by the number of solutions of the system of $n+c$ equations in $n+c$ unknowns,
-  \begin{align}
-    \label{eq:pfaffian-system}
-  \begin{split}
-    f_i(x) &= 0, \quad i\in [c]\\
-    v-\sum_{i=1}^c \lambda_i \nabla f_i(x) &= 0.
-  \end{split}
-  \end{align}
-  All functions involved are Pfaffian and we can apply Theorem~\ref{thm:khovanskii} to get a bound on the number of solutions, using the fact that the $c$ equations $f_i=0$ have degrees $\beta_i$ and the $n$ gradient equations have degree $\alpha+\overline{\beta}$ by Lemma~\ref{le:pfaffalgebra}(3). The chain depends on $n$ of the $n+c$ variables (the $x$-variables only). By Sard's theorem, for a generic regular value $v$ of $\gamma$, all solutions of~\eqref{eq:pfaffian-system} are non-degenerate. Since $|\gamma^{-1}(v)|$ is locally constant on regular values, the maximum degree is achieved at such generic values.
-  \end{proof}
+Let $M=\mathcal Z(f_1,\dots,f_c)\subset\R^n$, where $1\le c\le n$, the gradients $\nabla f_j$ are linearly independent on $M$, and the functions share a Pfaffian chain with formats $(\alpha,\beta_j,s)$, $\alpha,\beta_j\ge1$. Put $\overline\beta=\max_j\beta_j$. Then
+\begin{align*}
+\md(M)\le{}&
+2^{\frac{s(s-1)}2}(\alpha+\overline\beta)^n\prod_{j=1}^c\beta_j\\
+&{}\cdot\left[
+n(\alpha+\overline\beta-1)+\sum_{j=1}^c(\beta_j-1)
++\min\{n+c,s\}\alpha+1
+\right]^s.
+\end{align*}
+The same bound in ambient dimension $c+i$ bounds $\md_i(M)$.
+\end{proposition}
 
-  \begin{remark}\label{rem:lagrange-vs-minors}
-    In the proof of Proposition~\ref{prop:pfaffian-degree-bound}, one could alternatively eliminate the Lagrange multipliers $\lambda_i$ by requiring that the matrix
-  \begin{equation}\label{eq:jacobian}
-    J =
-    \begin{bmatrix}
-      \nabla f_1(x) & \cdots & \nabla f_c(x) & v
-    \end{bmatrix}
-  \end{equation}
-  has rank at most $c$, i.e., that all $(c{+}1)\times(c{+}1)$ minors of $J$ vanish. Each such minor has degree at most $c(\alpha+\overline{\beta}-1)$ in the variables $x_1,\dots,x_n$, by Lemma~\ref{le:pfaffalgebra}(3). The resulting (overdetermined) system involves only the $n$ variables $x_i$, so one can apply the connected-components bound~\eqref{eq:jones} with $D = \max\{\overline{\beta}, c(\alpha+\overline{\beta}-1)\}$ playing the role of $\overline{\beta}$.
-  While this reduces the number of variables from $n+c$ to $n$, the exponential base in~\eqref{eq:jones} becomes $\alpha + 2D - 1$, which for $c = 2$ equals $5\alpha + 4\overline{\beta} - 5$. This is significantly larger than $\alpha + \overline{\beta}$, the base appearing in Proposition~\ref{prop:pfaffian-degree-bound}.
-  For the parameter ranges typical in neural-network applications ($c = 2$, $\alpha, \overline{\beta} \le 3$), this base inflation dominates the savings from reducing the number of variables, and the Lagrange-multiplier approach gives substantially better bounds. For instance, when $\alpha = 2$, $\overline{\beta} = 1$, $s = 1$, Proposition~\ref{prop:pfaffian-degree-bound} yields $\md(M) \le 3^n(2n+3)$, whereas the minor-elimination approach gives a bound of order $9^n \cdot n$.
-\end{remark}
-
-% \begin{lemma}\label{le:gauss-hypersurface}
-% Let $V = \mathcal{Z}(f)$ be a smooth, compact hypersurface, where $f$ is a Pfaffian function with format $(\alpha, \beta, s)$. Let $\gamma\colon S(NM)\to S^{n-1}$ be the Gau\ss map of $V$. Then
-% \begin{equation*}
-% \md \gamma \le 2^{\frac{s(s-1)}{2} + 1} \beta (\alpha + \beta - 1)^{n-1} \big(\beta + (n-1)(\alpha + \beta - 1) - n + \min(n,s)\alpha + 1 \big)^s.
-% \end{equation*}
-% \end{lemma}
-
-% \begin{proof}
-% Consider the map~\footnote{This is actually the traditional definition of the Gau\ss map for an oriented hypersurface.}
-% \begin{equation*}
-%  \tilde{\gamma}\colon V\to S^{n-1}, \ \tilde{\gamma}(x)=\frac{\nabla f(x)}{\|\nabla f(x)\|}.
-% \end{equation*}
-% Any $v\in S^{n-1}$ in the image of the generalised Gauss map is of the form $\pm \tilde{\gamma}(x)$, so that after a suitable choice of sign for $f$, we have
-% \begin{equation*}
-%  |\gamma^{-1}(v)| \leq 2|\tilde{\gamma}^{-1}(v)|.
-% \end{equation*} 
-% %The Gauss map is given by $\gamma(x) = \frac{\nabla q}{||\nabla q||}$. We begin by bounding $\# \Tilde{g}^{-1}(v)$ for $v \in S^{n-1}$
-% %a regular value. More specifically we show that 
-% %$$
-% %\# \Tilde{g}^{-1}(v) \le 2^{\frac{\gamma(\gamma-1)}{2}} \beta (\alpha + \beta - 1)^{n-1} \big(\beta + (n-1)(\alpha + \beta - 1) - n + \min(n,\gamma)\alpha + 1 \big)^l 
-% %$$
-% The argument for bounding $|\tilde{\gamma}^{-1}(v)|$ is close to the proof of the Milnor-Thom bound on the sum of Betti numbers of an algebraic variety \citep[Proposition 11.5.2]{bochnak2013real}.
-
-% Let $\mtx{Q}$ be an orthogonal transformation such that $\mtx{Q}v=\vct{e}_n$, where $\vct{e}_n=(0,\dots,0,1)^\trans$ is the $n$th unit vector, and consider the function $g(x)=f(\mtx{Q}x)$. Then the Gauss map associated to $g$ is given by $\tilde{\gamma}_g(x)=\mtx{Q}^\trans \tilde{\gamma}(\mtx{Q}x)$, and one easily checks that 
-% \begin{equation*}
-%   |\{x\in \R^n \colon g(x)=0, \ \tilde{\gamma}_g(x)=\mtx{Q}v=\vct{e}_n\}|=|\{x\in \R^n \colon f(x)=0, \ \tilde{\gamma}(x)=v\}|.
-% \end{equation*}
-% Moreover, by Remark~\ref{re:affine} the Pfaffian structure of $g$ is the same as that of $f$. 
-% We may therefore without loss of generality assume that $v = \vct{e}_n$. 
-% Solutions of the equation $\Tilde{\gamma}(x) = v$ thus correspond to solutions of the system
-% \begin{equation}\label{eq:paffian-hyper}
-% \frac{\partial f}{\partial x_1}(x) = \dotsb = \frac{\partial f}{\partial x_{n-1}}(x) = f(x) = 0.
-% \end{equation}
-% Once we see that such solutions $x$ are in fact regular, which is equivalent to showing that the matrix
-% \begin{equation*} 
-% \mtx{J} =
-% \begin{bmatrix}
-%     \frac{\partial^2 f}{\partial x_1 \partial x_1} & \dots & \frac{\partial^2 f}{\partial x_1 \partial x_{n-1}} & \frac{\partial f}{\partial x_1} \\
-%     \vdots                                        & \dots & \vdots                                             & \vdots                       \\ 
-%     \frac{\partial^2 f}{\partial x_n \partial x_1} & \dots & \frac{\partial^2 f}{\partial x_n \partial x_{n-1}} & \frac{\partial f}{\partial x_n}
-% \end{bmatrix}
-% \end{equation*}
-% is non-singular, we can apply Khovanskii's bound~\ref{thm:khovanskii}.
-
-% Let $x\in \Tilde{\gamma}^{-1}(v)$. Since $\partial f(x)/\partial x_n\neq 0$, by the implicit function theorem there exists an open neighbourhood $U\subset \R^{n-1}$ and a map $h\colon U\to \R$ such that $(\vct{u},h(\vct{u}))$ parametrizes $V$ in a neighbourhood of $x$. By differentiating $f(\vct{u},h(\vct{u})) = 0$ with respect to $u_i$, we get
-% \begin{equation}\label{eq:local}
-%     \frac{\partial f}{\partial x_i} + \frac{\partial f}{\partial x_n} \frac{\partial h}{\partial u_i} = 0 
-% \end{equation}
-% in a neighbourhood of $x$. By differentiation of the above expression with respect to $u_j$, we get that 
-% \begin{equation*}
-%     \frac{\partial^2 f}{\partial x_j \partial x_i} = - \frac{\partial f}{\partial x_n} \frac{\partial^2 h}{\partial u_j \partial u_i}.
-% \end{equation*}
-% at $y$ for all $1 \le i, j \le n-1$. Using the fact that $\partial f(x)/\partial x_j=0$ for $j\in \{1,\dots,n-1\}$, the determinant
-% of $\mtx{J}$ satisfies
-% \begin{equation*}
-%   |\det \mtx{J}| = \left|\left(\frac{\partial f(x)}{\partial x_n}\right)^n \cdot \det\left(\frac{\partial^2 h(x)}{\partial u_i\partial u_j}\right)\right|.
-% \end{equation*}
-% Using the expression~\eqref{eq:local}, we also get an expression of $\Tilde{\gamma}$ in the local coordinates,
-% \begin{equation*}
-%     \Tilde{\gamma}(u_1, \dotsc, u_{n-1}) =  \left(\frac{\partial h}{u_1}, \dotsc, \frac{\partial h}{\partial u_{n-1}}, -1 \right) \Bigg/ \sqrt{1 + \sum_{i=1}^{n-1} \Big(\frac{\partial h}{\partial u_i} \Big)^2}.
-% \end{equation*}
-% Differentiating and using the fact, from~\eqref{eq:local}, that $\nabla h(\vct{u}(x))=\zerovct$ at $x$, we get
-% \begin{equation*}
-%     \frac{\partial^2 h}{\partial u_i \partial u_j}(x) = \frac{\partial \Tilde{\gamma}_j}{\partial u_i} (x).
-% \end{equation*}
-% for all $1 \le i, j \le n-1$. Since $v$ is a regular value of $\tilde{\gamma}$, it follows that $\det \mtx{J}\neq 0$.
-
-% Since $f$ is Pfaffian with format $(\alpha, \beta, s)$, it follows from Lemma~\ref{le:pfaffalgebra} that $\frac{\partial f}{\partial x_i}$ is Pfaffian with format $(\alpha, \alpha + \beta - 1, s)$, and the bound on the number of solutions of the system~\eqref{eq:paffian-hyper} follows from Khovanskii's inequality, Theorem~\ref{thm:khovanskii}. 
-% \end{proof}
-
-For $0\le i\le m$, we bound the $i$-th maximal degree as follows. Fix a section $H\in\cE^n_{c+i}$ meeting $M$ transversally. Since $H$ is an affine subspace, there is an affine isometry $h\colon \R^n\to \R^n$ (a rigid motion) carrying $H$ onto the coordinate subspace
-\begin{equation*}
-  \tilde{H} = \{x\in \R^n \colon x_{c+i+1}=\cdots =x_{n}=0\}\cong\R^{c+i}.
-\end{equation*}
-The generalised Gauss-map degree is invariant under isometries, so
-\begin{equation*}
-  \md(M,H) = \md(\tilde{M},\tilde{H}),\qquad \tilde{M} := h(M) = \mathcal{Z}(\tilde{f}_1,\dots,\tilde{f}_c),\quad \tilde{f}_j := f_j\circ h^{-1}.
-\end{equation*}
-By Remark~\ref{re:affine}, each $\tilde{f}_j$ is Pfaffian of the same format $(\alpha,\beta_j,s)$ as $f_j$, so $\tilde{M}$ is a Pfaffian complete intersection of that format; in particular the resulting bound is independent of $H$, and it suffices to bound $\md(\tilde{M},\tilde{H})$. Restricting to $\tilde{H}$, that is, setting $x_{c+i+1}=\cdots=x_n=0$, realises $\tilde{M}\cap\tilde{H}$ as a Pfaffian complete intersection of $c$ functions in the $c+i$ variables $x_1,\dots,x_{c+i}$. When $i=0$, this is a zero-dimensional transverse complete intersection, and its generalised Gauss-map degree is just the number of points in the section, so the same argument applies. Applying Proposition~\ref{prop:pfaffian-degree-bound} in dimension $c+i$ gives
-\begin{align}
-  \begin{split} 
-  \label{eq:ideg}
-  \md_i(M) \leq &2^{\frac{s(s-1)}{2}}(\alpha+\overline{\beta})^{c+i}\prod_{j=1}^c \beta_j\\
-  &\cdot\left[(c+i+\min\{c+i,s\})\alpha+(c+i)(\overline{\beta}-1)+\sum_{j=1}^c (\beta_j-1)+1\right]^s.
-\end{split}
-\end{align}
-
+\begin{proof}
+For a regular value $v$ of $\gamma_M$, its fibre is in bijection with solutions of
+\begin{equation}\label{eq:pfaffian-system}
+f_j(x)=0\quad(1\le j\le c),\qquad
+\sum_{j=1}^c\lambda_j\nabla f_j(x)=v.
+\end{equation}
+The multipliers are unique by independence of the gradients. To check non-degeneracy, identify $(x,\lambda)\in M\times\R^c$ with $(x,\sum_j\lambda_j\nabla f_j(x))$ in the normal bundle. Near a solution, projection of this bundle to $\R^n$ is, in radial coordinates, $(x,u,r)\mapsto r\gamma_M(x,u)$. Its differential is invertible at $r=1$ precisely when $\diff\gamma_M$ is invertible. Since $(f_1,\dots,f_c)$ is a submersion on $M$, this is equivalent to the full Jacobian of~\eqref{eq:pfaffian-system} being nonsingular. Theorem~\ref{thm:khovanskii} now applies in $n+c$ variables, with degrees $\beta_1,\dots,\beta_c$ and $n$ degrees at most $\alpha+\overline\beta$. Restriction to a transverse affine section preserves the formats.
+\end{proof}
 
 \subsection{A Pfaffian tube formula}
-We can now state and prove our bound on the volume of a tubular neighbourhood of a Pfaffian hypersurface. For convenience, this has been stated in terms of probability, 
-but the reader should note that one could readily modify the proof to get a similar bound for $\vol T(V, \varepsilon)$. 
+Combining the local tube bound with the direct hypersurface system gives the following estimate.
 
-\begin{theorem} \label{thm:prob_bound}
-Let $V = \mathcal{Z}(f)$ for Pfaffian function $f\in \Pfaff_{\alpha,\beta,s}(\R^n)$. Suppose that $\nabla f$ is non-vanishing on $V$ and that $V$ is bounded. Moreover, let $p \in \R^n$, $\varepsilon, \rho > 0$ and $X$ uniformly distributed over $B(p, \rho)$. Then
-\begin{equation*}
-\prob\{ d(X, V) \le \varepsilon \} \leq C_{\alpha,\beta,s,n}\left[\left(1+(\alpha+\overline{\beta}+1)\frac{\varepsilon}{\rho}\right)^n - \left(1+\frac{\varepsilon}{\rho}\right)^n\right],
-\end{equation*}
-where $\overline{\beta}= \max\{\beta,2\}$ and
-\begin{equation*}
-C_{\alpha,\beta,s,n} =  6\cdot 2^{\frac{s(s-1)}{2}}\beta\left(n (2\alpha+\overline{\beta}-1)+\beta+1\right)^s.
-\end{equation*}
+\begin{theorem}\label{thm:prob_bound}
+Let $f\in\Pfaff_{\alpha,\beta,s}(\R^n)$ with $\alpha,\beta\ge1$ and $0$ a regular value, and set $V=\mathcal Z(f)$. Let $X$ be uniformly distributed in $B(p,\rho)$, where $p\in\R^n$ and $\rho>0$. For every $\varepsilon>0$,
+\[
+\prob\{\dist(X,V)\le\varepsilon\}\le
+C_{\alpha,\beta,s,n}
+\left[\left(1+(\alpha+\beta)\frac{\varepsilon}{\rho}\right)^n
+-\left(1+\frac{\varepsilon}{\rho}\right)^n\right],
+\]
+where
+\begin{equation}\label{eq:pfaffian-tube-constant}
+C_{\alpha,\beta,s,n}
+=\frac{2^{\frac{s(s-1)}2+1}\beta}{\alpha+\beta-1}
+\left[\beta+(n-1)(\alpha+\beta-2)+\min\{n,s\}\alpha\right]^s.
+\end{equation}
 \end{theorem}
 
-\begin{remark}
-Note that the constant involves both $\beta$ and $\overline{\beta}=\max\{\beta,2\}$: the bare $\beta$ is the degree of $f$, while $\overline{\beta}$ is forced by the codimension-two boundary $V\cap S^{n-1}(p,\rho+\varepsilon)$ arising in the proof, whose defining sphere has degree~$2$.
-\end{remark}
-
-\begin{proof}[Proof of Theorem~\ref{thm:prob_bound}]
-The probability that $d(X,V)\leq \varepsilon$ for $X$ uniformly distributed in $B(p,\rho)$ is given by
-\begin{equation*}
-  \prob\{d(X, V)\leq \varepsilon\} = \frac{\vol (T(V,\varepsilon)\cap B(p,\rho))}{\vol B(p,\rho)}.
-\end{equation*}
-Fix $\varepsilon>0$ and assume first that $\rho+\varepsilon$ is a regular value of the map $x\mapsto\|x-p\|$ on $V$, which holds for almost all $\rho>0$ by Sard's theorem; the remaining values of $\rho$ are handled by a limiting argument at the end of the proof. Then $M = V \cap B(p, \rho + \varepsilon)$ is a compact manifold with boundary, and we notice that
-\begin{equation*}
-T(V, \varepsilon) \cap B(p, \rho) \subset T(M \setminus \partial M, \varepsilon) \cup T(\partial M, \varepsilon),
-\end{equation*}
-where $\partial M=M\cap S^{n-1}(p, \varepsilon+\rho)$.
-It is therefore enough to bound the two tubular neighbourhoods on the right-hand side.
-
-Since $M \setminus \partial M \subset V$ and $\dim(M \setminus \partial M) = \dim V$, we have $\md_i(M\setminus \partial M) \leq \md_i(V)$. Applying Theorem~\ref{thm:tube_bound} to the compact manifold with boundary $M\subset B(p,\rho+\varepsilon)$ (see Remark~\ref{rem:tube_bound_boundary}) and using $\md_i(M\setminus\partial M)\le\md_i(V)$, we obtain
-\begin{equation*}
-  \vol T(M \setminus \partial M, \varepsilon)  \leq 2 \omega_n (\rho+\varepsilon)^n\sum_{i=0}^{n-1} \binom{n}{i+1} \cdot \md_i(V)\cdot \left(\frac{\varepsilon}{\rho+\varepsilon}\right)^{i+1}.
-\end{equation*}
-Since $\partial M$ has codimension $2$, we get, in addition,
-\begin{equation*}
-  \vol T(\partial M, \varepsilon) \leq 2 \omega_n (\rho+\varepsilon)^{n}\sum_{i=1}^{n-1} \binom{n}{i+1} \cdot \md_{i-1}(\partial M)\cdot \left(\frac{\varepsilon}{\rho+\varepsilon}\right)^{i+1}.
-\end{equation*}
-Set
-\begin{equation*}
-  K := 2^{\frac{s(s-1)}{2}}\beta\big[n(2\alpha+\overline{\beta}-1)+\beta+1\big]^s.
-\end{equation*}
-Using~\eqref{eq:ideg}, we get
-\begin{align*}
-\md_i(V) &\leq 2^{\frac{s(s-1)}{2}}(\alpha+\beta)^{i+1}\beta\big[(i+1)(2\alpha+\beta-1)+\beta\big]^s\leq K (\alpha+\overline{\beta})^{i+1},\\
-\md_{i-1}(\partial M) &\leq 2^{\frac{s(s-1)}{2}+1}(\alpha+\overline{\beta})^{i+1}\beta\big[(i+1)(2\alpha+\overline{\beta}-1)+\beta+1\big]^s\leq 2K (\alpha+\overline{\beta})^{i+1}.
-\end{align*}
-Combining these bounds, we get
-\begin{align*}
-\vol T(V, \varepsilon) \cap B(p, \rho) &\le \vol T(M \setminus \partial M, \varepsilon) + \vol T(\partial M, \varepsilon) \\
-& \leq 6K\omega_n(\rho+\varepsilon)^{n} \sum_{i=0}^{n-1}\binom{n}{i+1}(\alpha+\overline{\beta})^{i+1}\left(\frac{\varepsilon}{\rho+\varepsilon}\right)^{i+1}.
-\end{align*}
-Dividing both sides by $\vol B(p, \rho) = \omega_n \rho^n$, substituting $j=i+1$ and using the binomial theorem
-%and setting $a=\alpha+\overline{\beta}$ and $t=\varepsilon/\rho$, we get
-%\begin{equation*}
-%\prob\{d(X, V)\leq \varepsilon\} \leq 6K\sum_{i=0}^{n-1}\binom{n}{i+1}(at)^{i+1}\left(1+t\right)^{n-i-1}.
-%\end{equation*}
-%The substitution $j=i+1$ and the binomial theorem give
-%\begin{equation*}
-%  \sum_{j=1}^{n}\binom{n}{j}(at)^j(1+t)^{n-j} = (1+(a+1)t)^n - (1+t)^n.
-%\end{equation*}
-%Recalling $C_{\alpha,\beta,s,n}=6K$, $a=\alpha+\overline{\beta}$, and $t=\varepsilon/\rho$ 
-gives the claimed bound for every $\rho$ such that $\rho+\varepsilon$ is a regular value of $x\mapsto\|x-p\|$ on $V$, which by Sard's theorem is a dense set of $\rho>0$. It remains to remove this genericity assumption. Both sides of the inequality are continuous in $\rho$: the right-hand side is a polynomial in $\varepsilon/\rho$, while the left-hand side equals $\vol\bigl(T(V,\varepsilon)\cap B(p,\rho)\bigr)/(\omega_n\rho^n)$, which is continuous because $\rho\mapsto\vol\bigl(T(V,\varepsilon)\cap B(p,\rho)\bigr)$ is. Since the bound holds on a dense set of $\rho$ and both sides are continuous, it holds for all $\rho,\varepsilon>0$, completing the proof.
+\begin{proof}
+Put $D=\alpha+\beta-1$, $B=\beta+(n-1)(\alpha+\beta-2)+\min\{n,s\}\alpha$, and $A=2^{s(s-1)/2}\beta B^s$. Proposition~\ref{prop:hypersurface-degree} gives $\md_i(V)\le AD^i$. The zero set $V$ is closed, so Proposition~\ref{prop:local-tube} applies. With $u=\varepsilon/\rho$, the binomial identity
+\[
+\sum_{i=0}^{n-1}\binom n{i+1}D^i u^{i+1}(1+u)^{n-i-1}
+=\frac{(1+(D+1)u)^n-(1+u)^n}{D}
+\]
+gives the result, since $C_{\alpha,\beta,s,n}=2A/D$.
 \end{proof}
 
 \begin{remark}\label{rem:prob_bound_simple}
-Discarding the non-positive term $-(1+\varepsilon/\rho)^n$ gives the simpler bound
-\begin{equation*}
- \prob\{ d(X, V) \le \varepsilon \} \leq C_{\alpha,\beta,s,n}\left(1+(\alpha+\overline{\beta}+1)\frac{\varepsilon}{\rho}\right)^n.
-\end{equation*}
-The full bound of Theorem~\ref{thm:prob_bound} is sharper in two ways: it vanishes as $\varepsilon\to 0$ (as it must), and for large $\rho/\varepsilon$ it decays as $C_{\alpha,\beta,s,n}\cdot n(\alpha+\overline{\beta})\varepsilon/\rho$. This $O(\varepsilon/\rho)$ behaviour is essential for deriving the $O(1/t)$ tail bounds on condition numbers in Section~\ref{sec:robustness}.
+The right-hand side vanishes with $\varepsilon$ and has expansion
+\[
+C_{\alpha,\beta,s,n}\,n(\alpha+\beta-1)\frac{\varepsilon}{\rho}
++O_{\alpha,\beta,s,n}\!\left(\frac{\varepsilon^2}{\rho^2}\right)
+\quad\text{as }\varepsilon/\rho\to0.
+\]
+This linear leading term yields the $O(1/t)$ condition-number tails in Section~\ref{sec:robustness}. Every probability bound may also be replaced by its minimum with $1$.
 \end{remark}
